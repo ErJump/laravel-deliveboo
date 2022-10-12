@@ -70,19 +70,27 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(\Illuminate\Http\Request $request)
     {
+        $data= $request->all();
         $data['image'] = Storage::put('uploads', $data['image']);
-        /* $user->typologies()->attach($data['typology_id']); */
-        return User::create([
-            'restaurant_name' => $data['restaurant_name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'p_iva' => $data['p_iva'],
-            'address' => $data['address'],
-            'phone_number' => $data['phone_number'],
-            'description' => $data['description'],
-            'image' => $data['image'],
-        ]);
+
+        $user= new User();
+        $user->password = Hash::make($data['password']);
+        $user->fill($data);
+        $user->save();
+        $user->typologies()->attach($data['typologies']); 
+
+        return redirect()->route('home');
+        // return User::create([
+        //     'restaurant_name' => $data['restaurant_name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        //     'p_iva' => $data['p_iva'],
+        //     'address' => $data['address'],
+        //     'phone_number' => $data['phone_number'],
+        //     'description' => $data['description'],
+        //     'image' => $data['image'],
+        // ]);
     }
 }
