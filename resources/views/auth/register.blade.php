@@ -103,7 +103,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row px-5">
                                 <label for="typologies" class="col-12 col-form-label">{{ __('Tipologia di cucina (puoi selezionarne più di una)') }}</label>
                                 <div class="row">
                                     @foreach ($typologies as $typology)
