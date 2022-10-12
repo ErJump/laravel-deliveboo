@@ -17,7 +17,7 @@
                     <div class="card-header">{{ __('Registrati') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('addNewUser') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">

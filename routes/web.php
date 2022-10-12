@@ -29,4 +29,4 @@ Route::get("{any?}", function () {
     return view('guest.home');
 })->where("any", ".*");
 
-Route::post('/register/create', 'Auth\RegisterController@create')->name('register');
+Route::post('/register/create', 'Auth\RegisterController@create')->name('addNewUser');
