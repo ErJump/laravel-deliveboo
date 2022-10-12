@@ -1,22 +1,7 @@
 @php
+    use App\Models\Typology;
 
-    class Typology {
-        public $id;
-        public $name;
-        public function __construct($id, $name) {
-            $this->id = $id;
-            $this->name = $name;
-        }
-    }
-
-    $typologies = [
-        new Typology(1, 'Pizza'),
-        new Typology(2, 'Hamburger'),
-        new Typology(3, 'Panini'),
-        new Typology(4, 'Dolci'),
-        new Typology(5, 'Bevande'),
-    ];
-
+    $typologies = Typology::all();
 @endphp
 
 @extends('layouts.app')
@@ -32,20 +17,20 @@
                     <div class="card-header">{{ __('Registrati') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('addNewUser') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
-                                <label for="restaurant_name"
+                                <label for="name"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Nome del locale') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="restaurant_name" type="text"
-                                        class="form-control @error('restaurant_name') is-invalid @enderror"
-                                        name="restaurant_name" value="{{ old('restaurant_name') }}" required
-                                        autocomplete="restaurant_name">
+                                    <input id="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}" required
+                                        autocomplete="name">
 
-                                    @error('restaurant_name')
+                                    @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -93,7 +78,7 @@
                                 <div class="col-md-6">
                                     <input id="phone_number" type="tel"
                                         class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                                        value="{{ old('phone_number') }}" required autocomplete="phone_number"  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                                        value="{{ old('phone_number') }}" required autocomplete="phone_number">
 
                                     @error('phone_number')
                                     <span class="invalid-feedback" role="alert">

@@ -18,7 +18,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 
         'email', 
-        'password',
         'address',
         'p_iva',
         'phone_number',
@@ -43,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function typologies() {
+        return $this->belongsToMany('App\Models\Typology');
+    }
 }
