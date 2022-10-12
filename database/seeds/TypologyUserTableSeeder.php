@@ -21,6 +21,7 @@ class TypologyUserTableSeeder extends Seeder
         $users[2]->typologies()->attach($typologies[1]);
         $users[3]->typologies()->attach($typologies[2]);
         $users[4]->typologies()->attach($typologies[10]);
+        $users[4]->typologies()->attach($typologies[9]);
         $users[5]->typologies()->attach($typologies[8]);
         $users[6]->typologies()->attach($typologies[0]);
         $users[7]->typologies()->attach($typologies[2]);

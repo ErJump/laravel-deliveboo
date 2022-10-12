@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 use function PHPSTORM_META\type;
@@ -71,6 +72,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd($data);
+        $data['image'] = Storage::put('uploads', $data['image']);
+        /* $user->typologies()->attach($data['typology_id']); */
         return User::create([
             'restaurant_name' => $data['restaurant_name'],
             'email' => $data['email'],

@@ -1,22 +1,7 @@
 @php
+    use App\Models\Typology;
 
-    class Typology {
-        public $id;
-        public $name;
-        public function __construct($id, $name) {
-            $this->id = $id;
-            $this->name = $name;
-        }
-    }
-
-    $typologies = [
-        new Typology(1, 'Pizza'),
-        new Typology(2, 'Hamburger'),
-        new Typology(3, 'Panini'),
-        new Typology(4, 'Dolci'),
-        new Typology(5, 'Bevande'),
-    ];
-
+    $typologies = Typology::all();
 @endphp
 
 @extends('layouts.app')
@@ -93,7 +78,7 @@
                                 <div class="col-md-6">
                                     <input id="phone_number" type="tel"
                                         class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                                        value="{{ old('phone_number') }}" required autocomplete="phone_number"  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                                        value="{{ old('phone_number') }}" required autocomplete="phone_number">
 
                                     @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
