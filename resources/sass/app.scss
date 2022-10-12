@@ -6,3 +6,24 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+header {
+    background-color: $secondary-color;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+nav img {
+    height: 30px;
+}
+
+i {
+    transform: translateY(5px);
+}
+
+button.nav-toggler {
+    border: none;
+    background-color: transparent;
+}
