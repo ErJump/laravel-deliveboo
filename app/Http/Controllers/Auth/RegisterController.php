@@ -56,9 +56,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'address' => ['required', 'unique', 'string'],
-            'p_iva' => ['required', 'unique', 'string', 'digits:11',],
-            'phone_number' => ['required', 'unique', 'string', 'min:10', 'max:15',],
+            'address' => ['required', 'unique:users', 'string'],
+            'p_iva' => ['required', 'unique:users', 'string', 'digits:11',],
+            'phone_number' => ['required', 'unique:users', 'string', 'min:10', 'max:15',],
             'description' => ['required', 'string', 'max:1500'],
             'image' => ['required', 'image', 'max:2000'],
         ]);
@@ -72,7 +72,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
         $data['image'] = Storage::put('uploads', $data['image']);
         /* $user->typologies()->attach($data['typology_id']); */
         return User::create([
