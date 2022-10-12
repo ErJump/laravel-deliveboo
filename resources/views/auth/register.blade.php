@@ -1,3 +1,24 @@
+@php
+
+    class Typology {
+        public $id;
+        public $name;
+        public function __construct($id, $name) {
+            $this->id = $id;
+            $this->name = $name;
+        }
+    }
+
+    $typologies = [
+        new Typology(1, 'Pizza'),
+        new Typology(2, 'Hamburger'),
+        new Typology(3, 'Panini'),
+        new Typology(4, 'Dolci'),
+        new Typology(5, 'Bevande'),
+    ];
+
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Registrazione')
@@ -98,6 +119,25 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="typologies" class="col-md-4 col-form-label mr-4 text-md-right">{{ __('Tipologia di cucina (puoi selezionarne più di uno)') }}</label>
+                                <div class="row">
+                                    @foreach ($typologies as $typology)
+                                        <div class="col-3 form-check d-inline px-3">
+                                            <input class="form-check-input" type="checkbox" name="typologies[]" value="{{$typology->id}}" id="{{$typology->name}}"
+                                            @if($errors->any())
+                                            {{in_array($typology->id, old('typologies', [])) ? 'checked' : ''}}
+                                            @else
+                                            {{-- {{$user->typologies->contains($typology) ? 'checked' : '' }} --}}
+                                            @endif> 
+                                            <label class="form-check-label" for="{{$typology->name}}">
+                                            {{$typology->name}}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="image"
                                     class="col-md-4 col-form-label text-md-right">{{ __("Inserisci l'immagine del tuo ristorante") }}</label>
 
@@ -110,7 +150,6 @@
                                     @enderror
                                 </div>
                             </div>
-
 
 
                             <div class="form-group row">
