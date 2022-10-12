@@ -69,7 +69,7 @@
                             <div class="col-md-6">
                                 <input id="phone_number" type="tel"
                                     class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                                    value="{{ old('phone_number') }}" required autocomplete="phone_number">
+                                    value="{{ old('phone_number') }}" required autocomplete="phone_number"  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
 
                                 @error('phone_number')
                                 <span class="invalid-feedback" role="alert">
@@ -145,7 +145,7 @@
 
                         <div class="form-group row">
                             <label for="password-confirm"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control"
