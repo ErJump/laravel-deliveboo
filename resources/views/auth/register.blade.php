@@ -104,10 +104,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="typologies" class="col-md-4 col-form-label mr-4 text-md-right">{{ __('Tipologia di cucina (puoi selezionarne più di uno)') }}</label>
+                                <label for="typologies" class="col-12 col-form-label">{{ __('Tipologia di cucina (puoi selezionarne più di una)') }}</label>
                                 <div class="row">
                                     @foreach ($typologies as $typology)
-                                        <div class="col-3 form-check d-inline px-3">
+                                        <div class="col-6 col-md-4 px-5 py-2">
                                             <input class="form-check-input" type="checkbox" name="typologies[]" value="{{$typology->id}}" id="{{$typology->name}}"
                                             @if($errors->any())
                                             {{in_array($typology->id, old('typologies', [])) ? 'checked' : ''}}
@@ -126,7 +126,7 @@
                                 <label for="image"
                                     class="col-md-4 col-form-label text-md-right">{{ __("Inserisci l'immagine del tuo ristorante") }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 align-self-center">
                                     <input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
