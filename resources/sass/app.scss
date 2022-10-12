@@ -11,10 +11,10 @@
 @import 'common_classes';
 
 // Custom Header Back-Office
-@import 'header';
+@import 'partials/header';
 
 // Custom Footer Back-Office
-@import 'footer';
+@import 'partials/footer';
 
 main{
     min-height: 70vh;
