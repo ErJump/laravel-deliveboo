@@ -70,8 +70,10 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(\Illuminate\Http\Request $request)
     {
+        $data= $request->all();
+        dd($data);
         $data['image'] = Storage::put('uploads', $data['image']);
         /* $user->typologies()->attach($data['typology_id']); */
         return User::create([

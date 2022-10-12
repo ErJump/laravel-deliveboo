@@ -21,16 +21,16 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="restaurant_name"
+                                <label for="name"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Nome del locale') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="restaurant_name" type="text"
-                                        class="form-control @error('restaurant_name') is-invalid @enderror"
-                                        name="restaurant_name" value="{{ old('restaurant_name') }}" required
-                                        autocomplete="restaurant_name">
+                                    <input id="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}" required
+                                        autocomplete="name">
 
-                                    @error('restaurant_name')
+                                    @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
