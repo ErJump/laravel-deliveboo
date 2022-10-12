@@ -22,6 +22,7 @@ class TypologiesTableSeeder extends Seeder
             'cinese',
             'fast food',
             'vegetariano',
+            'paninoteca'
         ];
 
         foreach ($typologies as $typology) {
