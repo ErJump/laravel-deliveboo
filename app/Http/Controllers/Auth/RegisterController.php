@@ -129,7 +129,7 @@ class RegisterController extends Controller
         $user->save();
         $user->typologies()->attach($data['typologies']); 
 
-        return redirect()->route('admin.home');
+        return redirect()->route('login')->with('result-message', 'Ristorante creato con successo, effettua il login per accedere al pannello di controllo');
         // return User::create([
         //     'restaurant_name' => $data['restaurant_name'],
         //     'email' => $data['email'],

@@ -4,6 +4,15 @@
 
 @section('content')
 <main class="ms_bg_image_black">
+    @if (session('result-message'))
+        <div class="container-lg">
+            <div class="row">
+                <div class="col-12 alert alert-success"  role="alert">
+                    <strong>{{session('result-message')}}</strong>
+                </div>
+            </div>  
+        </div>
+    @endif
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
