@@ -129,7 +129,7 @@ class RegisterController extends Controller
         $user->save();
         $user->typologies()->attach($data['typologies']); 
 
-        return redirect()->route('home');
+        return redirect()->route('admin.home');
         // return User::create([
         //     'restaurant_name' => $data['restaurant_name'],
         //     'email' => $data['email'],

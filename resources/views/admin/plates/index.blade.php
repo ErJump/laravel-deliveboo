@@ -19,7 +19,7 @@
                         <div class="card-body ms_overflowx_scroll">
                             <table class="table">
                                 <thead>
-                                    <tr >
+                                    <tr>
                                         <th>Nome</th>
                                         <th>Ingredienti</th>
                                         <th>Descrizione</th>
