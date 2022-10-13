@@ -11,12 +11,12 @@ class PlateController extends Controller
 {
     protected $validationRules = [
         'name' => 'required|string|min:3|max:255',
-        'user_id' => 'required|integer',
+        'user_id' => 'integer',
         'ingredients' => 'required|string|min:5|max:1000',
         'description' => 'required|string|min:5|max:1000',
         'price' => 'required|numeric|min:0',
         'image' => 'nullable|image|max:2000',
-        'visibility' => 'required|boolean',
+        'visibility' => 'boolean',
     ];
 
     protected $validationMessages = [
@@ -122,7 +122,9 @@ class PlateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validate($this->validationRules, $this->validationMessages);
+        //$data = $request->validate($this->validationRules, $this->validationMessages);
+        $data = $request->all();
+        $dataToValidate = $request->validate($this->validationRules, $this->validationMessages);
         $plate = Plate::findOrFail($id);
         if (array_key_exists('image', $data)) {
             if ($plate->image) {
