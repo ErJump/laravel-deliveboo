@@ -14,6 +14,7 @@ class PlateController extends Controller
         'user_id' => 'integer',
         'ingredients' => 'required|string|min:5|max:1000',
         'description' => 'required|string|min:5|max:1000',
+        'discount' => 'required|integer|min:0|max:100',
         'price' => 'required|numeric|min:0',
         'image' => 'nullable|image|max:2000',
         'visibility' => 'boolean',
@@ -37,6 +38,11 @@ class PlateController extends Controller
         'description.string' => 'La descrizione deve essere una stringa',
         'description.min' => 'La descrizione deve essere lunga almeno 5 caratteri',
         'description.max' => 'La descrizione deve essere lunga al massimo 1000 caratteri',
+
+        'discount.required' => 'Lo sconto è obbligatorio',
+        'discount.integer' => 'Lo sconto deve essere un numero intero',
+        'discount.min' => 'Lo sconto deve essere almeno 0',
+        'discount.max' => 'Lo sconto deve essere al massimo 100',
 
         'price.required' => 'Il prezzo è obbligatorio',
         'price.numeric' => 'Il prezzo deve essere un numero',
