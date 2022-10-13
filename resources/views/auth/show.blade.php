@@ -4,7 +4,7 @@
 
 @extends('layouts.app')
 
-@section('title', $user->restaurant_name)
+@section('title', $user->name)
 
 @section('content')
 <main>
@@ -30,6 +30,11 @@
                                 <h2 class="text-center mb-3">Dati personali</h2>
                                 <ul class="list-group">
                                     <li class="list-group-item">Email: {{ $user->email }}</li>
+                                    <li class="list-group-item">Tipologia Ristorante:
+                                        @foreach ($user->typologies as $typology)
+                                            {{ $typology->name }}
+                                        @endforeach
+                                    </li>
                                     <li class="list-group-item">Indirizzo: {{ $user->address }}</li>
                                     <li class="list-group-item">Partita IVA: {{ $user->p_iva }}</li>
                                     <li class="list-group-item">Numero di telefono: {{ $user->phone_number }}</li>
