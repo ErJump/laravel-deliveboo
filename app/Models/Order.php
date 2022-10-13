@@ -20,4 +20,8 @@ class Order extends Model
       public function plates(){
         return $this -> belongsToMany('App\Models\Plate');
       }
+
+      public function user(){
+        return $this -> belongsTo('App\User');
+      }
 }
