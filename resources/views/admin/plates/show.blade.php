@@ -35,8 +35,12 @@
                             <div class="col-12 col-md-6">
                                 <h2 class="text-center mb-3">Gestione</h2>
                                 <div class="d-flex justify-content-around">
-                                    <a class="btn ms_btn_secondary ms-5" href="{{-- {{ route('admin.plates.index') }} --}}">Modifica</a>
-                                    <a class="btn btn-primary" href="{{-- {{ route('admin.orders.index') }} --}}">Elimina</a>
+                                    <a class="btn ms_btn_secondary ms-5" href="{{-- {{ route('admin.plates.edit', $plate->id) }} --}}">Modifica</a>
+                                    {{-- <form action="{{ route('admin.plates.destroy', $plate->id)}}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Elimina</button>
+                                    </form> --}}
                                 </div>
                             </div>
                         </div>
