@@ -13,9 +13,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        /* dd($request); */
         $users = User::paginate(10, ['name', 'email', 'address', 'phone_number', 'description', 'image']);
         return response()->json([
             'response' => true,
