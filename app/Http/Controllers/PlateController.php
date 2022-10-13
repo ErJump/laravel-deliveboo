@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Plate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PlateController extends Controller
 {
@@ -26,7 +27,8 @@ class PlateController extends Controller
      */
     public function create()
     {
-        //
+        $plate = new Plate();
+        return view('admin.plates.create', compact('plate'));
     }
 
     /**
@@ -37,7 +39,14 @@ class PlateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        $data['image'] = Storage::put('uploads', $data['image']);
+        $newPlate = new Plate();
+        $newPlate->fill($data);
+        $newPlate->save();
+
+        return redirect()->route('admin.plates.index');
     }
 
     /**
