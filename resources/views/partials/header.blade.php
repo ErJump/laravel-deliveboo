@@ -6,7 +6,6 @@
                 <img class="d-block d-sm-block d-md-block d-lg-none d-xl-none" src="{{asset('assets/images/logo-small.png')}}" alt="logo-small">
             </a>
             <div class="d-flex justify-content-between">
-                <i class="fa-solid fa-cart-shopping text-white fa-2x justify-self-end me-4"></i>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                     aria-label="Toggle navigation">

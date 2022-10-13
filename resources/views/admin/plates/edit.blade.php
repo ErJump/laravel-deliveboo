@@ -4,8 +4,19 @@
 
 @section('content')
 <main>
-    <div class="container-lg">
-        <h2 class="mb-3">Modifica Piatto</h2>
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="row align-items-center mb-3">
+                    <div class="col-1">
+                        <a href="{{ route('admin.plates.show', $plate->id) }}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
+                    </div>
+                    <div class="col-11">
+                        <h1 class="font-weight-bold">Modifica il piatto</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
                 @include('admin.plates.partials.platesForm', [

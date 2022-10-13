@@ -7,7 +7,14 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="font-weight-bold">{{ $plate->name }}</h1>
+                <div class="row align-items-center mb-3">
+                    <div class="col-1">
+                        <a href="{{ route('admin.plates.index') }}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
+                    </div>
+                    <div class="col-11">
+                        <h1 class="font-weight-bold">{{ $plate->name }}</h1>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -40,7 +47,7 @@
                             <form action="{{ route('admin.plates.destroy', $plate->id)}}" method="post" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Elimina</button>
+                                <button type="submit" class="btn ms_btn_alert h-100">Elimina</button>
                             </form>
                         </div>
                     </div>

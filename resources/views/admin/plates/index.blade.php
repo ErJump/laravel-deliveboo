@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <div class="row align-items-center">
                         <div class="col-1">
-                            <a href="{{ route('admin.home') }}"><i class="fa-solid fa-angle-left fa-2x"></i></a>
+                            <a href="{{ route('admin.home') }}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
                         </div>
                         <div class="col-11">
                             <h1 class="font-weight-bold">I tuoi piatti</h1>
@@ -20,11 +20,11 @@
             <div class="row">
                 <div class="col-12 ">
                     <div class="card ">
-                        <div class="card-header">
-                            <a class="btn ms_btn_secondary" href="{{ route('admin.plates.create') }}">Aggiungi un nuovo piatto</a>
+                        <div class="card-header text-right">
+                            <a class="btn btn-success" href="{{ route('admin.plates.create') }}">Aggiungi un nuovo piatto</a>
                         </div>
                         <div class="card-body ms_overflowx_scroll">
-                            <table class="table">
+                            <table class="table mb-0">
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -38,7 +38,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($plates as $plate)
-                                        <tr>
+                                        <tr class="my-2">
                                             <td>{{ $plate->name }}</td>
                                             <td>{{ $plate->ingredients }}</td>
                                             <td>{{ $plate->description }}</td>
@@ -53,11 +53,11 @@
                                             <td>{{ $plate->discount }}</td>
                                             <td class="d-flex">
                                                 <a class="btn btn-primary mr-2" href="{{ route('admin.plates.show', $plate->id) }}">Dettagli</a>
-                                                <a class="btn btn-warning mr-2" href="{{ route('admin.plates.edit', $plate->id) }}">Modifica</a>
+                                                <a class="btn ms_btn_secondary mr-2" href="{{ route('admin.plates.edit', $plate->id) }}">Modifica</a>
                                                 <form action="{{ route('admin.plates.destroy', $plate->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Elimina</button>
+                                                    <button type="submit" class="btn ms_btn_alert h-100">Elimina</button>
                                                 </form>
                                             </td>
                                         </tr>
