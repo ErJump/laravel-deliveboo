@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function typologies() {
         return $this->belongsToMany('App\Models\Typology');
     }
+
+    public function plates(){
+        return $this->hasMany('App\Models\Plate');
+    }
 }
