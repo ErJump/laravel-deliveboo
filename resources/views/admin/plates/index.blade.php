@@ -7,6 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <h1 class="text-center">I tuoi piatti</h1>
                 </div>
             </div>
