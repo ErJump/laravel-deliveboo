@@ -69,7 +69,8 @@ class PlateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $plate = Plate::findOrFail($id);
+        return view('admin.plates.edit', compact('plate'));
     }
 
     /**
@@ -81,7 +82,16 @@ class PlateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $plate = Plate::findOrFail($id);
+        if (array_key_exists('image', $data)) {
+            if ($plate->image) {
+                Storage::delete($plate->image);
+            }
+            $data['image'] = Storage::put('uploads', $data['image']);
+        }
+        $plate->update($data);
+        return redirect()->route('admin.plates.index');
     }
 
     /**
