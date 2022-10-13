@@ -65,20 +65,23 @@ class RegisterController extends Controller
     }
 
     protected $validationRules = [
-        'name' => 'required|min:3|max:255',
+        'name' => 'required|min:3|max:255|string|unique:users',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:8|confirmed',
         'p_iva' => 'required|unique:users|digits:11',
         'address' => 'required|unique:users',
         'phone_number' => 'required|unique:users|min:10|max:15',
         'description' => 'required|min:30|max:1500',
-        'image' => 'required|image|max:2000'
+        'image' => 'required|image|max:2000',
+        'typologies' => 'required|min:1|exists:typologies,id',
     ];
 
     protected $validationMessages = [
         'name.required' => 'Inserisci il nome del tuo ristorante',
         'name.min' => 'Il nome del ristorante deve essere minimo 3 caratteri',
         'name.max' => 'Troppi caratteri (max:255)',
+        'name.string' => 'Il nome del ristorante deve essere una stringa',
+        'name.unique' => 'Il nome del ristorante è già stato utilizzato',
 
 
         'email.required' => "Inserisci l'email della tua attività",
@@ -104,6 +107,10 @@ class RegisterController extends Controller
         'description.required' => "Inserisci una descrizione del tuo ristorante",
         'description.min' => "La descrizion deve avere almeno 30 caratteri",
         'description.max' => "La descrizion deve avere massimo 1500 caratteri",
+
+        'typologies.required' => "Seleziona almeno una tipologia",
+        'typologies.min' => "Seleziona almeno una tipologia",
+        'typologies.exists' => "Seleziona una tipologia valida",
 
         'image.required' => "Inserisci un'immagine",
         'image.image' => "Formato del file non valido, prova con un jpg, jpeg, png, bmp, gif, svg o un webp",
