@@ -32,6 +32,7 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('plates', 'PlateController');
+        Route::resource('orders', 'OrderController');
     });
 
 Route::post('/register/create', 'Auth\RegisterController@create')->name('addNewUser');
