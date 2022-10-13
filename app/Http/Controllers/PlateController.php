@@ -9,6 +9,46 @@ use Illuminate\Support\Facades\Storage;
 
 class PlateController extends Controller
 {
+    protected $validationRules = [
+        'name' => 'required|string|min:3|max:255',
+        'user_id' => 'required|integer',
+        'ingredients' => 'required|string|min:5|max:1000',
+        'description' => 'required|string|min:5|max:1000',
+        'price' => 'required|numeric|min:0',
+        'image' => 'nullable|image|max:2000',
+        'visibility' => 'required|boolean',
+    ];
+
+    protected $validationMessages = [
+        'name.required' => 'Il nome del piatto è obbligatorio',
+        'name.string' => 'Il nome del piatto deve essere una stringa',
+        'name.min' => 'Il nome del piatto deve essere lungo almeno 3 caratteri',
+        'name.max' => 'Il nome del piatto deve essere lungo al massimo 255 caratteri',
+
+        'user_id.required' => 'Il ristorante è obbligatorio',
+        'user_id.integer' => 'Il ristorante deve essere un numero intero',
+
+        'ingredients.required' => 'Gli ingredienti sono obbligatori',
+        'ingredients.string' => 'Gli ingredienti devono essere una stringa',
+        'ingredients.min' => 'Gli ingredienti devono essere lungi almeno 5 caratteri',
+        'ingredients.max' => 'Gli ingredienti devono essere lungi al massimo 1000 caratteri',
+
+        'description.required' => 'La descrizione è obbligatoria',
+        'description.string' => 'La descrizione deve essere una stringa',
+        'description.min' => 'La descrizione deve essere lunga almeno 5 caratteri',
+        'description.max' => 'La descrizione deve essere lunga al massimo 1000 caratteri',
+
+        'price.required' => 'Il prezzo è obbligatorio',
+        'price.numeric' => 'Il prezzo deve essere un numero',
+        'price.min' => 'Il prezzo deve essere maggiore di 0',
+
+        'image.image' => 'L\'immagine deve essere un file immagine',
+        'image.max' => 'L\'immagine deve essere più piccola di 2MB',
+
+        'visibility.required' => 'La visibilità è obbligatoria',
+        'visibility.boolean' => 'La visibilità deve essere un booleano',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +79,7 @@ class PlateController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate($this->validationRules, $this->validationMessages);
         $data['user_id'] = Auth::id();
         $data['image'] = Storage::put('uploads', $data['image']);
         $newPlate = new Plate();
@@ -82,7 +122,7 @@ class PlateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $data = $request->validate($this->validationRules, $this->validationMessages);
         $plate = Plate::findOrFail($id);
         if (array_key_exists('image', $data)) {
             if ($plate->image) {
