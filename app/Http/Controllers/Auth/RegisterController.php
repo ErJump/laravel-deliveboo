@@ -65,7 +65,7 @@ class RegisterController extends Controller
     }
 
     protected $validationRules = [
-        'restaurant_name' => 'required|max:255',
+        'name' => 'required|max:255',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:8|confirmed',
         'p_iva' => 'required|unique:users|digits:11',
@@ -75,9 +75,9 @@ class RegisterController extends Controller
         'image' => 'required|image|max:2000'
     ];
 
-    protected $validationMessages = [
-        'restaurant_name.required' => 'Inserisci il nome del tuo ristorante',
-        'restaurant_name.max' => 'Troppi caratteri (max:255)',
+    protected $message = [
+        'name.required' => 'Inserisci il nome del tuo ristorante',
+        'name.max' => 'Troppi caratteri (max:255)',
 
 
         'email.required' => "Inserisci l'email della tua attività",
@@ -120,7 +120,7 @@ class RegisterController extends Controller
         $data= $request->all();
         $data['image'] = Storage::put('uploads', $data['image']);
 
-        $validatedData = $request->validate($this->validationRules, $this->validationMessages);
+        $validatedData = $request->validate($this->validationRules, $this->message);
 
         $user= new User();
         $user->password = Hash::make($data['password']);
