@@ -26,9 +26,8 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr>
                            @foreach ($orders as $order)
-                              <th scope="row">1</th>
+                              <tr>
                                  <td>{{ $order->id}}</td>
                                  <td>{{ $order->first_name}}</td>
                                  <td>{{ $order->last_name}}</td>
