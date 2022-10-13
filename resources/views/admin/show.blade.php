@@ -20,7 +20,7 @@
                     <div class="card-header ms_ojbectfit_100 p-0">
                         
                         <img class="ms_objectfit_100" 
-                        src="{{ //se l'url dell'image inizia con uploads allora la prendo da storage altrimenti la prendo da internet
+                        src="{{
                         (substr($user->image, 0, 7) == 'uploads') ? asset('storage/' . $user->image) : $user->image }}" 
                         alt="image">
                     </div>
