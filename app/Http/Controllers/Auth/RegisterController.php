@@ -75,6 +75,40 @@ class RegisterController extends Controller
         'image' => 'required|image|max:2000'
     ];
 
+    protected $validationMessages = [
+        'restaurant_name.required' => 'Inserisci il nome del tuo ristorante',
+        'restaurant_name.max' => 'Troppi caratteri (max:255)',
+
+
+        'email.required' => "Inserisci l'email della tua attività",
+        'email.email' => 'Deve essere una e-mail',
+        'email.unique' => 'Questa e-mail esiste già',
+
+        'password.required' => 'Questo campo è obbligatorio',
+        'password.min' => 'La tua password deve avere almeno 8 caratteri',
+        'password.confirmed' => 'Le due password non corrispondono',
+
+        'p_iva.required' => 'Insersci la P.Iva del tuo ristorante',
+        'p_iva.unique' => 'Questa P.Iva esiste già',
+        'p_iva.digits' => 'La P.Iva deve avere 11 cifre',
+
+        'address.required' => "Inserisci l'indirizzo del tuo ristorante",
+        'address.unique' => "C'è già un ristorante a questo indirizzo",
+
+        'phone_number.required' => "Inserisci un numero di telefono",
+        'phone_number.unique' => "Questo numero già esiste",
+        'phone_number.min' => "Il numero deve avere almeno 10 cifre",
+        'phone_number.max' => "Il numero deve avere massimo 15 cifre",
+
+        'description.required' => "Inserisci una descrizione del tuo ristorante",
+        'description.min' => "La descrizion deve avere almeno 30 caratteri",
+        'description.max' => "La descrizion deve avere massimo 1500 caratteri",
+
+        'image.required' => "Inserisci un'immagine",
+        'image.image' => "Formato del file non valido, prova con un jpg, jpeg, png, bmp, gif, svg o un webp",
+        'image.max' => "Il file deve essere di massimo 2MB",
+    ];
+
     /**
      * Create a new user instance after a valid registration.
      *
