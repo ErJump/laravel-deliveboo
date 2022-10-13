@@ -120,6 +120,8 @@ class RegisterController extends Controller
         $data= $request->all();
         $data['image'] = Storage::put('uploads', $data['image']);
 
+        $validatedData = $request->validate($this->validationRules, $this->validationMessages);
+
         $user= new User();
         $user->password = Hash::make($data['password']);
         $user->fill($data);
