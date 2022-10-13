@@ -10,7 +10,7 @@
          </div>
          <div class="row">
             <div class="col-12">
-               <div class="card">
+               <div class="card ms_overflowx_scroll">
                   <table class="table">
                      <thead>
                         <tr>
@@ -36,7 +36,7 @@
                                  <td>{{ $order->phone}}</td>
                                  <td>{{ $order->comment}}</td>
                                  <td>{{ $order->address}}</td>
-                                 <td>{{ $order->total_price}}</td>
+                                 <td>{{ $order->total_price}}€</td>
                                  <td>
                                     @if ($order->payment_state == 0)
                                        <span class="text-warning">Non pagato</span>
