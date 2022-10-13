@@ -11,15 +11,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
+                <div class="col-12 ">
+                    <div class="card ">
                         <div class="card-header">
                             <a class="btn ms_btn_secondary" href="{{ route('admin.plates.create') }}">Aggiungi un nuovo piatto</a>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body ms_overflowx_scroll">
                             <table class="table">
                                 <thead>
-                                    <tr>
+                                    <tr >
                                         <th>Nome</th>
                                         <th>Ingredienti</th>
                                         <th>Descrizione</th>
