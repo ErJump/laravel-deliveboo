@@ -64,6 +64,17 @@ class RegisterController extends Controller
         ]);
     }
 
+    protected $validationRules = [
+        'restaurant_name' => 'required|max:255',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:8|confirmed',
+        'p_iva' => 'required|unique:users|digits:11',
+        'address' => 'required|unique:users',
+        'phone_number' => 'required|unique:users|min:10|max:15',
+        'description' => 'required|min:30|max:1500',
+        'image' => 'required|image|max:2000'
+    ];
+
     /**
      * Create a new user instance after a valid registration.
      *
