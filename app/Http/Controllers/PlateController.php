@@ -48,7 +48,8 @@ class PlateController extends Controller
      */
     public function show($id)
     {
-        //
+        $plate = Plate::findOrFail($id);
+        return view('admin.plates.show', compact('plate'));
     }
 
     /**

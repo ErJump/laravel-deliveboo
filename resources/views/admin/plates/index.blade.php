@@ -35,9 +35,15 @@
                                             <td>{{ $plate->name }}</td>
                                             <td>{{ $plate->ingredients }}</td>
                                             <td>{{ $plate->description }}</td>
-                                            <td>{{ $plate->price }} €</td>
+                                            <td>{{ $plate->price }}€</td>
+                                            <td>
+                                                @if($plate->availability == 1)
+                                                    Disponibile
+                                                @else
+                                                    Non disponibile
+                                                @endif
+                                            </td>
                                             <td>{{ $plate->discount }}</td>
-                                            <td>{{ $plate->availability }}</td>
                                             <td class="d-flex">
                                                 <a class="btn btn-primary mr-2" href="{{ route('admin.plates.show', $plate->id) }}">Dettagli</a>
                                                 <a class="btn btn-warning mr-2" href="{{ route('admin.plates.edit', $plate->id) }}">Modifica</a>
