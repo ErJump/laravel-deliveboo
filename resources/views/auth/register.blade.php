@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('addNewUser') }}" enctype="multipart/form-data">
                             @csrf
-
+                            {{-- Nome --}}
                             <div class="form-group row">
                                 <label for="name"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Nome del locale') }}</label>
@@ -37,7 +37,7 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            {{-- Indirizzo --}}
                             <div class="form-group row">
                                 <label for="address"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}</label>
@@ -54,7 +54,7 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            {{-- Partita Iva --}}
                             <div class="form-group row">
                                 <label for="p_iva"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA') }}</label>
@@ -70,7 +70,7 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            {{-- Telefono --}}
                             <div class="form-group row">
                                 <label for="phone_number"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Numero di telefono') }}</label>
@@ -87,7 +87,7 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            {{-- Descrizione --}}
                             <div class="form-group row">
                                 <label for="description"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Descrizione del ristorante') }}</label>
@@ -102,7 +102,7 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            {{-- Tipologie --}}
                             <div class="form-group row px-5">
                                 <label for="typologies" class="col-12 col-form-label">{{ __('Tipologia di cucina (puoi selezionarne più di una)') }}</label>
                                 <div class="row">
@@ -121,7 +121,7 @@
                                     @endforeach
                                 </div>
                             </div>
-
+                            {{-- Immagine --}}
                             <div class="form-group row">
                                 <label for="image"
                                     class="col-md-4 col-form-label text-md-right">{{ __("Inserisci l'immagine del tuo ristorante") }}</label>
@@ -135,8 +135,7 @@
                                     @enderror
                                 </div>
                             </div>
-
-
+                            {{-- Email --}}
                             <div class="form-group row">
                                 <label for="email"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail') }}</label>
@@ -152,7 +151,7 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            {{-- Password --}}
                             <div class="form-group row">
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -169,7 +168,7 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            {{-- Conferma Password --}}
                             <div class="form-group row">
                                 <label for="password-confirm"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
@@ -179,7 +178,7 @@
                                         name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
-
+                            {{-- Submit --}}
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn ms_btn_secondary">
