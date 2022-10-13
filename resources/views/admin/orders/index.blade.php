@@ -26,19 +26,23 @@
                         </tr>
                      </thead>
                      <tbody>
-                        @foreach ($orders as $order)
-                           <tr>
-                              <td>{{ $order->id}}</td>
-                              <td>{{ $order->first_name}}</td>
-                              <td>{{ $order->last_name}}</td>
-                              <td>{{ $order->email}}</td>
-                              <td>{{ $order->phone}}</td>
-                              <td>{{ $order->comment}}</td>
-                              <td>{{ $order->address}}</td>
-                              <td>{{ $order->total_price}}</td>
-                              <td>{{ $order->payment_state}}</td>
-                           </tr> 
-                        @endforeach
+                        @if (is_array($orders) || is_object($orders))
+                           @forelse ($orders as $order)
+                              <tr>
+                                 <td>{{ $order->id}}</td>
+                                 <td>{{ $order->first_name}}</td>
+                                 <td>{{ $order->last_name}}</td>
+                                 <td>{{ $order->email}}</td>
+                                 <td>{{ $order->phone}}</td>
+                                 <td>{{ $order->comment}}</td>
+                                 <td>{{ $order->address}}</td>
+                                 <td>{{ $order->total_price}}</td>
+                                 <td>{{ $order->payment_state}}</td>
+                              </tr> 
+                           @empty
+                              <tr>Non ci sono ordini per il tuo risorante</tr>
+                           @endforelse
+                        @endif
                      </tbody>
                    </table>
                </div>
