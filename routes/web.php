@@ -13,18 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', function () {
-    return view('welcome');
-});
-
-Route::get('/admin/show', function () {
-    return view('auth.show');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')
+    //->namespace('Admin')
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/', 'HomeController@index')->name('home');
+    });
+
+Route::post('/register/create', 'Auth\RegisterController@create')->name('addNewUser');
+
 
 Route::get("{any?}", function () {
     return view('guest.home');
 })->where("any", ".*");
+

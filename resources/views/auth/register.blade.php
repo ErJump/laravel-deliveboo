@@ -17,20 +17,20 @@
                     <div class="card-header">{{ __('Registrati') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('addNewUser') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
-                                <label for="restaurant_name"
+                                <label for="name"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Nome del locale') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="restaurant_name" type="text"
-                                        class="form-control @error('restaurant_name') is-invalid @enderror"
-                                        name="restaurant_name" value="{{ old('restaurant_name') }}" required
-                                        autocomplete="restaurant_name">
+                                    <input id="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}" required
+                                        autocomplete="name">
 
-                                    @error('restaurant_name')
+                                    @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -103,11 +103,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="typologies" class="col-md-4 col-form-label mr-4 text-md-right">{{ __('Tipologia di cucina (puoi selezionarne più di uno)') }}</label>
+                            <div class="form-group row px-5">
+                                <label for="typologies" class="col-12 col-form-label">{{ __('Tipologia di cucina (puoi selezionarne più di una)') }}</label>
                                 <div class="row">
                                     @foreach ($typologies as $typology)
-                                        <div class="col-3 form-check d-inline px-3">
+                                        <div class="col-6 col-md-4 px-5 py-2">
                                             <input class="form-check-input" type="checkbox" name="typologies[]" value="{{$typology->id}}" id="{{$typology->name}}"
                                             @if($errors->any())
                                             {{in_array($typology->id, old('typologies', [])) ? 'checked' : ''}}
@@ -126,7 +126,7 @@
                                 <label for="image"
                                     class="col-md-4 col-form-label text-md-right">{{ __("Inserisci l'immagine del tuo ristorante") }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 align-self-center">
                                     <input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">

@@ -19,3 +19,9 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.ms_objectfit_100{
+    object-fit: cover;
+    width: 100%;
+    max-height: 75%;
+}
