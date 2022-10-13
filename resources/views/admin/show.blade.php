@@ -18,11 +18,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="row g-0">
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-sm-12 col-lg-6">
                         <img src="{{
-                            (substr($user->image, 0, 7) == 'uploads') ? asset('storage/' . $user->image) : $user->image }}" class="img-fluid rounded-start" alt="image">
+                            (substr($user->image, 0, 7) == 'uploads') ? asset('storage/' . $user->image) : $user->image }}" class="img-fluid rounded-start ms_objectfit_100" alt="image">
                     </div>
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-sm-12 col-lg-6">
                         <div class="card-body">
                             <h3 class="card-title mb-2">Dati Personali</h3>
                             <ul class="list-group mb-3">
