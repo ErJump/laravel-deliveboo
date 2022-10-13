@@ -5,10 +5,16 @@
 @section('content')
     <main>
         <div class="container">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-12">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i>
-                    <h1 class="text-center">I tuoi piatti</h1>
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <a href="{{ route('admin.home') }}"><i class="fa-solid fa-angle-left fa-2x"></i></a>
+                        </div>
+                        <div class="col-11">
+                            <h1 class="font-weight-bold">I tuoi piatti</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
