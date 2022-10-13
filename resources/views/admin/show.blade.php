@@ -43,7 +43,7 @@
                             <div class="col-12 col-md-6">
                                 <h2 class="text-center mb-3">Gestione</h2>
                                 <div class="d-flex justify-content-around">
-                                    <a class="btn ms_btn_secondary ms-5" href="{{-- {{ route('admin.plates.index') }} --}}">Gestisci i tuoi piatti</a>
+                                    <a class="btn ms_btn_secondary ms-5" href="{{ route('admin.plates.index') }}">Gestisci i tuoi piatti</a>
                                     <a class="btn btn-primary" href="{{-- {{ route('admin.orders.index') }} --}}">Gestisci i tuoi ordini</a>
                                 </div>
                             </div>

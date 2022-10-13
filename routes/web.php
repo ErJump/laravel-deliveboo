@@ -22,6 +22,7 @@ Route::middleware('auth')
     ->prefix('admin')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
+        Route::resource('plates', 'PlateController');
     });
 
 Route::post('/register/create', 'Auth\RegisterController@create')->name('addNewUser');

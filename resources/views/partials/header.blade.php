@@ -27,6 +27,11 @@
                     @endif
                     @else
                     <li class="nav-item">
+                        <a class="text-white nav-link" href="{{ route('admin.plates.index') }}">
+                            Piatti
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="text-white nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                             {{ __('Esci') }}
