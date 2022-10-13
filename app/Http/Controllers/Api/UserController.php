@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +15,12 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request);
+        /* dd($request); */
+        $users = User::paginate(10, ['name', 'email', 'address', 'phone_number', 'description', 'image']);
+        return response()->json([
+            'response' => true,
+            'results' => $users
+        ]);
     }
 
     /**
