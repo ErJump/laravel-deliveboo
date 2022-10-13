@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::middleware('auth')->get('/home', function() {
+    return view('admin.show');
+});
+
 Route::middleware('auth')
     //->namespace('Admin')
     ->name('admin.')
