@@ -25,7 +25,6 @@ class CreateOrdersTable extends Migration
             $table->string('phone', 30);
             $table->string('comment') -> nullable();
             $table->string('address');
-            $table->boolean('payment_state');
             $table->float('total_price');
             
             $table->timestamps();
