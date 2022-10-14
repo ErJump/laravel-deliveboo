@@ -18,6 +18,11 @@
                 </div>
             </div>
             <div class="row">
+                @if( session ('delete'))
+                    <div class="p-3">
+                        {{ session('delete') }} è stato rimosso
+                    </div>
+                @endif
                 <div class="col-12 ">
                     <div class="card ">
                         <div class="card-header text-right">
@@ -51,6 +56,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $plate->discount }}%</td>
+
                                             <td class="d-flex">
                                                 <a class="btn btn-primary mr-2" href="{{ route('admin.plates.show', $plate->id) }}">Dettagli</a>
                                                 <a class="btn ms_btn_secondary mr-2" href="{{ route('admin.plates.edit', $plate->id) }}">Modifica</a>
