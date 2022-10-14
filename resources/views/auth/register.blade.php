@@ -15,7 +15,15 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Registrati') }}</div>
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="card-body">
                         <form method="POST" action="{{ route('addNewUser') }}" enctype="multipart/form-data">
                             @csrf
@@ -120,6 +128,11 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                @error('typologies')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             {{-- Immagine --}}
                             <div class="form-group row">
