@@ -8,7 +8,7 @@
         <div class="row">
 
             @if (session('not-allowed'))
-                <div class="col-12 alert alert-warning">
+                <div class="col-12 alert alert-warning hideMeAfter5Seconds">
                     {{ session('not-allowed') }}
                 </div>
             @endif

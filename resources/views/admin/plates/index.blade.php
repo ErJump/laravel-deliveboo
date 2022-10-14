@@ -8,8 +8,13 @@
             <div class="row mb-3">
 
                 @if (session('not-allowed'))
-                    <div class="col-12 alert alert-warning">
+                    <div class="col-12 alert alert-warning hideMeAfter5Seconds">
                         {{ session('not-allowed') }}
+                    </div>
+                @endif
+                @if( session ('delete'))
+                    <div class="col-12 alert alert-warning hideMeAfter5Seconds">
+                        {{ session('delete') }} è stato rimosso
                     </div>
                 @endif
 
@@ -25,11 +30,7 @@
                 </div>
             </div>
             <div class="row">
-                @if( session ('delete'))
-                    <div class="p-3 hideMeAfter5Seconds">
-                        {{ session('delete') }} è stato rimosso
-                    </div>
-                @endif
+                
                 <div class="col-12 ">
                     <div class="card ">
                         <div class="card-header text-right">
