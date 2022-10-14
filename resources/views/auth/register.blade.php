@@ -30,7 +30,7 @@
                             {{-- Nome --}}
                             <div class="form-group row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome del locale') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome del locale') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -48,7 +48,7 @@
                             {{-- Indirizzo --}}
                             <div class="form-group row">
                                 <label for="address"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="address" type="text"
@@ -65,7 +65,7 @@
                             {{-- Partita Iva --}}
                             <div class="form-group row">
                                 <label for="p_iva"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="p_iva" type="text" class="form-control @error('p_iva') is-invalid @enderror"
@@ -81,7 +81,7 @@
                             {{-- Telefono --}}
                             <div class="form-group row">
                                 <label for="phone_number"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Numero di telefono') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Numero di telefono') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="phone_number" type="tel"
@@ -98,11 +98,11 @@
                             {{-- Descrizione --}}
                             <div class="form-group row">
                                 <label for="description"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Descrizione del ristorante') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Descrizione del ristorante') }}*</label>
 
                                 <div class="col-md-6">
                                     <textarea class="form-control" name="description" id="description"
-                                        value="{{old('description')}}" required cols="30" rows="10"></textarea>
+                                        required cols="30" rows="10">{{old('description')}}</textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -112,7 +112,7 @@
                             </div>
                             {{-- Tipologie --}}
                             <div class="form-group row px-5">
-                                <label for="typologies" class="col-12 col-form-label">{{ __('Tipologia di cucina (puoi selezionarne più di una)') }}</label>
+                                <label for="typologies" class="col-12 col-form-label">{{ __('Tipologia di cucina (puoi selezionarne più di una)') }}*</label>
                                 <div class="row">
                                     @foreach ($typologies as $typology)
                                         <div class="col-6 col-md-4 px-5 py-2">
@@ -137,7 +137,7 @@
                             {{-- Immagine --}}
                             <div class="form-group row">
                                 <label for="image"
-                                    class="col-md-4 col-form-label text-md-right">{{ __("Inserisci l'immagine del tuo ristorante") }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __("Inserisci l'immagine del tuo ristorante") }}*</label>
 
                                 <div class="col-md-6 align-self-center">
                                     <input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
@@ -151,7 +151,7 @@
                             {{-- Email --}}
                             <div class="form-group row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -167,7 +167,7 @@
                             {{-- Password --}}
                             <div class="form-group row">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -184,7 +184,7 @@
                             {{-- Conferma Password --}}
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
