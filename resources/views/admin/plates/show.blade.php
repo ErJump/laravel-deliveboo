@@ -12,7 +12,7 @@
                         <a href="{{ route('admin.plates.index') }}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
                     </div>
                     <div class="col-11">
-                        <h1 class="font-weight-bold">{{ $plate->name }}</h1>
+                        <h3 class="font-weight-bold">{{ $plate->name }}</h3>
                     </div>
                 </div>
             </div>
@@ -21,25 +21,25 @@
             <div class="col-12">
                 <div class="card">
                     <div class="row g-0">
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-5">
                         <img src="{{
                             (substr($plate->image, 0, 7) == 'uploads') ? asset('storage/' . $plate->image) : $plate->image }}" class="img-fluid rounded-start ms_objectfit_100" 
                             alt="image">
                     </div>
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-7">
                         <div class="card-body">
-                            <h3 class="card-title mb-2">Informazioni</h3>
+                            <h3 class="card-title mb-3">Informazioni</h3>
                             <ul class="list-group mb-3">
                                 <li class="list-group-item">Prezzo: {{ $plate->price }}€</li>
                                 <li class="list-group-item">Ingredienti: {{ $plate->ingredients }}</li>
                                 <li class="list-group-item">Descrizione {{ $plate->description }}</li>
-                                <li class="list-group-item">Sconto: {{ $plate->discount }}</li>
+                                <li class="list-group-item">Sconto: {{ $plate->discount }}%</li>
                                 <li class="list-group-item">
                                     Disponibilità: 
                                     @if($plate->availability == 1)
-                                    Disponibile
+                                        <span class="text-success">Disponibile</span>
                                     @else
-                                        Non disponibile
+                                    <span class="text-alert">Non disponibile</span>
                                     @endif
                                 </li>
                             </ul>

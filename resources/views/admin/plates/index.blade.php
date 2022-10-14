@@ -12,7 +12,7 @@
                             <a href="{{ route('admin.home') }}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
                         </div>
                         <div class="col-11">
-                            <h1 class="font-weight-bold">I tuoi piatti</h1>
+                            <h3 class="font-weight-bold">I tuoi piatti</h3>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                                                     Non disponibile
                                                 @endif
                                             </td>
-                                            <td>{{ $plate->discount }}</td>
+                                            <td>{{ $plate->discount }}%</td>
                                             <td class="d-flex">
                                                 <a class="btn btn-primary mr-2" href="{{ route('admin.plates.show', $plate->id) }}">Dettagli</a>
                                                 <a class="btn ms_btn_secondary mr-2" href="{{ route('admin.plates.edit', $plate->id) }}">Modifica</a>

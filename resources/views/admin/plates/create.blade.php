@@ -10,7 +10,7 @@
                 <a href="{{ route('admin.plates.index') }}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
             </div>
             <div class="col-11">
-                <h1 class="font-weight-bold">Crea un nuovo piatto</h1>
+                <h3 class="font-weight-bold">Crea un nuovo piatto</h3>
             </div>
         </div>
         <div class="row">

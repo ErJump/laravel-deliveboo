@@ -9,20 +9,20 @@
 @section('content')
 <main>
     <div class="container">
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-12">
-                <h1 class="font-weight-bold mb-3">{{ $user->name }}</h1>
+                <h3 class="font-weight-bold mb-3">{{ $user->name }}</h3>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="row g-0">
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-5">
                         <img src="{{
                             (substr($user->image, 0, 7) == 'uploads') ? asset('storage/' . $user->image) : $user->image }}" class="img-fluid rounded-start ms_objectfit_100" alt="image">
                     </div>
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-7">
                         <div class="card-body">
                             <h4 class="card-title mb-3">Dati Personali</h4>
                             <ul class="list-group mb-3">

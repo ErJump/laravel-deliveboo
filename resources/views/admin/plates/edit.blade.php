@@ -12,7 +12,7 @@
                         <a href="{{ route('admin.plates.show', $plate->id) }}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
                     </div>
                     <div class="col-11">
-                        <h1 class="font-weight-bold">Modifica il piatto</h1>
+                        <h3 class="font-weight-bold">Modifica il piatto</h3>
                     </div>
                 </div>
             </div>
