@@ -25,7 +25,7 @@
                         </div>
                         <div class="card-body ms_overflowx_scroll">
                             <table class="table mb-0">
-                                <thead>
+                                <thead class="bg-dark">
                                     <tr>
                                         <th>Nome</th>
                                         <th>Ingredienti</th>

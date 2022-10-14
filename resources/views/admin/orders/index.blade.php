@@ -17,7 +17,7 @@
             <div class="col-12">
                <div class="card ms_overflowx_scroll">
                   <table class="table">
-                     <thead>
+                     <thead class="bg-dark">
                         <tr>
                            <th scope="col">ID</th>
                            <th scope="col">Nome</th>
