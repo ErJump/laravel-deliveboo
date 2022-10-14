@@ -25,7 +25,7 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" action="{{ route('addNewUser') }}" enctype="multipart/form-data">
+                        <form id="checkGroup" method="POST" action="{{ route('addNewUser') }}" enctype="multipart/form-data">
                             @csrf
                             {{-- Nome --}}
                             <div class="form-group row">
@@ -197,7 +197,7 @@
                             {{-- Submit --}}
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn ms_btn_secondary">
+                                    <button type="submit" class="btn ms_btn_secondary" name="submit">
                                         {{ __('Registrati') }}
                                     </button>
                                 </div>
@@ -209,4 +209,30 @@
         </div>
     </div>
 </main>
+@endsection
+
+
+@section('footer-scripts')
+<script>
+
+function validateGrp() {
+  let things = document.querySelectorAll('.form-check-input')
+  let checked = 0;
+  for (let thing of things) {
+    thing.checked && checked++
+  }
+  if (checked) {
+    things[things.length - 1].setCustomValidity("");
+    document.getElementById('checkGroup').submit();
+  } else {
+    things[things.length - 1].setCustomValidity("Devi selezionare almeno una tipologia");
+    things[things.length - 1].reportValidity();
+  }
+}
+
+document.querySelector('[name=submit]').addEventListener('click', () => {
+  validateGrp()
+});
+
+</script>
 @endsection
