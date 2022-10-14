@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 @if( session ('delete'))
-                    <div class="p-3">
+                    <div class="p-3 hideMeAfter5Seconds">
                         {{ session('delete') }} è stato rimosso
                     </div>
                 @endif
