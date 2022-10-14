@@ -1,3 +1,26 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-family-sans-serif;
+    color: $dark-color;
+}
+
+body,
+p,
+a,
+span,
+strong,
+li,
+button,
+table *,
+td {
+    font-family: $font-family-serif;
+    color: $rgba-dark-color
+}
+
 .ms_btn_secondary {
     background-color: $secondary-color;
     color: $light-color;
@@ -22,7 +45,7 @@
 }
 
 .ms_bg_image_black{
-    background-image: url(../../assets/images/pattern-b.png);
+    background-image: url(../../assets/images/pattern-b-2.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -38,25 +61,21 @@
     overflow-x: scroll;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: $font-family-sans-serif;
-    color: $dark-color;
+.card {
+    box-shadow: 0 4px 6px rgba(33,33,33,0.08);
 }
 
-body,
-p,
-a,
-span,
-strong,
-li,
-button,
-table *,
-td {
-    font-family: $font-family-serif;
-    color: $light-dark-color
+footer {
+    h6 {
+        color: $light-color
+    }
+
+    p,
+    li {
+        color: $rgba-light-color;
+    }
+
+    li {
+        list-style: none;
+    }
 }
