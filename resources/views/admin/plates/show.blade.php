@@ -29,9 +29,13 @@
                 <div class="card">
                     <div class="row g-0">
                     <div class="col-sm-12 col-lg-5">
+                        @if($plate->image != null)
                         <img src="{{
                             (substr($plate->image, 0, 7) == 'uploads') ? asset('storage/' . $plate->image) : $plate->image }}" class="img-fluid rounded-start ms_objectfit_100" 
                             alt="image">
+                        @else
+                        <img src="{{ asset('assets/images/food-placeholder.png') }}" class="img-fluid rounded-start ms_objectfit_100" alt="image">
+                        @endif
                     </div>
                     <div class="col-sm-12 col-lg-7">
                         <div class="card-body">
