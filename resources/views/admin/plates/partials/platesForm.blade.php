@@ -58,8 +58,7 @@
             {{-- Descrizione --}}
             <div class="form-group ">
                 <label for="description">Descrizione</label>
-                <textarea name="description" id="description" rows="5"
-                    class="form-control">{{old('description', $plate->description)}}</textarea>
+                <textarea name="description" id="description" rows="5" class="form-control">{{old('description', $plate->description)}}</textarea>
                 @error('description')
                 <div class="alert alert-danger" role="alert">
                     {{$message}}
@@ -70,9 +69,7 @@
             {{-- Ingredienti --}}
             <div class="form-group ">
                 <label for="ingredients">Ingredienti</label>
-                <textarea name="ingredients" id="ingredients" rows="4" class="form-control">
-                    {{old('ingredients', $plate->ingredients)}}
-                </textarea>
+                <textarea name="ingredients" id="ingredients" rows="4" class="form-control">{{old('ingredients', $plate->ingredients)}}</textarea>
                 @error('ingredients')
                 <div class="alert alert-danger" role="alert">
                     {{$message}}
