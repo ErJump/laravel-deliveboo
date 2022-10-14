@@ -67,7 +67,7 @@ class RegisterController extends Controller
     protected $validationRules = [
         'name' => 'required|min:3|max:255|string|unique:users',
         'email' => 'required|email|unique:users',
-        'password' => 'required|min:8|confirmed',
+        'password' => 'required|min:8|max:255|confirmed',
         'p_iva' => 'required|unique:users|digits:11',
         'address' => 'required|unique:users',
         'phone_number' => 'required|unique:users|min:10|max:15',
