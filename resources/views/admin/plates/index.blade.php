@@ -8,8 +8,13 @@
             <div class="row mb-3">
 
                 @if (session('not-allowed'))
-                    <div class="col-12 alert alert-warning">
+                    <div class="col-12 alert alert-warning hideMeAfter5Seconds">
                         {{ session('not-allowed') }}
+                    </div>
+                @endif
+                @if( session ('delete'))
+                    <div class="col-12 alert alert-warning hideMeAfter5Seconds">
+                        {{ session('delete') }} è stato rimosso
                     </div>
                 @endif
 
@@ -25,6 +30,7 @@
                 </div>
             </div>
             <div class="row">
+                
                 <div class="col-12 ">
                     <div class="card ">
                         <div class="card-header text-right">
@@ -58,6 +64,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $plate->discount }}%</td>
+
                                             <td class="d-flex">
                                                 <a class="btn btn-primary mr-2" href="{{ route('admin.plates.show', $plate->id) }}">Dettagli</a>
                                                 <a class="btn ms_btn_secondary mr-2" href="{{ route('admin.plates.edit', $plate->id) }}">Modifica</a>

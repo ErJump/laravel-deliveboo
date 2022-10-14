@@ -170,6 +170,8 @@ class PlateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plate = Plate::findorfail($id);
+        $plate->delete();
+        return redirect()->route('admin.plates.index')->with('delete', $plate->name);
     }
 }

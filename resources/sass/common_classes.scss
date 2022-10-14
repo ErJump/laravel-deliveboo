@@ -65,6 +65,18 @@ td {
     box-shadow: 0 4px 6px rgba(33,33,33,0.08);
 }
 
+.hideMeAfter5Seconds{
+    animation: hideAnimation 0s ease-in-out 5s;
+    animation-fill-mode: forwards;
+  }
+  
+@keyframes hideAnimation {
+    to {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+}
 footer {
     h6 {
         color: $light-color
