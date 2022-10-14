@@ -13,7 +13,6 @@ class Order extends Model
         'phone',
         'comment',
         'address',
-        'payment_state',
         'total_price',
       ];
     
