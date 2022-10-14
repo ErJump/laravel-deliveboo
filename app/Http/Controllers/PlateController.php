@@ -95,7 +95,7 @@ class PlateController extends Controller
         $newPlate->fill($data);
         $newPlate->save();
 
-        return redirect()->route('admin.plates.index');
+        return redirect()->route('admin.plates.index')->with('result-message', 'Il piatto è stato aggiunto con successo');
     }
 
     /**
@@ -163,7 +163,7 @@ class PlateController extends Controller
             Storage::delete($plate->image);
         }
         $plate->update($data);
-        return redirect()->route('admin.plates.index');
+        return redirect()->route('admin.plates.index')->with('result-message', 'Il piatto è stato modificato correttamente');
     }
 
     /**

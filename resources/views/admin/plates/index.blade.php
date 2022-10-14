@@ -17,6 +17,11 @@
                         {{ session('delete') }} è stato rimosso
                     </div>
                 @endif
+                @if(session('result-message'))
+                    <div class="col-12 alert alert-success hideMeAfter5Seconds">
+                        {{ session('result-message') }}
+                    </div>
+                @endif
 
                 <div class="col-12">
                     <div class="row align-items-center">
