@@ -122,8 +122,6 @@
                                             <input class="form-check-input" type="checkbox" name="typologies[]" value="{{$typology->id}}" id="{{$typology->name}}"
                                             @if($errors->any())
                                             {{in_array($typology->id, old('typologies', [])) ? 'checked' : ''}}
-                                            @else
-                                            {{-- {{$user->typologies->contains($typology) ? 'checked' : '' }} --}}
                                             @endif> 
                                             <label class="form-check-label" for="{{$typology->name}}">
                                             {{$typology->name}}
@@ -158,7 +156,7 @@
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                        name="email" value="{{ old('email') }}" required autocomplete="email">
+                                        name="email" value="{{ old('email') }}" maxlength="255" required autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -175,6 +173,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
+                                        minlength="8" maxlenght="255" 
                                         required autocomplete="new-password">
 
                                     @error('password')
@@ -191,7 +190,8 @@
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" required autocomplete="new-password">
+                                        name="password_confirmation" required minlength="8" maxlength="255"
+                                        autocomplete="new-password">
                                 </div>
                             </div>
                             {{-- Submit --}}
