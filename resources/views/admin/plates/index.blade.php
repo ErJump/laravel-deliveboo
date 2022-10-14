@@ -6,6 +6,13 @@
     <main>
         <div class="container">
             <div class="row mb-3">
+
+                @if (session('not-allowed'))
+                    <div class="col-12 alert alert-warning">
+                        {{ session('not-allowed') }}
+                    </div>
+                @endif
+
                 <div class="col-12">
                     <div class="row align-items-center">
                         <div class="col-1">
