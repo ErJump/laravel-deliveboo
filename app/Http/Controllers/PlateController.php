@@ -88,7 +88,9 @@ class PlateController extends Controller
     {
         $data = $request->validate($this->validationRules, $this->validationMessages);
         $data['user_id'] = Auth::id();
-        $data['image'] = Storage::put('uploads', $data['image']);
+        if($request->hasFile('image')) {
+            $data['image'] = Storage::put('uploads', $data['image']);
+        }
         $newPlate = new Plate();
         $newPlate->fill($data);
         $newPlate->save();
@@ -157,6 +159,8 @@ class PlateController extends Controller
                 Storage::delete($plate->image);
             }
             $data['image'] = Storage::put('uploads', $data['image']);
+        } else{
+            Storage::delete($plate->image);
         }
         $plate->update($data);
         return redirect()->route('admin.plates.index');
