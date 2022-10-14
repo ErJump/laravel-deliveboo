@@ -27,7 +27,6 @@
                            <th scope="col">Commento</th>
                            <th scope="col">Indirizzo</th>
                            <th scope="col">Totale</th>
-                           <th scope="col">Status</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -42,13 +41,6 @@
                                  <td>{{ $order->comment}}</td>
                                  <td>{{ $order->address}}</td>
                                  <td>{{ $order->total_price}}€</td>
-                                 <td>
-                                    @if ($order->payment_state == 0)
-                                       <span class="text-warning">Non pagato</span>
-                                    @else
-                                       <span class="text-success">Pagato</span>
-                                    @endif
-                                 </td>
                               </tr> 
                            @empty
                               <tr>Non ci sono ordini per il tuo risorante</tr>
