@@ -25,7 +25,7 @@ class CreatePlatesTable extends Migration
             $table->float('price');
             $table->float('discount');
             $table->boolean('availability')->default(1);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

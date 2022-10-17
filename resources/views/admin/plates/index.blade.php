@@ -6,6 +6,23 @@
     <main>
         <div class="container">
             <div class="row mb-3">
+
+                @if (session('not-allowed'))
+                    <div class="col-12 alert alert-warning hideMeAfter5Seconds">
+                        {{ session('not-allowed') }}
+                    </div>
+                @endif
+                @if( session ('delete'))
+                    <div class="col-12 alert alert-warning hideMeAfter5Seconds">
+                        {{ session('delete') }} è stato rimosso
+                    </div>
+                @endif
+                @if(session('result-message'))
+                    <div class="col-12 alert alert-success hideMeAfter5Seconds">
+                        {{ session('result-message') }}
+                    </div>
+                @endif
+
                 <div class="col-12">
                     <div class="row align-items-center">
                         <div class="col-1">
@@ -18,6 +35,7 @@
                 </div>
             </div>
             <div class="row">
+                
                 <div class="col-12 ">
                     <div class="card ">
                         <div class="card-header text-right">
@@ -51,10 +69,11 @@
                                                 @endif
                                             </td>
                                             <td>{{ $plate->discount }}%</td>
+
                                             <td class="d-flex">
                                                 <a class="btn btn-primary mr-2" href="{{ route('admin.plates.show', $plate->id) }}">Dettagli</a>
                                                 <a class="btn ms_btn_secondary mr-2" href="{{ route('admin.plates.edit', $plate->id) }}">Modifica</a>
-                                                <form action="{{ route('admin.plates.destroy', $plate->id) }}" method="POST">
+                                                <form action="{{ route('admin.plates.destroy', $plate->id) }}" method="POST" class="form-plate-delete">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn ms_btn_alert h-100">Elimina</button>
@@ -70,4 +89,20 @@
             </div>
         </div>
     </main>
+@endsection
+
+@section('footer-scripts')
+    <script>
+        const deleteForms = document.querySelectorAll('.form-plate-delete');
+
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const confirmDelete = confirm('Sei sicuro di voler eliminare questo piatto?');
+                if (confirmDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

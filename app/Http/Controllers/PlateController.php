@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PlateController extends Controller
 {
+
     protected $validationRules = [
         'name' => 'required|string|min:3|max:255',
         'user_id' => 'integer',
@@ -62,7 +63,8 @@ class PlateController extends Controller
      */
     public function index()
     {
-        $plates = Auth::user()->plates;
+        //mi segna errore in questo punto perchè non trova la funzione plates, tuttavia i piatti sono visualizzati correttamente
+        $plates = Auth::user()->plates()->orderBy('name')->get();
         return view('admin.plates.index', compact('plates'));
     }
 
@@ -87,12 +89,14 @@ class PlateController extends Controller
     {
         $data = $request->validate($this->validationRules, $this->validationMessages);
         $data['user_id'] = Auth::id();
-        $data['image'] = Storage::put('uploads', $data['image']);
+        if($request->hasFile('image')) {
+            $data['image'] = Storage::put('uploads', $data['image']);
+        }
         $newPlate = new Plate();
         $newPlate->fill($data);
         $newPlate->save();
 
-        return redirect()->route('admin.plates.index');
+        return redirect()->route('admin.plates.index')->with('result-message', 'Il piatto è stato aggiunto con successo');
     }
 
     /**
@@ -103,8 +107,18 @@ class PlateController extends Controller
      */
     public function show($id)
     {
+        
         $plate = Plate::findOrFail($id);
-        return view('admin.plates.show', compact('plate'));
+        $plates = Auth::user()->plates;
+
+        if (Auth::id() === $plate->user_id) {
+            return view('admin.plates.show', compact('plate'));
+        }
+
+        else {
+            return redirect()->route('admin.plates.index', compact('plates'))->with('not-allowed', 'Il contenuto che hai cercato non è stato trovato nel tuo archivio.');
+        }
+
     }
 
     /**
@@ -116,7 +130,16 @@ class PlateController extends Controller
     public function edit($id)
     {
         $plate = Plate::findOrFail($id);
-        return view('admin.plates.edit', compact('plate'));
+        $plates = Auth::user()->plates;
+
+        if (Auth::id() === $plate->user_id) {
+            return view('admin.plates.edit', compact('plate'));
+        }
+
+        else {
+            return redirect()->route('admin.plates.index', compact('plates'))->with('not-allowed', 'Il contenuto che hai cercato non è stato trovato nel tuo archivio.');
+        }
+
     }
 
     /**
@@ -137,9 +160,11 @@ class PlateController extends Controller
                 Storage::delete($plate->image);
             }
             $data['image'] = Storage::put('uploads', $data['image']);
+        } else{
+            Storage::delete($plate->image);
         }
         $plate->update($data);
-        return redirect()->route('admin.plates.index');
+        return redirect()->route('admin.plates.index')->with('result-message', 'Il piatto è stato modificato correttamente');
     }
 
     /**
@@ -150,6 +175,8 @@ class PlateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plate = Plate::findorfail($id);
+        $plate->delete();
+        return redirect()->route('admin.plates.index')->with('delete', $plate->name);
     }
 }

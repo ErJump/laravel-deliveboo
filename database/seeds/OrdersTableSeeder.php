@@ -21,7 +21,6 @@ class OrdersTableSeeder extends Seeder
         $order1->phone = '3463399876';
         $order1->comment = 'Il citofono non funziona, chiama quando arrivi';
         $order1->address = 'Via Trinità delle Monache 22';
-        $order1->payment_state = 0;
         $order1->total_price = 18.50;
         $order1->save();
 
@@ -33,7 +32,6 @@ class OrdersTableSeeder extends Seeder
         $order2->phone = '3463488876';
         $order2->comment = '';
         $order2->address = 'Piazzale Tecchio 11';
-        $order2->payment_state = 1;
         $order2->total_price = 28.50;
         $order2->save();
 
@@ -45,7 +43,6 @@ class OrdersTableSeeder extends Seeder
         $order3->phone = '3593588876';
         $order3->comment = 'Scala A, ascensore a destra';
         $order3->address = 'Via Luca Giordano 25';
-        $order3->payment_state = 1;
         $order3->total_price = 28.50;
         $order3->save();
 
@@ -57,7 +54,6 @@ class OrdersTableSeeder extends Seeder
         $order4->phone = '3333588811';
         $order4->comment = "Il palazzo di fronte l'edicola";
         $order4->address = 'Via Maselli 11';
-        $order4->payment_state = 0;
         $order4->total_price = 20.60;
         $order4->save();
 

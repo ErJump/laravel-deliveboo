@@ -25,7 +25,7 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" action="{{ route('addNewUser') }}" enctype="multipart/form-data">
+                        <form id="checkGroup" method="POST" action="{{ route('addNewUser') }}" enctype="multipart/form-data">
                             @csrf
                             {{-- Nome --}}
                             <div class="form-group row">
@@ -35,7 +35,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror"
-                                        name="name" value="{{ old('name') }}" required
+                                        name="name" value="{{ old('name') }}" required minlength="3" maxlength="255"
                                         autocomplete="name">
 
                                     @error('name')
@@ -53,6 +53,7 @@
                                 <div class="col-md-6">
                                     <input id="address" type="text"
                                         class="form-control @error('address') is-invalid @enderror" name="address"
+                                        minlength="3" maxlength="255"
                                         value="{{ old('address') }}" required autocomplete="address">
 
                                     @error('address')
@@ -68,8 +69,8 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA') }}*</label>
 
                                 <div class="col-md-6">
-                                    <input id="p_iva" type="text" class="form-control @error('p_iva') is-invalid @enderror"
-                                        name="p_iva" value="{{ old('p_iva') }}" required autocomplete="p_iva">
+                                    <input id="p_iva" type="number" class="form-control @error('p_iva') is-invalid @enderror"
+                                        name="p_iva" value="{{ old('p_iva') }}" required min="10000000000" max="99999999999" autocomplete="p_iva">
 
                                     @error('p_iva')
                                     <span class="invalid-feedback" role="alert">
@@ -86,6 +87,7 @@
                                 <div class="col-md-6">
                                     <input id="phone_number" type="tel"
                                         class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
+                                        minlength="10" maxlength="15"
                                         value="{{ old('phone_number') }}" required autocomplete="phone_number">
 
                                     @error('phone_number')
@@ -102,6 +104,7 @@
 
                                 <div class="col-md-6">
                                     <textarea class="form-control" name="description" id="description"
+                                        minlength="30" maxlength="1500"
                                         required cols="30" rows="10">{{old('description')}}</textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -119,8 +122,6 @@
                                             <input class="form-check-input" type="checkbox" name="typologies[]" value="{{$typology->id}}" id="{{$typology->name}}"
                                             @if($errors->any())
                                             {{in_array($typology->id, old('typologies', [])) ? 'checked' : ''}}
-                                            @else
-                                            {{-- {{$user->typologies->contains($typology) ? 'checked' : '' }} --}}
                                             @endif> 
                                             <label class="form-check-label" for="{{$typology->name}}">
                                             {{$typology->name}}
@@ -155,7 +156,7 @@
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                        name="email" value="{{ old('email') }}" required autocomplete="email">
+                                        name="email" value="{{ old('email') }}" maxlength="255" required autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -172,6 +173,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
+                                        minlength="8" maxlenght="255" 
                                         required autocomplete="new-password">
 
                                     @error('password')
@@ -188,13 +190,14 @@
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" required autocomplete="new-password">
+                                        name="password_confirmation" required minlength="8" maxlength="255"
+                                        autocomplete="new-password">
                                 </div>
                             </div>
                             {{-- Submit --}}
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn ms_btn_secondary">
+                                    <button type="submit" class="btn ms_btn_secondary" name="submit">
                                         {{ __('Registrati') }}
                                     </button>
                                 </div>
@@ -206,4 +209,30 @@
         </div>
     </div>
 </main>
+@endsection
+
+
+@section('footer-scripts')
+<script>
+
+function validateGrp() {
+  let things = document.querySelectorAll('.form-check-input')
+  let checked = 0;
+  for (let thing of things) {
+    thing.checked && checked++
+  }
+  if (checked) {
+    things[things.length - 1].setCustomValidity("");
+    document.getElementById('checkGroup').submit();
+  } else {
+    things[things.length - 1].setCustomValidity("Devi selezionare almeno una tipologia");
+    things[things.length - 1].reportValidity();
+  }
+}
+
+document.querySelector('[name=submit]').addEventListener('click', () => {
+  validateGrp()
+});
+
+</script>
 @endsection
