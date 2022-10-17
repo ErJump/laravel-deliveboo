@@ -32,6 +32,26 @@ td {
 }
 
 
+
+/* backgrounds style */
+
+.ms_bg_primary {
+    background-color: $primary-color;
+}
+
+.ms_bg_secondary {
+    background-color: $secondary-color;
+}
+
+.ms_bg_dark {
+    background-color: $dark-color;
+}
+
+.ms_bg_light {
+    background-color: $light-color;
+}
+
+
 /* Forms style */
 
 .form-control {

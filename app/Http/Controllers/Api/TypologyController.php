@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\Typology;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class TypologyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('typologies')->paginate(10, ['id', 'name', 'email', 'address', 'phone_number', 'description', 'image']);
+        $typologies = Typology::with('users')->paginate(10, ['id', 'name']);
+
         return response()->json([
             'response' => true,
-            'results' => $users
+            'results' => $typologies,
         ]);
     }
 
@@ -49,18 +50,32 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $user = User::with('typologies')->find($id, ['id','name', 'email', 'address', 'phone_number', 'description', 'image']);
+        $typologies = $request->query('typologies');
 
-        if ($user) {
-            return response()->json([
-                'response' => true,
-                'results' => $user,
+        $typology_array = Typology::whereIn('id', $typologies)->with('users')->get();
 
-            ]);
-        }    
-        else return response('', 404);
+        // dd($typology_array);
+
+        // $typology = Typology::with('users')->findOrFail($id);
+
+        return response()->json([
+            'response' => true,
+            'results' => $typology_array,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $typologies = $request->query('typologies');
+
+        $typology_array = Typology::whereIn('id', $typologies)->with('users')->get();
+
+        return response()->json([
+            'response' => true,
+            'results' => $typology_array,
+        ]);
     }
 
     /**
