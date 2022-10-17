@@ -1,3 +1,5 @@
+/* Text style */
+
 h1,
 h2,
 h3,
@@ -18,12 +20,30 @@ button,
 table *,
 td {
     font-family: $font-family-serif;
-    color: $rgba-dark-color
+    color: $rgba-dark-color;
 }  
 
 .fs-2 {
     font-size: $font-size-2x;
 }
+
+.fs-small {
+    font-size: $font-size-small;
+}
+
+
+/* Forms style */
+
+.form-control {
+    height: 48px;
+}
+
+.input-image {
+    padding-top: .7rem;
+}
+
+
+/* Elements style */
 
 .ms_btn_secondary {
     background-color: $secondary-color;
@@ -81,6 +101,10 @@ td {
         height: 0;
     }
 }
+
+
+/* Footer style */
+
 footer {
     h6 {
         color: $light-color
