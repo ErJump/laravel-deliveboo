@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xs-12 col-lg-4">
             {{-- Nome --}}
-            <div class="form-group ">
+            <div class="form-group">
                 <label for="input-name">Nome*</label>
                 <input required name="name" type="text" class="form-control" id="input-name" placeholder="Inserisci nome piatto"
                     minlength="3" maxlength="255"
