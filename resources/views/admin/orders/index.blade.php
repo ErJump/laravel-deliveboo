@@ -44,7 +44,7 @@
          </div>
          <div class="row">
             <div class="col-12 d-none d-lg-block">
-               <div class="card ms_overflowx_scroll">
+               <div class="card">
                   <table class="table">
                      <thead>
                         <tr>

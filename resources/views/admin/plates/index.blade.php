@@ -81,7 +81,7 @@
                         <div class="card-header text-right">
                             <a class="btn btn-success" href="{{ route('admin.plates.create') }}">Aggiungi un nuovo piatto</a>
                         </div>
-                        <div class="card-body ms_overflowx_scroll">
+                        <div class="card-body">
                             <table class="table mb-0">
                                 <thead>
                                     <tr>
