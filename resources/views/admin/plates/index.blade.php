@@ -6,22 +6,23 @@
     <main>
         <div class="container">
             <div class="row mb-3">
-
-                @if (session('not-allowed'))
-                    <div class="col-12 alert alert-warning hideMeAfter5Seconds">
-                        {{ session('not-allowed') }}
-                    </div>
-                @endif
-                @if( session ('delete'))
-                    <div class="col-12 alert alert-warning hideMeAfter5Seconds">
-                        {{ session('delete') }} è stato rimosso
-                    </div>
-                @endif
-                @if(session('result-message'))
-                    <div class="col-12 alert alert-success hideMeAfter5Seconds">
-                        {{ session('result-message') }}
-                    </div>
-                @endif
+                <div class="col-12">
+                    @if (session('not-allowed'))
+                        <div class="col-12 alert alert-warning hideMeAfter5Seconds">
+                            {{ session('not-allowed') }}
+                        </div>
+                    @endif
+                    @if( session ('delete'))
+                        <div class="col-12 alert alert-warning hideMeAfter5Seconds">
+                            {{ session('delete') }} è stato rimosso
+                        </div>
+                    @endif
+                    @if(session('result-message'))
+                        <div class="col-12 alert alert-success hideMeAfter5Seconds">
+                            {{ session('result-message') }}
+                        </div>
+                    @endif
+                </div>
 
                 <div class="col-12">
                     <div class="row align-items-center">
@@ -34,16 +35,16 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
-                
-                <div class="col-12 ">
+                <div class="col-12 d-none d-lg-block">
                     <div class="card ">
                         <div class="card-header text-right">
                             <a class="btn btn-success" href="{{ route('admin.plates.create') }}">Aggiungi un nuovo piatto</a>
                         </div>
                         <div class="card-body ms_overflowx_scroll">
                             <table class="table mb-0">
-                                <thead class="bg-dark">
+                                <thead>
                                     <tr>
                                         <th>Nome</th>
                                         <th>Ingredienti</th>
