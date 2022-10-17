@@ -1,7 +1,11 @@
 <template>
     <div>
         <h1>Home Page</h1>
-        <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant" />
+        <div class="container-lg">
+            <div class="row">
+                <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant" />
+            </div>
+        </div>  
     </div>
 </template>
 
@@ -19,6 +23,7 @@ export default {
         return {
             restaurantsUrl: 'http://localhost:8000/api/users',
             restaurants: [],
+            typologiesArray: [],
             typologies: [],
         }
     },

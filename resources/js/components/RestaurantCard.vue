@@ -1,5 +1,5 @@
 <template>
-    <div class="card px-0 col-12 position-relative">
+    <div class="card px-0 col-12 rounded mb-4">
         <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name">
         <div class="card-body">
             <h5 class="card-title">{{restaurant.name}}</h5>
@@ -26,16 +26,10 @@ export default {
 
 <style scoped lang="scss">
 @import "../../sass/variables.scss";
-.ms_badge{
-    margin: 0 auto;
-    padding: 10px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    background-color: $dark-color;
-    img{
-        width: 100px;
-    }
+
+img{
+    height: 200px;
+    object-fit: cover;
+    position: center;
 }
 </style>
