@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 position-relative text-center">
-                    <img class="img-fluid floating" :src="images[mainImage]" alt="hero">
+                    <img class="img-fluid floating"  :src="'../../public/assets/images/' + images[mainImage]" alt="hero">
                     <div class="w-100 d-flex justify-content-center mb-3">
                         <a href="#" class="btn btn-danger ms_btn_cta">Sfoglia i ristoranti</a>
                     </div>
@@ -24,30 +24,27 @@ export default {
     data () {
         return {
         images: [
-            '../../../public/assets/images/margherita.png',
-            '../../../public/assets/images/nigiri.png',
-            '../../../public/assets/images/HERO.png',
+            'margherita.png',
+            'nigiri.png',
+            'HERO.png',
         ],
         mainImage: 0,
         }
     },
     methods:{
-        callFunction: function() {
-        let i = 0;
+        changeImage(){
             setInterval(() => {
-                if (i==this.images.length) {
-                    i = 0;
-                }
-                else{
-                    i++;
-                    this.mainImage = this.images[i];
+                if(this.mainImage < this.images.length - 1){
+                    this.mainImage++;
+                }else{
+                    this.mainImage = 0;
                 }
             }, 3000);
         }
     },
 
     mounted(){
-        this.callFunction();
+        this.changeImage();
     }
 }
 
