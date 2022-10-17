@@ -39,7 +39,7 @@
                                         autocomplete="name">
 
                                     <div>
-                                        <small>Min:3/Max:255 caratteri.</small>
+                                        <small>Min:3 / Max:255 caratteri.</small>
                                     </div>    
 
                                     @error('name')
@@ -165,7 +165,7 @@
                                     <input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
 
                                     <div>
-                                        <small>Max:M 2.</small>
+                                        <small>Max: 2MB</small>
                                     </div>
 
                                     @error('image')
@@ -185,7 +185,7 @@
                                         name="email" value="{{ old('email') }}" maxlength="255" required autocomplete="email">
 
                                     <div>
-                                        <small>Max:255 caratteri.</small>
+                                        <small>Max: 255 caratteri.</small>
                                     </div>   
 
                                     @error('email')
@@ -207,7 +207,7 @@
                                         required autocomplete="new-password">
 
                                     <div>
-                                        <small>Min:8/Max:255 caratteri.</small>
+                                        <small>Min: 8 / Max: 255 caratteri.</small>
                                     </div>   
 
                                     @error('password')
