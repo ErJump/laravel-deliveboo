@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-dark navbar-expand-lg px-5">
+    <nav class="navbar navbar-expand-lg navbar-dark ms_bg_secondary py-2">
         <div class="container-fluid d-flex">
             <a class="navbar-brand" href="{{ route('admin.home') }}">
                 <img class="d-none d-sm-none d-md-none d-lg-block d-xl-block" src="{{asset('assets/images/logo-white.png')}}" alt="logo">
@@ -13,30 +13,30 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                <ul class="navbar-nav navbar-dark">
+                <ul class="navbar-nav">
                     <!-- Authentication Links -->
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Accedi') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Accedi') }}</a>
                     </li>
                     @if (Route::has('register'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Registrati') }}</a>
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Registrati') }}</a>
                     </li>
                     @endif
                     @else
                     <li class="nav-item">
-                        <a class="text-white nav-link" href="{{ route('admin.orders.index') }}">
+                        <a class="nav-link" href="{{ route('admin.orders.index') }}">
                             Ordini
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="text-white nav-link" href="{{ route('admin.plates.index') }}">
+                        <a class="nav-link" href="{{ route('admin.plates.index') }}">
                             Piatti
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="text-white nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                             {{ __('Esci') }}
                         </a>
