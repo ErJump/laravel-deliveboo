@@ -38,6 +38,10 @@
                                         name="name" value="{{ old('name') }}" required minlength="3" maxlength="255"
                                         autocomplete="name">
 
+                                    <div>
+                                        <small>Min:3/Max:255 caratteri.</small>
+                                    </div>    
+
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -56,6 +60,10 @@
                                         minlength="3" maxlength="255"
                                         value="{{ old('address') }}" required autocomplete="address">
 
+                                    <div>
+                                        <small>Min:3/Max:255 caratteri.</small>
+                                    </div>   
+                                        
                                     @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -71,6 +79,10 @@
                                 <div class="col-md-6">
                                     <input id="p_iva" type="number" class="form-control @error('p_iva') is-invalid @enderror"
                                         name="p_iva" value="{{ old('p_iva') }}" required min="10000000000" max="99999999999" autocomplete="p_iva">
+
+                                    <div>
+                                        <small>Obbligatori 11 numeri.</small>
+                                    </div>    
 
                                     @error('p_iva')
                                     <span class="invalid-feedback" role="alert">
@@ -90,6 +102,10 @@
                                         minlength="10" maxlength="15"
                                         value="{{ old('phone_number') }}" required autocomplete="phone_number">
 
+                                    <div>
+                                        <small>Min:10/Max:15 numeri.</small>
+                                    </div>
+
                                     @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -106,6 +122,11 @@
                                     <textarea class="form-control" name="description" id="description"
                                         minlength="30" maxlength="1500"
                                         required cols="30" rows="10">{{old('description')}}</textarea>
+
+                                    <div>
+                                        <small>Min:30/Max:1500 caratteri.</small>
+                                    </div>    
+
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -142,6 +163,11 @@
 
                                 <div class="col-md-6 align-self-center">
                                     <input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
+
+                                    <div>
+                                        <small>Max:M 2.</small>
+                                    </div>
+
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -157,6 +183,10 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                         name="email" value="{{ old('email') }}" maxlength="255" required autocomplete="email">
+
+                                    <div>
+                                        <small>Max:255 caratteri.</small>
+                                    </div>   
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -175,6 +205,10 @@
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         minlength="8" maxlenght="255" 
                                         required autocomplete="new-password">
+
+                                    <div>
+                                        <small>Min:8/Max:255 caratteri.</small>
+                                    </div>   
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
