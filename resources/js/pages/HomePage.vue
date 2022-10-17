@@ -7,6 +7,20 @@
 <script>
 export default {
     name: 'HomePage',
+    components: {
+
+    },
+    data() {
+        return {
+
+        }
+    },
+    methods: {
+
+    },
+    created() {
+
+    }
 }
 </script>
 

@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 //da cancellare quando si attiva il front-office
-Route::middleware('auth')->get('/', function() {
+/* Route::middleware('auth')->get('/', function() {
     return view('admin.show');
-});
+}); */
 
 Route::middleware('auth')->get('/home', function() {
     return view('admin.show');
@@ -38,7 +38,7 @@ Route::middleware('auth')
 Route::post('/register/create', 'Auth\RegisterController@create')->name('addNewUser');
 
 //da scommentare quando si attiva il front-office
-/* Route::get("{any?}", function () {
+Route::get("{any?}", function () {
     return view('guest.home');
-})->where("any", ".*"); */
+})->where("any", ".*");
 
