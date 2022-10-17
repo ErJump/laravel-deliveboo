@@ -37,6 +37,13 @@
             </div>
 
             <div class="row">
+                <div class="col-12 d-lg-none">
+                    <div class="row">
+                        <div class="col-12">
+                            <a class="btn btn-success" href="{{ route('admin.plates.create') }}">Aggiungi un nuovo piatto</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-12 d-none d-lg-block">
                     <div class="card ">
                         <div class="card-header text-right">
