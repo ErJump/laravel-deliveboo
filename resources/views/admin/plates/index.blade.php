@@ -73,7 +73,7 @@
                                             <td class="d-flex">
                                                 <a class="btn btn-primary mr-2" href="{{ route('admin.plates.show', $plate->id) }}">Dettagli</a>
                                                 <a class="btn ms_btn_secondary mr-2" href="{{ route('admin.plates.edit', $plate->id) }}">Modifica</a>
-                                                <form action="{{ route('admin.plates.destroy', $plate->id) }}" method="POST">
+                                                <form action="{{ route('admin.plates.destroy', $plate->id) }}" method="POST" class="form-plate-delete">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn ms_btn_alert h-100">Elimina</button>
@@ -89,4 +89,20 @@
             </div>
         </div>
     </main>
+@endsection
+
+@section('footer-scripts')
+    <script>
+        const deleteForms = document.querySelectorAll('.form-plate-delete');
+
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const confirmDelete = confirm('Sei sicuro di voler eliminare questo piatto?');
+                if (confirmDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection
