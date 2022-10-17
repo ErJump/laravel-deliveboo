@@ -14,10 +14,39 @@
            </div>
          </div>
          <div class="row">
-            <div class="col-12">
+            <div class="col-12 d-lg-none">
+               <div class="row">
+                   <div class="col-12">
+                       @forelse ($orders as $order)
+                           <div class="card mb-3">
+                               <div class="card-body">
+                                    <h4 class="font-weight-bold mb-4">Ordine: {{ $order->id }}</h4>
+                                    <h6 class="font-weight-bold">Dati cliente:</h6>
+                                    <ul class="mb-4">
+                                       <li><strong>ID:</strong> {{ $order->id }}</li>
+                                       <li><strong>Nome:</strong> {{ $order->first_name }}</li>
+                                       <li><strong>Cognome:</strong> {{ $order->last_name }}</li>
+                                       <li><strong>Email:</strong> {{ $order->email }}</li>
+                                       <li><strong>Telefono:</strong> {{ $order->phone }}</li>
+                                       <li><strong>Indirizzo:</strong> {{ $order->address }}</li>
+                                       <li><strong>Note:</strong> {{ $order->comment }}</li>
+                                    </ul>
+                                    <h6 class="font-weight-bold">Prezzo:</h6>
+                                    <p class="fs-2">{{ $order->total_price }}€</p>
+                               </div>
+                           </div>
+                       @empty
+                           <h3>Non hai ricevuto ordini</h3>
+                       @endforelse
+                   </div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-12 d-none d-lg-block">
                <div class="card ms_overflowx_scroll">
                   <table class="table">
-                     <thead class="bg-dark">
+                     <thead>
                         <tr>
                            <th scope="col">ID</th>
                            <th scope="col">Nome</th>
