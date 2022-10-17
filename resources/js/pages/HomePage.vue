@@ -1,18 +1,20 @@
 <template>
     <div>
         <h1>Home Page</h1>
+        <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant" />
     </div>
 </template>
 
 <script>
 
 import axios from 'axios';
+import RestaurantCard from '../components/RestaurantCard.vue';
 
 export default {
     name: 'HomePage',
     components: {
-
-    },
+    RestaurantCard
+},
     data() {
         return {
             restaurantsUrl: 'http://localhost:8000/api/users',
