@@ -91,29 +91,3 @@ footer {
         list-style: none;
     }
 }
-
-// error 404 page
-.error{
-    background-image: url(../../assets/images/background.jpg);
-    height: 100vh;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.errorquattro{
-    font-weight: 900;
-    font-size: 10rem;
-    color: white;
-    padding: 0px 22px;
-}
-.centering{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-.text-error{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, 110%);
-}
