@@ -52,21 +52,29 @@ class TypologyController extends Controller
      */
     public function show(Request $request)
     {
-        $typologies = [
-            '1',
-            '2',
-            '3',
-        ];
+        $typologies = $request->query('typologies');
 
-        $typology = Typology::where($typologies)->get();
+        $typology_array = Typology::whereIn('id', $typologies)->with('users')->get();
 
-        dd($typologies);
+        // dd($typology_array);
 
         // $typology = Typology::with('users')->findOrFail($id);
 
         return response()->json([
             'response' => true,
-            'results' => $typology,
+            'results' => $typology_array,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $typologies = $request->query('typologies');
+
+        $typology_array = Typology::whereIn('id', $typologies)->with('users')->get();
+
+        return response()->json([
+            'response' => true,
+            'results' => $typology_array,
         ]);
     }
 
