@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 position-relative text-center">
-                    <img class="img-fluid floating"  :src="'../../public/assets/images/' + images[mainImage]" alt="hero">
+                    <img class="img-fluid floating"  src="../../../public/assets/images/HERO.png" alt="hero">
                     <div class="w-100 d-flex justify-content-center mb-3">
                         <a href="#" class="btn btn-danger ms_btn_cta">Sfoglia i ristoranti</a>
                     </div>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <svg class="w-100" xmlns="../../../public/assets/images/wave1.svg" viewBox="0 0 100 100" preserveAspectRatio="none" height="100">
-            <path fill="white" d="M 0 0 L0 100 L100 100 L100 0 Q 50 200 0 0"></path>
+            <path fill="#FDFDFF" d="M 0 0 L0 100 L100 100 L100 0 Q 50 200 0 0"></path>
         </svg>
     </section>
 </template>

@@ -1,15 +1,26 @@
 <template>
     <div>
-        <h1>Home Page</h1>
+        <MainJumbotron class="mb-5"/>
+        <div class="container-lg">
+            <div class="row">
+                <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant" />
+            </div>
+        </div>  
     </div>
 </template>
 
 <script>
-export default {
-    name: '',
-    components: {
 
-    },
+import axios from 'axios';
+import RestaurantCard from '../components/RestaurantCard.vue';
+import MainJumbotron from '../components/MainJumbotron.vue';
+
+export default {
+    name: 'HomePage',
+    components: {
+    RestaurantCard,
+    MainJumbotron
+},
     data() {
         return {
             restaurantsUrl: 'http://localhost:8000/api/users',
