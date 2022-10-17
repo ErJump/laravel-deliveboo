@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10, ['name', 'email', 'address', 'phone_number', 'description', 'image']);
+        $users = User::with('typologies')->paginate(10, ['id', 'name', 'email', 'address', 'phone_number', 'description', 'image']);
         return response()->json([
             'response' => true,
             'results' => $users
@@ -51,7 +51,16 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::with('typologies')->find($id, ['id','name', 'email', 'address', 'phone_number', 'description', 'image']);
+
+        if ($user) {
+            return response()->json([
+                'response' => true,
+                'results' => $user,
+
+            ]);
+        }    
+        else return response('', 404);
     }
 
     /**
