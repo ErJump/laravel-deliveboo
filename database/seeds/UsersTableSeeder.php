@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user1 = new User();
-        $user1->restaurant_name = 'Antica Pizzeria da Michele';
+        $user1->name = 'Antica Pizzeria da Michele';
         $user1->email = 'info@pizzeriamichele.it';
         $user1->password = Hash::make('damichele');
         $user1->address = 'Via Cesare Sersale 1';
@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
         $user1->save();
 
         $user2 = new User();
-        $user2->restaurant_name = "McDonald's";
+        $user2->name = "McDonald's";
         $user2->email = 'info@mcdonalds.it';
         $user2->password = Hash::make('donald');
         $user2->address = 'Via Giovanni Merliani 38';
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
         $user2->save();
 
         $user3 = new User();
-        $user3->restaurant_name = "Sushi Zen";
+        $user3->name = "Sushi Zen";
         $user3->email = 'info@sushi.it';
         $user3->password = Hash::make('sushi');
         $user3->address = 'Via Luca Giordano 23';
@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
         $user3->save();
 
         $user4 = new User();
-        $user4->restaurant_name = "Iberico";
+        $user4->name = "Iberico";
         $user4->email = 'info@iberico.it';
         $user4->password = Hash::make('spagna');
         $user4->address = 'Traversa San Severino 18';
@@ -58,7 +58,7 @@ class UsersTableSeeder extends Seeder
         $user4->save();
 
         $user5 = new User();
-        $user5->restaurant_name = "O' Talebano Kebab";
+        $user5->name = "O' Talebano Kebab";
         $user5->email = 'info@talebano.it';
         $user5->password = Hash::make('spagna');
         $user5->address = 'Via Porta di Massa 8';
@@ -69,7 +69,7 @@ class UsersTableSeeder extends Seeder
         $user5->save();
 
         $user6 = new User();
-        $user6->restaurant_name = "Mi'ndujo";
+        $user6->name = "Mi'ndujo";
         $user6->email = 'info@mi_ndujo.it';
         $user6->password = Hash::make("mi'ndujo");
         $user6->address = 'Piazzale San Antonio 18';
@@ -80,7 +80,7 @@ class UsersTableSeeder extends Seeder
         $user6->save();
 
         $user7 = new User();
-        $user7->restaurant_name = "Antica Pizza Fritta da Zia Esterina Sorbillo";
+        $user7->name = "Antica Pizza Fritta da Zia Esterina Sorbillo";
         $user7->email = 'info@ziasorbillo.it';
         $user7->password = Hash::make('fritto');
         $user7->address = ' Piazza Trieste e Trento 53';
@@ -91,7 +91,7 @@ class UsersTableSeeder extends Seeder
         $user7->save();
 
         $user8 = new User();
-        $user8->restaurant_name = "Taverna del Gatto";
+        $user8->name = "Taverna del Gatto";
         $user8->email = 'info@tavernadelgatto.it';
         $user8->password = Hash::make('spagna');
         $user8->address = 'Via Roma 72';
@@ -102,7 +102,7 @@ class UsersTableSeeder extends Seeder
         $user8->save();
 
         $user9 = new User();
-        $user9->restaurant_name = "Hello Poke";
+        $user9->name = "Hello Poke";
         $user9->email = 'info@poke.it';
         $user9->password = Hash::make('poke');
         $user9->address = 'Via Michele Kerbaker 37';
@@ -113,7 +113,7 @@ class UsersTableSeeder extends Seeder
         $user9->save();
 
         $user10 = new User();
-        $user10->restaurant_name = "Thai Restaurant";
+        $user10->name = "Thai Restaurant";
         $user10->email = 'info@thairestaurant.it';
         $user10->password = Hash::make('thai');
         $user10->address = 'Via Caccia 72';
@@ -124,7 +124,7 @@ class UsersTableSeeder extends Seeder
         $user10->save();
 
         $user11 = new User();
-        $user11->restaurant_name = "I Panizzeri";
+        $user11->name = "I Panizzeri";
         $user11->email = 'info@panizzeri.it';
         $user11->password = Hash::make('panizzeri');
         $user11->address = 'via napoli 32';

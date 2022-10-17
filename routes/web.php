@@ -13,14 +13,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//da cancellare quando si attiva il front-office
+/* Route::middleware('auth')->get('/', function() {
+    return view('admin.show');
+}); */
 
+Route::middleware('auth')->get('/home', function() {
+    return view('admin.show');
+});
+
+Route::middleware('auth')
+    //->namespace('Admin')
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/', 'HomeController@index')->name('home');
+        Route::resource('plates', 'PlateController');
+        Route::resource('orders', 'OrderController');
+    });
+
+Route::post('/register/create', 'Auth\RegisterController@create')->name('addNewUser');
+
+//da scommentare quando si attiva il front-office
 Route::get("{any?}", function () {
     return view('guest.home');
 })->where("any", ".*");
+
