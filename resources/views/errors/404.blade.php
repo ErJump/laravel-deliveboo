@@ -4,7 +4,7 @@
             <h1 class="errorquattro">4</h1>
         </div>
         <div>
-            <img class="" src="{{asset('assets/images/logo-white.png')}}" alt="logo">
+            <img class="" src="{{asset('assets/images/error.png')}}" alt="logo">
         </div>
         <div>
             <h1 class="errorquattro">4</h1>
