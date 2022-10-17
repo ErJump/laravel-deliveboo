@@ -3,6 +3,7 @@
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
+    background-position:center;
 }
 .errorquattro{
     font-weight: 900;
@@ -21,5 +22,6 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, 110%);
-    text-shadow: 0px 11px 10px rgba(81,67,21,0.8);
+    text-shadow: 0px 7px 8px rgba(33, 33, 33, 0.3);
+    width: 100vw;
 }
