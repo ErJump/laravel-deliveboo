@@ -195,7 +195,7 @@
                                                         required autocomplete="new-password">
 
                                                     <div>
-                                                        <small class="form-text text-muted fs-small px-2">Min:8 / Max:255 caratteri.</small>
+                                                        <small class="form-text text-muted fs-small px-2">Min:8 - Max:255 caratteri.</small>
                                                     </div>   
 
                                                     @error('password')

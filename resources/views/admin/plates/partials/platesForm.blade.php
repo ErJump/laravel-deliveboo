@@ -11,7 +11,7 @@
                     minlength="3" maxlength="255"
                     value="{{old('name', $plate->name)}}">
                 <div>
-                    <small class="form-text text-muted fs-small px-2">Min:3 / Max:255 caratteri.</small>
+                    <small class="form-text text-muted fs-small px-2">Min:3 - Max:255 caratteri.</small>
                 </div>
                 @error('name')
                 <div class="alert alert-danger" role="alert">
@@ -91,7 +91,7 @@
                 <label for="area-description">Descrizione*</label>
                 <textarea name="description" id="area-description" rows="8" class="form-control" minlength="5" maxlength="1000">{{old('description', $plate->description)}}</textarea>
                 <div>
-                    <small class="form-text text-muted fs-small px-2">Min:5 / Max:1000 caratteri.</small>
+                    <small class="form-text text-muted fs-small px-2">Min:5 - Max:1000 caratteri.</small>
                 </div>
                 @error('description')
                     <div class="alert alert-danger" role="alert">
@@ -105,7 +105,7 @@
                 <label for="area-ingredients">Ingredienti*</label>
                 <textarea name="ingredients" id="area-ingredients" rows="8" class="form-control" minlength="5" maxlength="1000">{{old('ingredients', $plate->ingredients)}}</textarea>
                 <div>
-                    <small class="form-text text-muted fs-small px-2">Min:5 / Max:1000 caratteri.</small>
+                    <small class="form-text text-muted fs-small px-2">Min:5 - Max:1000 caratteri.</small>
                 </div>
                 @error('ingredients')
                     <div class="alert alert-danger" role="alert">
