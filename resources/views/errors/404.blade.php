@@ -16,8 +16,8 @@
         </div>
     </div>
     <div class="text-error d-flex align-items-center flex-column text-center ">
-        <h1 class="text-white col-sm-8 font-weight-bold">"Oops, pagina non trovata. </h1>
-        <h1 class="text-white col-sm-10 font-weight-bold">Andiamo ad incolpare i graphic designer"</h1>
+        <h2 class="text-white col-sm-8 font-weight-bold">"Oops, pagina non trovata. </h2>
+        <h2 class="text-white col-sm-10 font-weight-bold">Andiamo ad incolpare i graphic designer"</h2>
     </div>
 </div>
 @endsection
