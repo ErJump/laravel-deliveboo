@@ -1,5 +1,4 @@
 header {
-    background-color: $secondary-color;
     position: sticky;
     top: 0;
     left: 0;
@@ -24,16 +23,12 @@ header {
 
     li.nav-item{
         padding: 10px 0;
-        border-bottom: 2px solid $secondary-color;
         transition: .5s;
         a{
             transition: .5s;
         }
-        &:hover{
-            border-bottom: 2px solid $dark-color;
-        }
         &:hover a{
-            color: $dark-color!important;
+            color: $light-color;
         }
     }
 }
