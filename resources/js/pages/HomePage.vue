@@ -1,10 +1,10 @@
 <template>
     <div>
         <MainJumbotron class="mb-5"/>
-        <div class="container-lg">
-            <div class="row">
-                <div class="col 6 rounded" v-for="typology in typologiesArray" :key="typology.id">
-                    <h6>{{}}</h6>
+        <div class="container-lg ">
+            <div class="row justify-content-center mb-5">
+                <div class="col-2 rounded p-4 m-2 text-center" v-for="typology in typologiesArray" :key="typology.id">
+                    <h6 class="text-white">{{capitalizeFirstLetter(typology.name)}}</h6>
                 </div>
             </div>
             <div class="row">
@@ -58,6 +58,10 @@ export default {
                     console.log(error)
                 })
         },
+        //rende la prima lettera maiuscola
+        capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        },
     },
     created() {
         this.getRestaurants(),
@@ -67,5 +71,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../sass/variables.scss";
+
+div.col-2{
+    background-color: $secondary-color;
+    h6{
+        line-height: 20px;
+    }
+}
 
 </style>
