@@ -9,14 +9,14 @@
                         </div>
                         <div class="col-12 col-md-6 w-100 d-flex flex-column justify-content-center align-items-center align-items-md-start mb-3 ">
                             <h2 class="text-center ms_title_font mb-4 text-md-left">Il tuo cibo preferito direttamente <br>a casa tua!</h2>
-                            <a href="#" class="btn btn-danger ms_btn_cta w-50">Sfoglia i ristoranti</a>
+                            <a href="#restaurants-list" class="btn btn-danger ms_btn_cta w-50">Sfoglia i ristoranti</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <svg class="w-100" xmlns="../../../public/assets/images/wave1.svg" viewBox="0 0 100 100" preserveAspectRatio="none" height="100">
-            <path fill="#FDFDFF" d="M 0 0 L0 100 L100 100 L100 0 Q 50 200 0 0"></path>
+            <path fill="#f8fafc" d="M 0 0 L0 100 L100 100 L100 0 Q 50 200 0 0"></path>
         </svg>
     </section>
 </template>
