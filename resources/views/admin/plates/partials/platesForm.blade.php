@@ -89,7 +89,7 @@
             {{-- Descrizione --}}
             <div class="form-group ">
                 <label for="area-description">Descrizione*</label>
-                <textarea name="description" id="area-description" rows="8" class="form-control" minlength="5" maxlength="1000">{{old('description', $plate->description)}}</textarea>
+                <textarea name="description" id="area-description" rows="8" class="form-control" required minlength="5" maxlength="1000">{{old('description', $plate->description)}}</textarea>
                 <div>
                     <small class="form-text text-muted fs-small px-2">Min:5 - Max:1000 caratteri.</small>
                 </div>
@@ -103,7 +103,7 @@
             {{-- Ingredienti --}}
             <div class="form-group ">
                 <label for="area-ingredients">Ingredienti*</label>
-                <textarea name="ingredients" id="area-ingredients" rows="8" class="form-control" minlength="5" maxlength="1000">{{old('ingredients', $plate->ingredients)}}</textarea>
+                <textarea name="ingredients" id="area-ingredients" rows="8" class="form-control" required minlength="5" maxlength="1000">{{old('ingredients', $plate->ingredients)}}</textarea>
                 <div>
                     <small class="form-text text-muted fs-small px-2">Min:5 - Max:1000 caratteri.</small>
                 </div>

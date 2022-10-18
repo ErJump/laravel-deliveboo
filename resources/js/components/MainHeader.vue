@@ -3,7 +3,8 @@
       <nav class="navbar navbar-expand-lg navbar-dark ms_bg_primary py-2">
          <div class="container-fluid">
             <router-link to="/" class="navbar-brand">
-               <img src="../../../public/assets/images/logo-white.png" alt="logo">
+               <img src="../../../public/assets/images/logo-white.png" alt="logo" class="d-none d-lg-block">
+               <img src="../../../public/assets/images/logo-small.png" alt="logo" class="d-lg-none">
             </router-link>
             <div class="d-flex justify-content-between">
                <i class="fa-solid fa-cart-shopping text-white ustify-self-end"></i>
