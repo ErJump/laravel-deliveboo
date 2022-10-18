@@ -32,12 +32,11 @@
                 <div class="col-12">
                     <h3 class="mb-3"><strong>{{capitalizeFirstLetter(typology.name)}}</strong></h3>
                 </div>
-                <div 
-                    class="col-12 col-sm-6 col-lg-4 mb-4"
-                    v-for="restaurant in typology.users" :key="restaurant.id" 
-                >
-                    <h6 v-if="typology.users.length == 0" class="col-12">Non ci sono ristoranti per questa tipologia</h6>
-                    <RestaurantCard  :restaurant="restaurant" />
+                <div v-if="typology.users.length == 0"  class="col-12 mb-5">
+                    <h6 class="col-12">Non ci sono ristoranti per questa tipologia</h6>
+                </div>
+                <div v-else class="col-12 col-sm-6 col-lg-4 mb-5" v-for="restaurant in typology.users" :key="restaurant.id">
+                    <RestaurantCard :restaurant="restaurant" />
                 </div>
             </div>
         </div>  
