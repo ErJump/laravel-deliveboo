@@ -32,8 +32,8 @@
                     <div class="col-12 mb-3">
                         <h3>Menu</h3>
                     </div>
-                    <div class="col-12 col-md-6 mb-4" v-for="plate in platesArray" :key="plate.id">
-                        <div class="card h-100 rounded">
+                    <div class="col-12 col-md-6 mb-4"  v-for="plate in platesArray" :key="plate.id" >
+                        <div class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
                             <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
                             <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/images/' + cutImageString(plate.image)" alt="immagine_interna">
                             <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
@@ -126,4 +126,13 @@ export default {
 /* *{
     outline: 1px solid blue;
 } */
+
+div.card.h-100{
+    cursor: pointer;
+}
+.ms_not_available{
+    filter: grayscale(100%);
+    opacity: 0.5;
+    cursor: default !important;
+}
 </style>
