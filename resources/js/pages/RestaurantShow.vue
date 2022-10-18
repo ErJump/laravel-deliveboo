@@ -1,16 +1,14 @@
 <template>
     <section class="container-lg pt-5">
         <div class="row mb-5">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-4 mb-5">
                 <img class="w-100 rounded-lg" :src="restaurant.image" alt="image">
             </div>
             <div class="col-12 col-md-8">
                 <h3 class="font-weight-bold">{{ restaurant.name }}</h3>
-                <ul>
-                    <li v-for="typology in restaurant.typologies" :key="typology.id">
-                        {{ typology.name }}
-                    </li>
-                </ul>
+                <h5 class="mb-3">
+                    <span v-for="typology in restaurant.typologies" :key="typology.id">{{ capitalizeFirstLetter(typology.name) }} </span>
+                </h5>
                 <p>
                     {{ restaurant.description }}
                 </p>
@@ -34,7 +32,7 @@
                     <div class="col-12 mb-3">
                         <h3>Menu</h3>
                     </div>
-                    <div class="col-6 mb-4" v-for="plate in platesArray" :key="plate.id">
+                    <div class="col-12 col-md-6 mb-4" v-for="plate in platesArray" :key="plate.id">
                         <div class="card h-100 rounded">
                             <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
                             <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/images/' + cutImageString(plate.image)" alt="immagine_interna">
@@ -42,6 +40,12 @@
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">{{plate.name}}</h5>
                                 <p class="card-subtitle text-muted mb-3">{{plate.description}}</p>
+                                <p class="card-subtitle text-muted mb-3"><strong>Ingredienti: </strong>{{plate.ingredients}}</p>
+                                <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block">{{plate.discount}}% di sconto</span>
+                                <div class="d-flex g-3">
+                                    <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block text-muted mr-3"><s>{{plate.price}}€</s></span>
+                                    <strong class="card-subtitle mb-3 d-block">{{plate.price - (plate.price * plate.discount / 100)}}€</strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -100,13 +104,15 @@ export default {
         cutImageString(){
             return '0eNhQFs5Vs8YXUKncCnIgbDVT3Jee3mdrxXdsc0c.png';
         },
-        // verifica che l'url dell'immagine inizia con 'uploads' e in tal caso lo elimina lasciando solo la seconda parte
         cutImageString(image){
             if(image.startsWith("uploads/")){
                 return image.split('uploads/').pop()
             }
             return false
-        }
+        },
+        capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        },
     },
     created(){
         this.getRestaurantDetail();
