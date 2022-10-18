@@ -1,21 +1,44 @@
 <template>
     <div>
         <MainJumbotron class="mb-5"/>
-        <div class="container-lg ">
-            <div class="row justify-content-center mb-5">
-                <div class="col-2 rounded p-4 m-2 text-center" v-for="typology in typologiesArray" :key="typology.id" 
-                :class="typology.name"
-                @click="toggleTypologies(typology.id, typology.name), getFilteredTypologies()">
-                    <h6 class="text-white">{{capitalizeFirstLetter(typology.name)}}</h6>
+        <div class="container-lg">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 class="font-weight-bold text-center mb-4">Scegli la categoria</h2>
+                </div>
+                <div 
+                    class="col-xs-12 col-sm-6 col-md-3 col-lg-2 mb-3" 
+                    v-for="typology in typologiesArray" :key="typology.id" 
+                    @click="toggleTypologies(typology.id, typology.name), getFilteredTypologies()"
+                >
+                    <div class="card text-center filter-card" :class="typology.name">
+                        <h6 class="text-white m-4">{{capitalizeFirstLetter(typology.name)}}</h6>
+                    </div>
                 </div>
             </div>
-            <div v-if="typologies.length == 0" class="row mb-5">
-                <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant" />
+            
+            <div v-if="typologies.length == 0" class="row" id="restaurants-list">
+                <div 
+                    class="col-12 col-sm-6 col-lg-4 mb-4"
+                    v-for="restaurant in restaurants" :key="restaurant.id" 
+                >
+                    <RestaurantCard :restaurant="restaurant"/>
+                </div>
             </div>
-            <div v-else class="row mb-5" v-for="typology in filteredRestaurants" :key="typology.id">
-                <h4 class="mb-3"><strong>{{capitalizeFirstLetter(typology.name)}}</strong></h4>
-                <h6 v-if="typology.users.length == 0" class="col-12">Non ci sono ristoranti per questa tipologia</h6>
-                <RestaurantCard v-for="restaurant in typology.users" :key="restaurant.id" :restaurant="restaurant" />
+            <div v-else 
+                class="row" 
+                v-for="typology in filteredRestaurants" :key="typology.id"
+            >
+                <div class="col-12">
+                    <h3 class="mb-3"><strong>{{capitalizeFirstLetter(typology.name)}}</strong></h3>
+                </div>
+                <div 
+                    class="col-12 col-sm-6 col-lg-4 mb-4"
+                    v-for="restaurant in typology.users" :key="restaurant.id" 
+                >
+                    <h6 v-if="typology.users.length == 0" class="col-12">Non ci sono ristoranti per questa tipologia</h6>
+                    <RestaurantCard  :restaurant="restaurant" />
+                </div>
             </div>
         </div>  
     </div>
@@ -109,15 +132,23 @@ export default {
 <style scoped lang="scss">
 @import "../../sass/variables.scss";
 
-div.col-2{
+.filter-card{
     background-color: $secondary-color;
-    h6{
-        line-height: 20px;
+    &:hover {
+        cursor: pointer;
+        background-color: $secondary-accenture-color;
     }
 }
 
 .active{
     border: 5px solid $primary-color;
+}
+
+.card {
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 </style>
