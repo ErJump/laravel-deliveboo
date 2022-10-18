@@ -5,12 +5,16 @@
             <div class="row justify-content-center mb-5">
                 <div class="col-2 rounded p-4 m-2 text-center" v-for="typology in typologiesArray" :key="typology.id" 
                 :class="typology.name"
-                @click="toggleTypologies(typology.name)">
+                @click="toggleTypologies(typology.id, typology.name), getFilteredTypologies()">
                     <h6 class="text-white">{{capitalizeFirstLetter(typology.name)}}</h6>
                 </div>
             </div>
-            <div class="row">
+            <div v-if="typologies.length == 0" class="row">
                 <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant" />
+            </div>
+            <div v-else class="row" v-for="typology in filteredRestaurants" :key="typology.id">
+                <h6>{{typology.name}}</h6>
+                <RestaurantCard v-for="restaurant in typology.users" :key="restaurant.id" :restaurant="restaurant" />
             </div>
         </div>  
     </div>
@@ -32,9 +36,11 @@ export default {
         return {
             restaurantsUrl: 'http://localhost:8000/api/users',
             typologiesUrl: 'http://localhost:8000/api/typologies',
+            filteredTypologiesUrl: 'http://localhost:8000/api/typologies/search',
             restaurants: [],
             typologiesArray: [],
             typologies: [],
+            filteredRestaurants: [],
         }
     },
     methods: {
@@ -43,7 +49,7 @@ export default {
             axios.get(this.restaurantsUrl)
                 .then(response => {
                     this.restaurants = response.data.results.data;
-                    console.log(this.restaurants)
+                    //console.log(this.restaurants)
                 })
                 .catch(error => {
                     console.log(error)
@@ -54,7 +60,7 @@ export default {
             axios.get(this.typologiesUrl)
                 .then(response => {
                     this.typologiesArray = response.data.results.data;
-                    console.log(this.typologiesArray)
+                    //console.log(this.typologiesArray)
                 })
                 .catch(error => {
                     console.log(error)
@@ -65,17 +71,30 @@ export default {
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
         //agiunge e rimuove le tipologies selezionate dall'array typologies
-        toggleTypologies(typologyName) {
-            if(this.typologies.includes(typologyName)) {
-                this.typologies = this.typologies.filter(typology => typology !== typologyName);
+        toggleTypologies(typologyID, typologyName) {
+            if(this.typologies.includes(typologyID)) {
+                this.typologies = this.typologies.filter(typology => typology !== typologyID);
                 //rimuove la classe active dall'elemento
                 document.querySelector(`.${typologyName}`).classList.remove('active');
             } else {
-                this.typologies.push(typologyName);
+                this.typologies.push(typologyID);
                 //agiunge la classe active
                 document.querySelector(`.${typologyName}`).classList.add('active');
             }
-            console.log(this.typologies)
+        },
+        getFilteredTypologies(){
+            axios.get(this.filteredTypologiesUrl, {
+                params: {
+                    typologies: this.typologies
+                }
+            })
+            .then(response => {
+                this.filteredRestaurants = response.data.results;
+                console.log(this.filteredRestaurants)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         }
     },
     created() {
