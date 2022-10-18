@@ -3,7 +3,9 @@
         <MainJumbotron class="mb-5"/>
         <div class="container-lg ">
             <div class="row justify-content-center mb-5">
-                <div class="col-2 rounded p-4 m-2 text-center" v-for="typology in typologiesArray" :key="typology.id">
+                <div class="col-2 rounded p-4 m-2 text-center" v-for="typology in typologiesArray" :key="typology.id" 
+                :class="typology.name"
+                @click="toggleTypologies(typology.name)">
                     <h6 class="text-white">{{capitalizeFirstLetter(typology.name)}}</h6>
                 </div>
             </div>
@@ -62,6 +64,19 @@ export default {
         capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
+        //agiunge e rimuove le tipologies selezionate dall'array typologies
+        toggleTypologies(typologyName) {
+            if(this.typologies.includes(typologyName)) {
+                this.typologies = this.typologies.filter(typology => typology !== typologyName);
+                //rimuove la classe active dall'elemento
+                document.querySelector(`.${typologyName}`).classList.remove('active');
+            } else {
+                this.typologies.push(typologyName);
+                //agiunge la classe active
+                document.querySelector(`.${typologyName}`).classList.add('active');
+            }
+            console.log(this.typologies)
+        }
     },
     created() {
         this.getRestaurants(),
@@ -78,6 +93,10 @@ div.col-2{
     h6{
         line-height: 20px;
     }
+}
+
+.active{
+    border: 5px solid $primary-color;
 }
 
 </style>
