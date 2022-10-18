@@ -8,7 +8,7 @@
         <div class="card-footer">
             <p class="card-text text-muted mb-1">
                 {{restaurant.address}}
-            </p>  
+            </p>
             <p class="card-text text-muted">
                 {{restaurant.phone_number}}
             </p>
