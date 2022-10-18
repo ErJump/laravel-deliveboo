@@ -1,9 +1,12 @@
 <template>
-    <div class="card h-100 rounded">
-        <router-link :to="'/RestaurantShow/' + restaurant.id">
+    <router-link :to="'/RestaurantShow/' + restaurant.id">
+        <div class="card h-100 rounded">
             <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">{{restaurant.name}}</h5>
+                <h6 class="mb-4">
+                    <span v-for="typology in restaurant.typologies" :key="typology.id">{{capitalizeFirstLetter(typology.name)}} </span>
+                </h6>
                 <p class="card-subtitle text-muted mb-3">{{restaurant.description}}</p>
             </div>
             <div class="card-footer">
@@ -14,8 +17,8 @@
                     {{restaurant.phone_number}}
                 </p>
             </div>
-        </router-link>
-    </div>
+        </div>
+    </router-link>
 </template>
 
 <script>
@@ -26,6 +29,11 @@ export default {
             type: Object,
             required: true
         }
+    },
+    methods: {
+        capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        },
     }
 }
 </script>
