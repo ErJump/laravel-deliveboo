@@ -3,16 +3,24 @@
         <MainJumbotron class="mb-5"/>
         <div class="container-lg ">
             <div class="row justify-content-center mb-5">
-                <div class="col-2 rounded p-4 m-2 text-center" v-for="typology in typologiesArray" :key="typology.id" 
-                :class="typology.name"
-                @click="toggleTypologies(typology.id, typology.name), getFilteredTypologies()">
-                    <h6 class="text-white">{{capitalizeFirstLetter(typology.name)}}</h6>
+                <div 
+                    class="col-2 rounded p-4 m-2 text-center" 
+                    v-for="typology in typologiesArray" :key="typology.id" 
+                    :class="typology.name"
+                    @click="toggleTypologies(typology.id, typology.name), getFilteredTypologies()"
+                >
+                    <h6 class="text-white mb-0">{{capitalizeFirstLetter(typology.name)}}</h6>
                 </div>
             </div>
-            <div v-if="typologies.length == 0" class="row mb-5">
-                <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant" />
+            <div v-if="typologies.length == 0" class="row" id="restaurants-list">
+                <div 
+                    class="col-lg-4"
+                    v-for="restaurant in restaurants" :key="restaurant.id" 
+                >
+                    <RestaurantCard :restaurant="restaurant"/>
+                </div>
             </div>
-            <div v-else class="row mb-5" v-for="typology in filteredRestaurants" :key="typology.id">
+            <div v-else class="row" v-for="typology in filteredRestaurants" :key="typology.id">
                 <h4 class="mb-3"><strong>{{capitalizeFirstLetter(typology.name)}}</strong></h4>
                 <h6 v-if="typology.users.length == 0" class="col-12">Non ci sono ristoranti per questa tipologia</h6>
                 <RestaurantCard v-for="restaurant in typology.users" :key="restaurant.id" :restaurant="restaurant" />
