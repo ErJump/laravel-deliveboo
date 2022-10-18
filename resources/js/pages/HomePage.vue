@@ -14,7 +14,7 @@
             </div>
             <div v-if="typologies.length == 0" class="row" id="restaurants-list">
                 <div 
-                    class="col-lg-4"
+                    class="col-12 col-sm-6 col-md-4 mb-4"
                     v-for="restaurant in restaurants" :key="restaurant.id" 
                 >
                     <RestaurantCard :restaurant="restaurant"/>
