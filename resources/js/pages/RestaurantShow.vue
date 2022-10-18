@@ -101,9 +101,6 @@ export default {
             image.startsWith("https");
             return true;
         },
-        cutImageString(){
-            return '0eNhQFs5Vs8YXUKncCnIgbDVT3Jee3mdrxXdsc0c.png';
-        },
         cutImageString(image){
             if(image.startsWith("uploads/")){
                 return image.split('uploads/').pop()
