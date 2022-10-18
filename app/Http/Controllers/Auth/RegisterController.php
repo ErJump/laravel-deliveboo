@@ -72,7 +72,7 @@ class RegisterController extends Controller
         'address' => 'required|unique:users',
         'phone_number' => 'required|unique:users|min:10|max:15',
         'description' => 'required|min:30|max:1500',
-        'image' => 'required|image|max:2000',
+        'image' => 'required|mimes:jpg,png,jpeg|max:2000',
         'typologies' => 'required|min:1|exists:typologies,id',
     ];
 
@@ -113,8 +113,8 @@ class RegisterController extends Controller
         'typologies.exists' => "Seleziona una tipologia valida",
 
         'image.required' => "Inserisci un'immagine",
-        'image.image' => "Formato del file non valido, prova con un jpg, jpeg, png, bmp, gif, svg o un webp",
-        'image.max' => "Il file deve essere di massimo 2MB",
+        'image.mimes' => "L'immagine deve essere in formato jpg, png o jpeg",
+        'image.max' => "L'immagine deve avere massimo 2MB", 
     ];
 
     /**
@@ -125,10 +125,11 @@ class RegisterController extends Controller
      */
     protected function create(\Illuminate\Http\Request $request)
     {
+        $validatedData = $request->validate($this->validationRules, $this->validationMessages);
         $data= $request->all();
+        
         $data['image'] = Storage::put('uploads', $data['image']);
 
-        $validatedData = $request->validate($this->validationRules, $this->validationMessages);
 
         $user= new User();
         $user->password = Hash::make($data['password']);
