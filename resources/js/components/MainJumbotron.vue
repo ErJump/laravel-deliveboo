@@ -5,7 +5,7 @@
                 <div class="col-12 text-center">
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <img class="img-fluid floating"  src="../../../public/assets/images/HERO.png" alt="hero">
+                            <img class="img-fluid floating"  :src="images[mainImage]" alt="hero">
                         </div>
                         <div class="col-12 col-md-6 w-100 d-flex flex-column justify-content-center align-items-center align-items-md-start mb-3 ">
                             <h2 class="text-center ms_title_font mb-4 text-md-left">Il tuo cibo preferito direttamente <br>a casa tua!</h2>
@@ -28,9 +28,8 @@ export default {
     data () {
         return {
         images: [
-            'margherita.png',
-            'nigiri.png',
-            'HERO.png',
+            /* '/images/margherita.png', */
+            '/images/HERO.png',
         ],
         mainImage: 0,
         }
