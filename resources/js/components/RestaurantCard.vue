@@ -1,15 +1,19 @@
 <template>
+    
     <div class="card px-0 col-12 rounded mb-4">
-        <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name">
-        <div class="card-body">
-            <h5 class="card-title">{{restaurant.name}}</h5>
-            <p class="card-text">{{restaurant.description}}</p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{restaurant.address}}</li>
-            <li class="list-group-item">{{restaurant.phone_number}}</li>
-        </ul>
+        <router-link :to="'/RestaurantShow/' + restaurant.id" >
+            <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name">
+            <div class="card-body">
+                <h5 class="card-title">{{restaurant.name}}</h5>
+                <p class="card-text">{{restaurant.description}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{restaurant.address}}</li>
+                <li class="list-group-item">{{restaurant.phone_number}}</li>
+            </ul>
+        </router-link>
     </div>
+    
 </template>
 
 <script>
