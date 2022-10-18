@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark ms_bg_secondary py-2">
         <div class="container-fluid d-flex">
-            <a class="navbar-brand" href="{{ route('admin.home') }}">
+            <a class="navbar-brand" href="/">
                 <img class="d-none d-sm-none d-md-none d-lg-block d-xl-block" src="{{asset('assets/images/logo-white.png')}}" alt="logo">
                 <img class="d-block d-sm-block d-md-block d-lg-none d-xl-none" src="{{asset('assets/images/logo-small.png')}}" alt="logo-small">
             </a>
