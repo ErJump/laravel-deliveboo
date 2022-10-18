@@ -2,9 +2,9 @@
    <header>
       <nav class="navbar navbar-expand-lg navbar-dark ms_bg_primary py-2">
          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <router-link to="/" class="navbar-brand">
                <img src="../../../public/assets/images/logo-white.png" alt="logo">
-            </a>
+            </router-link>
             <div class="d-flex justify-content-between">
                <i class="fa-solid fa-cart-shopping text-white ustify-self-end"></i>
                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -15,13 +15,10 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                <ul class="navbar-nav">
                   <li class="nav-item">
-                     <a class="nav-link" href="#">Home</a>
+                     <router-link to="/" class="nav-link">Home</router-link>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">Ristoranti</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#">Contattaci</a>
+                     <a class="nav-link" href="/admin">Area Personale</a>
                   </li>
                </ul>
             </div>
