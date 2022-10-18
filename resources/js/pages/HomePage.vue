@@ -9,11 +9,12 @@
                     <h6 class="text-white">{{capitalizeFirstLetter(typology.name)}}</h6>
                 </div>
             </div>
-            <div v-if="typologies.length == 0" class="row">
+            <div v-if="typologies.length == 0" class="row mb-5">
                 <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.id" :restaurant="restaurant" />
             </div>
-            <div v-else class="row" v-for="typology in filteredRestaurants" :key="typology.id">
-                <h6>{{typology.name}}</h6>
+            <div v-else class="row mb-5" v-for="typology in filteredRestaurants" :key="typology.id">
+                <h4 class="mb-3"><strong>{{capitalizeFirstLetter(typology.name)}}</strong></h4>
+                <h6 v-if="typology.users.length == 0" class="col-12">Non ci sono ristoranti per questa tipologia</h6>
                 <RestaurantCard v-for="restaurant in typology.users" :key="restaurant.id" :restaurant="restaurant" />
             </div>
         </div>  
@@ -82,6 +83,7 @@ export default {
                 document.querySelector(`.${typologyName}`).classList.add('active');
             }
         },
+        //popola l'array filteredRestaurants con i ristoranti filtrati per tipologia attraverso chiamata axios
         getFilteredTypologies(){
             axios.get(this.filteredTypologiesUrl, {
                 params: {
