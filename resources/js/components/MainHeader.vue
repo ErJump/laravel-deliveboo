@@ -7,7 +7,6 @@
                <img src="../../../public/assets/images/logo-small.png" alt="logo" class="d-lg-none">
             </router-link>
             <div class="d-flex justify-content-between">
-               <i class="fa-solid fa-cart-shopping text-white ustify-self-end"></i>
                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                   aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
