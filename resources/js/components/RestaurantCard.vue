@@ -1,7 +1,9 @@
 <template>
     <router-link :to="'/RestaurantShow/' + restaurant.id">
         <div class="card h-100 rounded">
-            <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name">
+            <!-- <img :src="'../../../storage/app/public/uploads/5Gqc0VF4rDAUeoDG8e8HRON4hKvw2sdtTA2zYS1s.png'" alt=""> -->
+            <img v-if="cutImageString(restaurant.image)" :src="'../../../storage/app/public/uploads/' + cutImageString(restaurant.image)" alt="immagine interna">
+            <img v-else :src="restaurant.image" class="card-img-top" :alt="restaurant.name">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">{{restaurant.name}}</h5>
                 <h6 class="mb-4">
@@ -33,6 +35,12 @@ export default {
     methods: {
         capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
+        },
+        cutImageString(image){
+            if(image.startsWith("uploads/")){
+                return image.split('uploads/').pop()
+            }
+            return false
         },
     }
 }
