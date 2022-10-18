@@ -53,7 +53,7 @@ class TypologiesTableSeeder extends Seeder
         $newTypology8->save();
 
         $newTypology9 = new Typology();
-        $newTypology9->name = 'fast food';
+        $newTypology9->name = 'fast-food';
         $newTypology9->image = 'https://sqpiu.it/wp-content/uploads/2019/03/Fast-Food.jpg';
         $newTypology9->save();
 
