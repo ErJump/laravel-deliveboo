@@ -32,7 +32,7 @@ export default {
 @import "../../sass/variables.scss";
 
 img{
-    height: 230px;
+    height: 250px;
     object-fit: cover;
     position: center;
 }
