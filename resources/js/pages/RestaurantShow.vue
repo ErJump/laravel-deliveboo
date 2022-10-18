@@ -1,62 +1,66 @@
 <template>
-    <section>
-        <div class="py-3 border-bottom">
-        <div class="col-12">
-            <img class="w-100 rounded-lg" :src="restaurant.image" alt="image">
-        </div>
-        <div class="pl-3">
-            <h4 class="font-weight-bold"> {{ restaurant.name }} </h4>
-            <ul>
-                <li v-for="typology in restaurant.typologies" :key="typology.id" >
-                    {{ typology.name }}
-                </li>
-            </ul>
-            <p>
-                {{ restaurant.description }}
-            </p>
-            <div>
-                <div>
-                    <i class="fa-solid fa-phone"></i>
-                    <span>
-                        {{ restaurant.phone_number}}
-                    </span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>
-                        {{ restaurant.address}}
-                    </span>
+    <section class="container-lg pt-5">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <img class="w-100 rounded-lg" :src="restaurant.image" alt="image">
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <h1>{{restaurant.name}}</h1>
+                        <ul>
+                            <li v-for="typology in restaurant.typologies" :key="typology.id">
+                                {{ typology.name }}
+                            </li>
+                        </ul>
+                        <p>
+                            {{ restaurant.description }}
+                        </p>
+                        <div>
+                            <i class="fa-solid fa-phone"></i>
+                            <span>
+                                {{ restaurant.phone_number}}
+                            </span>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>
+                                {{ restaurant.address}}
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
+            <div class="col-12 mb-4">
+                <div class="row">
+                    <div class="col-12 col-md-9">
+                        <h5>Piatti</h5>
+                        <div class="col-11 mx-auto border p-2 rounded-lg my-2" v-for="plate in platesArray"
+                            :key="plate.id">
+                            <div class="d-flex justify-content-around align-items-center">
+                                <div class="text-center col-6">
+                                    <h5 class="card-title"> {{ plate.name }}</h5>
+                                    <span class="card-text" maxlegth="5"> € {{plate.description}}</span>
+                                    <span v-if="plate.description.length > 10">...</span>
+                                    <p class="card-text"> € {{plate.price}} </p>
+                                </div>
+                                <div v-if="urlValidationFunction(plate.image)" class="w-25 col-4 p-0">
+                                    <img class="w-100" :src="plate.image" alt="immagine_url">
+                                </div>
+                                <div v-else class="w-25 col-4 p-0">
+                                    <img class="w-100" :src="'/images/' + plate.image" alt="immagine_interna">
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-success ml-4 col-6">aggiungi al carrello</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h5>Carrello</h5>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <div>
-        <h5 class="pl-4 pt-5"> Piatti </h5>
-
-        <div class="col-11 mx-auto border p-2 rounded-lg my-2" v-for="plate in platesArray" :key="plate.id">
-            <span class="d-flex justify-content-around align-items-center">
-                <div class="text-center col-6">
-                    <h5 class="card-title"> {{ plate.name }}</h5>
-                    <span class="card-text" maxlegth="5"> € {{plate.description}}</span>
-                    <span v-if="plate.description.length > 10">...</span>
-                    <p class="card-text"> € {{plate.price}} </p>
-                </div>
-                <div v-if="urlValidationFunction(plate.image)" class="w-25 col-4 p-0">
-                    <img class="w-100" :src="plate.image"  alt="immagine_url">
-                </div>
-                <div v-else class="w-25 col-4 p-0">
-                    <img class="w-100" :src="'/images/' + plate.image"  alt="immagine_interna">
-                </div>
-            </span>
-           
-            <a href="#" class="btn btn-success ml-4 col-6">aggiungi al carrello</a>
-        </div>
-    </div>
     </section>
-  
-  
 </template>
 
 <script>
@@ -109,4 +113,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/variables.scss";
 
+*{
+    outline: 1px solid blue;
+}
 </style>
