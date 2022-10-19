@@ -119,11 +119,11 @@ class PlatesTableSeeder extends Seeder
         $plate10->price = 7;
         $plate10->discount = 0;
         $plate10->availability = 1;
-        $plate10->image = 'https://recipesblob.oetker.com/files/1477b95c4c434225a977caedefd4f5ea/43df75bae33b4c71a9e96072f96b6f0f/1272x764/kebabjpg.jpg';
+        $plate10->image = 'https://s3-eu-west-1.amazonaws.com/o2overticaldata/pictures/2021/11/2000430/012fbfe5a6c51767.jpg';
         $plate10->save();
 
         $plate11 = new Plate();
-        $plate11->name = 'kebab guremt 1';
+        $plate11->name = 'kebab gourmet 1';
         $plate11->user_id = 5;
         $plate11->ingredients = "kebab con mozzarella";
         $plate11->description = "kebab con classici ingredienti della tradizione campana";
@@ -134,7 +134,7 @@ class PlatesTableSeeder extends Seeder
         $plate11->save();
 
         $plate12 = new Plate();
-        $plate12->name = 'kebab guremt 2';
+        $plate12->name = 'kebab gourmet 2';
         $plate12->user_id = 5;
         $plate12->ingredients = "kebab di pollo, bacon e cheddar";
         $plate12->description = "una moderna rivisitazione del kebab";
