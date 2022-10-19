@@ -6,24 +6,33 @@
                 <div class="col-12">
                     <h2 class="font-weight-bold text-center mb-4">Scegli la categoria</h2>
                 </div>
-                <div 
-                    class="col-xs-12 col-sm-6 col-md-3 col-lg-2 mb-3" 
-                    v-for="typology in typologiesArray" :key="typology.id" 
-                    @click="toggleTypologies(typology.id, typology.name), getFilteredTypologies()"
-                >
-                    <div class="card text-center filter-card" :class="typology.name">
-                        <h6 class="text-white m-4">{{capitalizeFirstLetter(typology.name)}}</h6>
+                <div class="col-12">
+                    <div class="d-flex filter-categories">
+                        <div 
+                            class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3" 
+                            v-for="typology in typologiesArray" :key="typology.id" 
+                            @click="toggleTypologies(typology.id, typology.name), getFilteredTypologies()">
+                            <div class="card text-center filter-card" :class="typology.name">
+                                <div class="filter-img">
+                                    <img class="card-img-top" :src="typology.image" :alt="typology.name">
+                                </div>
+                                <h6 class="my-3">{{capitalizeFirstLetter(typology.name)}}</h6>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div id="restaurants-list"></div>
-            <div v-if="typologies.length == 0" class="row">
+            <div v-if="typologies.length == 0" class="row mb-5">
                 <div 
                     class="col-12 col-sm-6 col-lg-4 mb-4"
                     v-for="restaurant in restaurants" :key="restaurant.id" 
                 >
                     <RestaurantCard :restaurant="restaurant"/>
+                </div>
+                <div class="col-12 text-center my-2">
+                    <a class="btn ms_bg_secondary text-white" v-if="nextPageUrl != ''" @click="getNewRestaurantPage()">Carica altri ristoranti</a>
                 </div>
             </div>
             <div v-else 
@@ -65,6 +74,8 @@ export default {
             typologiesArray: [],
             typologies: [],
             filteredRestaurants: [],
+            activePage: 0,
+            nextPageUrl: '',
         }
     },
     methods: {
@@ -73,6 +84,7 @@ export default {
             axios.get(this.restaurantsUrl)
                 .then(response => {
                     this.restaurants = response.data.results.data;
+                    this.nextPageUrl = response.data.results.next_page_url;
                     //console.log(this.restaurants)
                 })
                 .catch(error => {
@@ -84,7 +96,7 @@ export default {
             axios.get(this.typologiesUrl)
                 .then(response => {
                     this.typologiesArray = response.data.results.data;
-                    //console.log(this.typologiesArray)
+                    console.log(this.typologiesArray)
                 })
                 .catch(error => {
                     console.log(error)
@@ -120,6 +132,22 @@ export default {
             .catch(error => {
                 console.log(error)
             })
+        },
+        //carica i ristoranti successivi
+        getNewRestaurantPage(){
+            axios.get(this.nextPageUrl)
+                .then(response => {
+                    this.restaurants = this.restaurants.concat(response.data.results.data);
+                    if(response.data.results.next_page_url != null) {
+                        this.nextPageUrl = response.data.results.next_page_url;
+                    } else {
+                        this.nextPageUrl = '';
+                    }
+                    console.log('Url nuova pagina: ' + this.nextPageUrl);
+                })
+                .catch(error => {
+                    console.log(error)
+                })
         }
     },
     created() {
@@ -132,11 +160,21 @@ export default {
 <style scoped lang="scss">
 @import "../../sass/variables.scss";
 
+
+.filter-img {
+    height: 100px;
+    width: 100%;
+
+    img {
+        height: 100%;
+        width:100%;
+        object-fit: cover;
+    }
+}
+
 .filter-card{
-    background-color: $secondary-color;
     &:hover {
         cursor: pointer;
-        background-color: $secondary-accenture-color;
     }
 }
 
@@ -151,4 +189,19 @@ export default {
     }
 }
 
+
+/* breakpoints classes */
+
+
+@media only screen and (max-width: 768px) {
+    .filter-categories{
+      overflow-y: auto;
+    }
+}
+@media only screen and (min-width: 769px) {
+    .filter-categories{
+      overflow-y: none;
+      flex-wrap: wrap;
+    }
+}
 </style>
