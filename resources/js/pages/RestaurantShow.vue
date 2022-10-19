@@ -2,7 +2,7 @@
     <section class="container-lg pt-5">
         <div class="row mb-5">
             <div class="col-12 col-md-4 mb-5">
-                <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna"></img>
+                <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + restaurant.image" alt="immagine_interna"></img>
                 <img v-else class="w-100 rounded-lg" :src="restaurant.image" alt="image">
             </div>
             <div class="col-12 col-md-8">
@@ -29,7 +29,7 @@
         </div>
         <div class="row mb-5">
             <div class="col-12 col-lg-8">
-                <div class="row">
+                <div v-if="platesArray.length > 0" class="row">
                     <div class="col-12 mb-3">
                         <h3>Menu</h3>
                     </div>
@@ -51,6 +51,9 @@
                         </div>
                     </div>
                 </div>
+                <div v-else-if="platesArray == 0">
+                    <h3>Questo ristorante non ha ancora inserito il suo menu</h3>
+                </div>
             </div>
             <div class="col-12 col-lg-4">
                 <div class="row">
@@ -60,8 +63,8 @@
                     <div class="col-12">
                         <div class="card h-100 rounded">
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold">Ciao</h5>
-                                <p class="card-subtitle text-muted mb-3">Io sono un carrello</p>
+                                <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5>
+                                <!-- <p class="card-subtitle text-muted mb-3">Io sono un carrello</p> -->
                             </div>
                         </div>
                     </div>
@@ -90,7 +93,11 @@ export default {
             axios.get(`http://localhost:8000/api/users/${id}`)
                 .then(response => {
                     this.restaurant = response.data.results;
-                    this.platesArray = response.data.results.plates;
+                    //console.warn(this.restaurant.image);
+                    if(this.restaurant.plates.length > 0){
+                        this.platesArray = response.data.results.plates;
+                    }
+                    //this.platesArray = response.data.results.plates;
                     console.log(this.restaurant, this.platesArray);
                 })
                 .catch(error => {
@@ -103,6 +110,7 @@ export default {
             return true;
         },
         cutImageString(image){
+            console.warn(image);
             if(image.startsWith("uploads/")){
                 return image.split('uploads/').pop()
             }
