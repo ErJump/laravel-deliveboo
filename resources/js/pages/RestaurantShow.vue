@@ -34,7 +34,7 @@
                         <h3>Menu</h3>
                     </div>
                     <div class="col-12 col-md-6 mb-4"  v-for="plate in platesArray" :key="plate.id" >
-                        <div class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
+                        <div @click="[plate.availability == 1 ? addToCart(plate) : '']" class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
                             <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
                             <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna">
                             <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
@@ -63,8 +63,34 @@
                     <div class="col-12">
                         <div class="card h-100 rounded">
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5>
+                                <!-- <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5> -->
                                 <!-- <p class="card-subtitle text-muted mb-3">Io sono un carrello</p> -->
+
+                                <table class="table mb-4">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nome</th>
+                                            <th scope="col">Prezzo</th>
+                                            <th scope="col">Rimuovi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(plate, index) in cart" :key="index">
+                                            <td>{{ plate.name }}</td>
+                                            <td>€ {{plate.price - (plate.price * plate.discount / 100)}}</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger" @click="removeFromCart(plate)">
+                                                    Rimuovi
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Totale</th>
+                                            <td>€ {{ total }}</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -83,6 +109,10 @@ export default {
         return {
             restaurant:[],
             platesArray:[],
+            cart: [],
+            plateIdsArray: [],
+            total: 0,
+            id: null,
         }
     },
     
@@ -121,10 +151,67 @@ export default {
         },
         floatPrice(price){
             return price.toFixed(2);
-        }
+        },
+
+        // Gestione Carrello
+        addToCart(plate) {
+            if ( localStorage.getItem("id") && localStorage.getItem("id") === this.id || localStorage.getItem("id") === null ) {
+                this.cart.push(plate);
+                this.plateIdsArray.push(plate.id);
+                this.total += parseFloat(plate.price);
+                this.save();
+            } else if ( localStorage.getItem("id") != this.id ) {
+                console.log("ID pagina attuale: " + this.id);
+                console.log("ID ristorante del local storage: " + localStorage.getItem("id"));
+                console.log("Local Storage svuotato");
+                localStorage.removeItem("cart");
+                localStorage.removeItem("total");
+                localStorage.removeItem("id");
+            }
+        },
+        save() {
+            localStorage.setItem("cart", JSON.stringify(this.cart));
+            localStorage.setItem("total", this.total);
+            localStorage.setItem("id", this.id);
+
+
+        },
+        removeFromCart(plate) {
+            this.cart.splice(this.cart.indexOf(plate), 1);
+            this.total -= parseFloat(plate.price);
+            this.save();
+        },
     },
     created(){
         this.getRestaurantDetail();
+
+        const url = window.location.href;
+        const id = url.substring(url.lastIndexOf("/") + 1);
+        this.id = id;
+     
+        // if (
+        //     localStorage.getItem("id") &&
+        //     localStorage.getItem("id") != this.id
+        // ) {
+        //     console.log("ID pagina attuale: " + this.id);
+        //     console.log("ID ristorante del local storage: " + localStorage.getItem("id"));
+        //     console.log("Local Storage svuotato");
+        //     localStorage.removeItem("cart");
+        //     localStorage.removeItem("total");
+        //     localStorage.removeItem("id");
+        // }
+
+        if (localStorage.getItem("cart")) {
+            try {
+                this.cart = JSON.parse(localStorage.getItem("cart"));
+                this.total = parseFloat(localStorage.getItem("total"));
+                this.id = JSON.parse(localStorage.getItem("id"));
+            } catch (error) {
+                localStorage.removeItem("cart");
+                localStorage.removeItem("total");
+                localStorage.removeItem("id");
+            }
+        }
     }
 }
 </script>
