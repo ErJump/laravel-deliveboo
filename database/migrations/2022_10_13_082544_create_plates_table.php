@@ -22,7 +22,8 @@ class CreatePlatesTable extends Migration
 
             $table->text('ingredients');
             $table->text('description');
-            $table->float('price');
+            //float con due decimali
+            $table->float('price', 8, 2);
             $table->float('discount');
             $table->boolean('availability')->default(1);
             $table->string('image')->nullable();
