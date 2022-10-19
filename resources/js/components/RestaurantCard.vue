@@ -1,5 +1,4 @@
 <template>
-    <router-link :to="'/RestaurantShow/' + restaurant.id">
         <div class="card h-100 rounded">
             <!-- <img :src="'../../../storage/app/public/uploads/5Gqc0VF4rDAUeoDG8e8HRON4hKvw2sdtTA2zYS1s.png'" alt=""> -->
             <img v-if="cutImageString(restaurant.image)" :src="'/storage/' + restaurant.image" alt="immagine interna">
@@ -7,20 +6,22 @@
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">{{restaurant.name}}</h5>
                 <h6 class="mb-4">
-                    <span v-for="typology in restaurant.typologies" :key="typology.id">{{capitalizeFirstLetter(typology.name)}} </span>
+                    <strong v-for="typology in restaurant.typologies" :key="typology.id" class="text-muted">{{capitalizeFirstLetter(typology.name)}} </strong>
                 </h6>
-                <p class="card-subtitle text-muted mb-3">{{restaurant.description}}</p>
+                <p class="card-subtitle text-muted mb-3"><small>{{restaurant.description}}</small></p>
             </div>
             <div class="card-footer">
                 <p class="card-text text-muted mb-1">
-                    {{restaurant.address}}
+                    <small>{{restaurant.address}}</small>
                 </p>
                 <p class="card-text text-muted">
-                    {{restaurant.phone_number}}
+                    <small>{{restaurant.phone_number}}</small>
                 </p>
             </div>
+            <router-link :to="'/RestaurantShow/' + restaurant.id" class="ms_btn_primary text-white rounded-bottom py-3">
+                Vai al ristorante
+            </router-link>
         </div>
-    </router-link>
 </template>
 
 <script>
@@ -51,19 +52,22 @@ export default {
 <style scoped lang="scss">
 @import "../../sass/variables.scss";
 
-img{
-    height: 250px;
+img {
+    height: 200px;
     object-fit: cover;
     position: center;
 }
 
-a{
+.card {
     text-decoration: none;
-    div.card{
-        transition: .3s;
-    }
-    &:hover div.card{
+    transition: .3s;
+
+    &:hover {
         transform: translateY(-10px);
+
+        h5 {
+            color: $primary-color;
+        }
     }
 }
 </style>
