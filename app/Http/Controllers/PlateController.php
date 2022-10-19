@@ -161,6 +161,7 @@ class PlateController extends Controller
             }
             $data['image'] = Storage::put('uploads', $data['image']);
         } else{
+            $plate->image = null;
             Storage::delete($plate->image);
         }
         $plate->update($data);
