@@ -173,7 +173,12 @@ export default {
             localStorage.setItem("cart", JSON.stringify(this.cart));
             localStorage.setItem("total", this.total);
             localStorage.setItem("id", this.id);
-
+            
+            if (this.cart.length == 0){
+                localStorage.removeItem("cart");
+                localStorage.removeItem("total");
+                localStorage.removeItem("id");
+            }
 
         },
         removeFromCart(plate) {
