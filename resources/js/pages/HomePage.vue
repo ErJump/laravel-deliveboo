@@ -17,7 +17,8 @@
                 </div>
             </div>
             
-            <div v-if="typologies.length == 0" class="row" id="restaurants-list">
+            <div id="restaurants-list"></div>
+            <div v-if="typologies.length == 0" class="row">
                 <div 
                     class="col-12 col-sm-6 col-lg-4 mb-4"
                     v-for="restaurant in restaurants" :key="restaurant.id" 
