@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function(){
     Route::get('/users', 'UserController@index');
     Route::get('/users/{id}', 'UserController@show');
+    Route::get('/search', 'UserController@search');
 
     Route::get('/typologies', 'TypologyController@index');
     Route::get('/typologies/search', 'TypologyController@search');

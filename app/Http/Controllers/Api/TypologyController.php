@@ -15,7 +15,7 @@ class TypologyController extends Controller
      */
     public function index()
     {
-        $typologies = Typology::with('users')->paginate(20, ['id', 'name']);
+        $typologies = Typology::paginate(20, ['id', 'name', 'image']);
 
         return response()->json([
             'response' => true,
