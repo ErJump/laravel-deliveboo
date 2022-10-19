@@ -32,7 +32,7 @@
                     <RestaurantCard :restaurant="restaurant"/>
                 </div>
                 <div class="col-12 text-center my-2">
-                    <a class="btn ms_bg_secondary text-white" v-if="nextPageUrl != ''" @click="getNewRestaurantPage()">Carica altri ristoranti</a>
+                    <a class="btn text-white ms_btn_secondary" v-if="nextPageUrl != ''" @click="getNewRestaurantPage()">Carica altri ristoranti</a>
                 </div>
             </div>
             <div v-else 
