@@ -39,8 +39,29 @@ td {
     background-color: $primary-color;
 }
 
-.ms_bg_secondary {
+/*  btn classes  */
+.ms_btn_primary {
+    background-color: $primary-color;
+    color: $light-color;
+    border-radius: 3px;
+    text-align: center;
+
+    &:hover {
+        background-color: $primary-accenture-color;
+        text-decoration: none;
+    }
+}
+
+.ms_btn_secondary {
     background-color: $secondary-color;
+    color: $light-color;
+    border-radius: 3px;
+    text-align: center;
+
+    &:hover{
+        background-color: $secondary-accenture-color;
+        text-decoration: none;
+    }
 }
 
 .ms_bg_dark {
