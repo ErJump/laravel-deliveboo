@@ -56,4 +56,14 @@ img{
     object-fit: cover;
     position: center;
 }
+
+a{
+    text-decoration: none;
+    div.card{
+        transition: .3s;
+    }
+    &:hover div.card{
+        transform: translateY(-10px);
+    }
+}
 </style>
