@@ -2,7 +2,7 @@
     <section class="container-lg pt-5">
         <div class="row mb-5">
             <div class="col-12 col-md-4 mb-5">
-                <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + restaurant.image" alt="immagine_interna"></img>
+                <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + restaurant.image" alt="immagine_interna">
                 <img v-else class="w-100 rounded-lg" :src="restaurant.image" alt="image">
             </div>
             <div class="col-12 col-md-8">
@@ -45,7 +45,7 @@
                                 <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block">{{plate.discount}}% di sconto</span>
                                 <div class="d-flex g-3">
                                     <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block text-muted mr-3"><s>{{plate.price}}€</s></span>
-                                    <strong class="card-subtitle mb-3 d-block">{{plate.price - (plate.price * plate.discount / 100)}}€</strong>
+                                    <strong class="card-subtitle mb-3 d-block">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</strong>
                                 </div>
                             </div>
                         </div>
@@ -119,6 +119,9 @@ export default {
         capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
+        floatPrice(price){
+            return price.toFixed(2);
+        }
     },
     created(){
         this.getRestaurantDetail();
