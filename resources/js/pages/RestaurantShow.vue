@@ -2,7 +2,8 @@
     <section class="container-lg pt-5">
         <div class="row mb-5">
             <div class="col-12 col-md-4 mb-5">
-                <img class="w-100 rounded-lg" :src="restaurant.image" alt="image">
+                <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna"></img>
+                <img v-else class="w-100 rounded-lg" :src="restaurant.image" alt="image">
             </div>
             <div class="col-12 col-md-8">
                 <h3 class="font-weight-bold">{{ restaurant.name }}</h3>
@@ -35,7 +36,7 @@
                     <div class="col-12 col-md-6 mb-4"  v-for="plate in platesArray" :key="plate.id" >
                         <div class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
                             <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
-                            <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/images/' + cutImageString(plate.image)" alt="immagine_interna">
+                            <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna">
                             <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">{{plate.name}}</h5>
