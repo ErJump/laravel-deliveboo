@@ -59,7 +59,7 @@ class TypologiesTableSeeder extends Seeder
 
         $newTypology10 = new Typology();
         $newTypology10->name = 'vegetariano';
-        $newTypology10->image = 'https://www.buttalapasta.it/wp-content/uploads/2021/08/secondi-piatti-vegetariani.jpg';
+        $newTypology10->image = 'https://www.vegolosi.it/wp-content/uploads/2017/07/starbucks-piatto-vegano.jpg';
         $newTypology10->save();
 
         $newTypology11 = new Typology();
