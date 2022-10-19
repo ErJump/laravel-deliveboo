@@ -77,7 +77,7 @@
                                     <tbody>
                                         <tr v-for="(plate, index) in cart" :key="index">
                                             <td>{{ plate.name }}</td>
-                                            <td>€ {{plate.price - (plate.price * plate.discount / 100)}}</td>
+                                            <td>€ {{floatPrice(plate.price - (plate.price * plate.discount / 100))}}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-danger" @click="removeFromCart(plate)">
                                                     Rimuovi
@@ -86,11 +86,12 @@
                                         </tr>
                                         <tr>
                                             <th>Totale</th>
-                                            <td>€ {{ total }}</td>
+                                            <td>€ {{ floatPrice(total) }}</td>
                                             <td></td>
                                         </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
@@ -112,7 +113,7 @@ export default {
             cart: [],
             plateIdsArray: [],
             total: 0,
-            id: null,
+            restaurantId: null,
         }
     },
     
@@ -140,7 +141,7 @@ export default {
             return true;
         },
         cutImageString(image){
-            console.warn(image);
+            // console.warn(image);
             if(image.startsWith("uploads/")){
                 return image.split('uploads/').pop()
             }
@@ -155,26 +156,29 @@ export default {
 
         // Gestione Carrello
         addToCart(plate) {
-            if ( localStorage.getItem("id") && localStorage.getItem("id") === this.id || localStorage.getItem("id") === null ) {
+            if ( localStorage.getItem("id") === this.restaurantId || localStorage.getItem("id") === null ) {
                 this.cart.push(plate);
                 this.plateIdsArray.push(plate.id);
-                this.total += parseFloat(plate.price);
+                this.total += parseFloat(plate.price - (plate.price * plate.discount / 100));
                 this.save();
-            } else if ( localStorage.getItem("id") != this.id ) {
-                console.log("ID pagina attuale: " + this.id);
+            } else {
+                console.log("ID pagina attuale: " + this.restaurantId);
                 console.log("ID ristorante del local storage: " + localStorage.getItem("id"));
                 console.log("Local Storage svuotato");
                 localStorage.removeItem("cart");
                 localStorage.removeItem("total");
                 localStorage.removeItem("id");
+                this.cart = [];
+                this.total = 0;
+                this.save();
             }
         },
         save() {
             localStorage.setItem("cart", JSON.stringify(this.cart));
             localStorage.setItem("total", this.total);
-            localStorage.setItem("id", this.id);
-            
-            if (this.cart.length == 0){
+            localStorage.setItem("id", this.restaurantId);
+
+            if (this.cart.length === 0){
                 localStorage.removeItem("cart");
                 localStorage.removeItem("total");
                 localStorage.removeItem("id");
@@ -191,20 +195,8 @@ export default {
         this.getRestaurantDetail();
 
         const url = window.location.href;
-        const id = url.substring(url.lastIndexOf("/") + 1);
-        this.id = id;
-     
-        // if (
-        //     localStorage.getItem("id") &&
-        //     localStorage.getItem("id") != this.id
-        // ) {
-        //     console.log("ID pagina attuale: " + this.id);
-        //     console.log("ID ristorante del local storage: " + localStorage.getItem("id"));
-        //     console.log("Local Storage svuotato");
-        //     localStorage.removeItem("cart");
-        //     localStorage.removeItem("total");
-        //     localStorage.removeItem("id");
-        // }
+        let pageID = url.substring(url.lastIndexOf("/") + 1);
+        this.restaurantId = pageID;
 
         if (localStorage.getItem("cart")) {
             try {
