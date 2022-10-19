@@ -187,7 +187,7 @@ export default {
         },
         removeFromCart(plate) {
             this.cart.splice(this.cart.indexOf(plate), 1);
-            this.total -= parseFloat(plate.price);
+            this.total -= parseFloat(plate.price - (plate.price * plate.discount / 100));
             this.save();
         },
     },
