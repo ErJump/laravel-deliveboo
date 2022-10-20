@@ -63,7 +63,7 @@
                         <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
                             <div class="plate-data">
                                 <i class="fa-solid fa-xmark text-center rounded-circle mr-2 p-2" @click="removeFromCart(plate)"></i>
-                                <span>{{ plate.name }}</span>
+                                <span>{{ plate.name }} x{{plate.quantity}}</span>
                             </div>
                             <div class="plate-prices">
                                 <h6 class="mb-0">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
@@ -99,6 +99,7 @@
                                         <tr>
                                             <th scope="col">Nome</th>
                                             <th scope="col">Prezzo</th>
+                                            <th scope="col">Quantità</th>
                                             <th scope="col">Rimuovi</th>
                                         </tr>
                                     </thead>
@@ -106,6 +107,7 @@
                                         <tr v-for="(plate, index) in cart" :key="index">
                                             <td>{{ plate.name }}</td>
                                             <td>€ {{floatPrice(plate.price - (plate.price * plate.discount / 100))}}</td>
+                                            <td>{{ plate.quantity }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-danger" @click="removeFromCart(plate)">
                                                     Rimuovi
@@ -188,8 +190,13 @@ export default {
         // Gestione Carrello
         addToCart(plate) {
             if ( localStorage.getItem("id") === this.restaurantId || localStorage.getItem("id") === null ) {
-                this.cart.push(plate);
-                this.plateIdsArray.push(plate.id);
+                if (this.plateIdsArray.includes(plate.id)){
+                    plate.quantity = plate.quantity + 1;
+                } else {
+                    plate.quantity = 1;
+                    this.cart.push(plate);
+                    this.plateIdsArray.push(plate.id);
+                }
                 this.total += parseFloat(plate.price - (plate.price * plate.discount / 100));
                 this.save();
             } else {
@@ -255,9 +262,15 @@ export default {
 
         },
         removeFromCart(plate) {
-            this.cart.splice(this.cart.indexOf(plate), 1);
-            this.total -= parseFloat(plate.price - (plate.price * plate.discount / 100));
-            this.save();
+            if (plate.quantity > 1){
+                plate.quantity = plate.quantity - 1;
+                this.total -= parseFloat(plate.price - (plate.price * plate.discount / 100));
+                this.save();
+            } else{
+                this.cart.splice(this.cart.indexOf(plate), 1);
+                this.total -= parseFloat(plate.price - (plate.price * plate.discount / 100));
+                this.save();
+            }
         },
         emptyCart() {
             const Swal = require('sweetalert2');
