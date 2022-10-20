@@ -22,7 +22,7 @@
     
             {{-- Prezzo --}}
             <div class="form-group ">
-                <label for="input-price">Prezzo*</label>
+                <label for="input-price">Prezzo* (€)</label>
                 <input required name="price" type="number" step="0.01" class="form-control" id="input-price" placeholder="Inserisci prezzo"
                     min="0"
                     value="{{old('price', $plate->price)}}">
