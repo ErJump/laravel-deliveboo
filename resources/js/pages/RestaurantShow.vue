@@ -1,5 +1,5 @@
 <template>
-    <section class="container-lg pt-5">
+    <section class="container-lg pt-5 custom">
         <div class="row mb-5">
             <div class="col-12 col-md-4 mb-5">
                 <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + restaurant.image" alt="immagine_interna">
@@ -33,7 +33,7 @@
                     <div class="col-12 mb-3">
                         <h3>Menu</h3>
                     </div>
-                    <div class="col-12 col-md-6 mb-4"  v-for="plate in platesArray" :key="plate.id" >
+                    <div class="col-12 col-md-6 col-xl-4 mb-4"  v-for="plate in platesArray" :key="plate.id" >
                         <div @click="[plate.availability == 1 ? addToCart(plate) : '']" class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
                             <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
                             <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna">
@@ -227,5 +227,25 @@ div.card.h-100{
     filter: grayscale(100%);
     opacity: 0.5;
     cursor: default !important;
+}
+@media (min-width: 1200px) {
+    .custom{
+        max-width: 1100px;
+    }
+ }
+@media (min-width: 1400px) {
+    .custom{
+        max-width: 1200px;
+    }
+}
+@media (min-width: 1700px) {
+    .custom{
+        max-width: 1500px;
+    }
+}
+@media (min-width: 1920px) {
+    .custom{
+        max-width: 1800px;
+    }
 }
 </style>
