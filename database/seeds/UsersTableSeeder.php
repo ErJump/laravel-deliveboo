@@ -133,5 +133,105 @@ class UsersTableSeeder extends Seeder
         $user11->description = 'Il Panizzo, non è un semplice panino, è una filosofia del mangiare!';
         $user11->image = 'https://www.panizzoromano.it/wp-content/uploads/2018/11/panizzo-2.jpg';
         $user11->save();
+
+        $user12 = new User();
+        $user12->name = "Il Giardino del Cibo";
+        $user12->email = 'info@giardino.it';
+        $user12->password = Hash::make('giardino');
+        $user12->address = 'via stocca 33';
+        $user12->p_iva = '12375385773';
+        $user12->phone_number = '1968438265';
+        $user12->description = 'Il nostro non è un semplice ristorane vegano, ti permetterà di scoprire sapori e esperienze mia provate prima!';
+        $user12->image = 'https://www.ansa.it/webimages/foto_large_ls_350/2017/4/19/74f40cc14481d553811efd2f36ee72b5.jpg';
+        $user12->save();
+
+        $user13 = new User();
+        $user13->name = "Appetitofu";
+        $user13->email = 'info@Appetitofu.it';
+        $user13->password = Hash::make('Appetitofu');
+        $user13->address = 'pazza del popolo';
+        $user13->p_iva = '10000000123';
+        $user13->phone_number = '1964478123';
+        $user13->description = 'Iistorante innovativo, pro al mangiare sano e mangiare bene';
+        $user13->image = 'https://www.vegolosi.it/wp-content/uploads/2018/05/Cuculia-Firenze.jpg';
+        $user13->save();
+
+        $user14 = new User();
+        $user14->name = "Pausa Vegana";
+        $user14->email = 'info@vegana.it';
+        $user14->password = Hash::make('vegana');
+        $user14->address = "via passo d'uomo 34";
+        $user14->p_iva = '10000000234';
+        $user14->phone_number = '1964478234';
+        $user14->description = 'Ottimo ristorante che fornisce un ampio catalogo di piatti sfiziosi tutti vegani';
+        $user14->image = 'https://www.latitudeslife.com/wp-content/uploads/hamburger-2856548_960_720-e1520434123437.jpg';
+        $user14->save();
+
+        $user15 = new User();
+        $user15->name = "Curry & Cumino";
+        $user15->email = 'info@curry.it';
+        $user15->password = Hash::make('curry');
+        $user15->address = 'via lucozzi 56';
+        $user15->p_iva = '12275386345';
+        $user15->phone_number = '1964478345';
+        $user15->description = 'Il miglior curry indiano di napoli';
+        $user15->image = 'https://cucinareoggi.com/wp-content/uploads/2021/10/Photo-1.jpg';
+        $user15->save();
+
+        $user16 = new User();
+        $user16->name = "Area Samosa";
+        $user16->email = 'info@samosa.it';
+        $user16->password = Hash::make('samosa');
+        $user16->address = 'via castovilli 32';
+        $user16->p_iva = '12275386456';
+        $user16->phone_number = '1964478456';
+        $user16->description = 'Il samosa , non è un semplice piatto indiano, è una filosofia del mangiare!';
+        $user16->image = 'https://media-cdn.tripadvisor.com/media/photo-s/0c/bc/e8/15/ristorante-indiano-gandhi.jpg';
+        $user16->save();
+
+        $user17 = new User();
+        $user17->name = "La Dimora del Tandoor";
+        $user17->email = 'info@tandoor.it';
+        $user17->password = Hash::make('tandoor');
+        $user17->address = 'via snopoti 6';
+        $user17->p_iva = '12275386567';
+        $user17->phone_number = '1964478567';
+        $user17->description = 'cibo caratteristico indiano, tramandato da generazione in generazione';
+        $user17->image = 'https://www.guidatorino.com/wp-content/uploads/2015/05/ristoranti-indiani-torino.jpg';
+        $user17->save();
+
+        $user18 = new User();
+        $user18->name = "	Fujian Bambù";
+        $user18->email = 'info@Bambù.it';
+        $user18->password = Hash::make('Bambù');
+        $user18->address = 'via car 77';
+        $user18->p_iva = '12275386678';
+        $user18->phone_number = '1964478678';
+        $user18->description = 'Voglia di cucina asiatica? Mai provato il Cinese? Prova i nostri piatti dai sapori unici';
+        $user18->image = 'https://wips.plug.it/cips/paginegialle.it/magazine/cms/2022/04/cucina-cinese.jpg';
+        $user18->save();
+
+        $user19 = new User();
+        $user19->name = "Hen Haochi Bistrò";
+        $user19->email = 'info@haochi.it';
+        $user19->password = Hash::make('haochi');
+        $user19->address = 'via gianni 32';
+        $user19->p_iva = '12275386789';
+        $user19->phone_number = '1964478789';
+        $user19->description = 'cibo caratteristico cinese, tramandato da generazione in generazione';
+        $user19->image = 'https://www.finedininglovers.it/sites/g/files/xknfdk1106/files/2022-08/ristoranti-cinesi-roma-Song.jpg';
+        $user19->save();
+
+        $user20 = new User();
+        $user20->name = "Raviolincina";
+        $user20->email = 'info@raviolincina.it';
+        $user20->password = Hash::make('raviolincina');
+        $user20->address = 'via castro 32';
+        $user20->p_iva = '12275386890';
+        $user20->phone_number = '1964478890';
+        $user20->description = 'I ravioli, non sono un semplice paso, è una filosofia del mangiare!';
+        $user20->image = 'https://www.napolitoday.it/~media/horizontal-hi/7847824910662/copertina-cucina-cinese-2.jpg';
+        $user20->save();
+
     }
 }
