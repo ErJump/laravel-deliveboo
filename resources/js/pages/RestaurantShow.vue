@@ -219,8 +219,13 @@ export default {
         // Gestione Carrello
         addToCart(plate) {
             if ( localStorage.getItem("id") === this.restaurantId || localStorage.getItem("id") === null ) {
-                this.cart.push(plate);
-                this.plateIdsArray.push(plate.id);
+                if (this.plateIdsArray.includes(plate.id)){
+                    plate.quantity = plate.quantity + 1;
+                } else {
+                    plate.quantity = 1;
+                    this.cart.push(plate);
+                    this.plateIdsArray.push(plate.id);
+                }
                 this.total += parseFloat(plate.price - (plate.price * plate.discount / 100));
                 this.save();
             } else {
