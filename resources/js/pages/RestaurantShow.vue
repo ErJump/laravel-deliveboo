@@ -63,10 +63,8 @@
                     <div class="col-12">
                         <div class="card h-100 rounded">
                             <div class="card-body">
-                                <!-- <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5> -->
-                                <!-- <p class="card-subtitle text-muted mb-3">Io sono un carrello</p> -->
 
-                                <table class="table mb-4">
+                                <table class="table mb-4" v-if="cart.length > 0">
                                     <thead>
                                         <tr>
                                             <th scope="col">Nome</th>
@@ -91,6 +89,12 @@
                                         </tr>
                                     </tbody>
                                 </table>
+
+                                <div v-else>
+                                    <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5>
+                                    <p class="card-subtitle text-muted mb-3">Clicca sui piatti per aggiungerli</p>
+                                </div>
+                                
 
                             </div>
                         </div>
