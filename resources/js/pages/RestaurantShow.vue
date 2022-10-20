@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="checkout-box text-center">
-                            <!-- <a class="btn mb-1 text-muted">Svuota carrello</a> -->
+                            <a @click="emptyCart()" class="btn mb-1 text-muted">Svuota carrello</a>
                             <a href="#" class="btn ms_btn_primary w-100">Vai alla cassa</a>
                         </div>
                     </div>
@@ -297,6 +297,7 @@ export default {
                 this.save();
             } else{
                 this.cart.splice(this.cart.indexOf(plate), 1);
+                this.plateIdsArray.splice(this.plateIdsArray.indexOf(plate), 1);
                 this.total -= parseFloat(plate.price - (plate.price * plate.discount / 100));
                 this.save();
             }
@@ -327,6 +328,7 @@ export default {
                 'success'
                 )
                 this.cart = [];
+                this.plateIdsArray = [];
                 this.total = 0;
                 this.save();
             } else if (
