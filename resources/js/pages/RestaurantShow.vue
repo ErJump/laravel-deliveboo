@@ -34,10 +34,12 @@
                         <h3>Menu</h3>
                     </div>
                     <div class="col-12 col-md-6 col-xl-4 mb-4"  v-for="plate in platesArray" :key="plate.id" >
-                        <div @click="[plate.availability == 1 ? addToCart(plate) : '']" class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
-                            <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
-                            <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna">
-                            <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
+                        <div class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
+                            <div class="card-header p-0 position-relative">
+                                <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
+                                <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna">
+                                <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">{{plate.name}}</h5>
                                 <p class="card-subtitle text-muted mb-3">{{plate.description}}</p>
@@ -47,6 +49,8 @@
                                     <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block text-muted mr-3"><s>{{plate.price}}€</s></span>
                                     <strong class="card-subtitle mb-3 d-block">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</strong>
                                 </div>
+                                <i class="fa-solid fa-plus text-right rounded-circle p-2"
+                                @click="[plate.availability == 1 ? addToCart(plate) : '']"></i>
                             </div>
                         </div>
                     </div>
@@ -55,23 +59,44 @@
                     <h3>Questo ristorante non ha ancora inserito il suo menu</h3>
                 </div>
             </div>
+
+
             <!------------ Mobile Cart ------------>
             <div class="d-sm-none">
-                <div class="card mobile-cart fixed-bottom">
-                    <div class="card-body">
-                        <h4 class="car-title mb-3 font-weight-bold">Carrello</h4>
-                        <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
-                            <div class="plate-data">
-                                <i class="fa-solid fa-xmark text-center rounded-circle mr-2 p-2" @click="removeFromCart(plate)"></i>
-                                <span>{{ plate.name }}</span>
+                <div class="card fixed-bottom mobile-cart" id="mobile-cart">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h4 class="car-title mb-0 font-weight-bold">Carrello</h4>    
                             </div>
-                            <div class="plate-prices">
-                                <h6 class="mb-0">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
+                            <div class="collapse-cart">
+                                <i class="fa-solid text-center rounded-circle mr-2 p-2"
+                                    :class="cartActive ? 'fa-angle-down' : 'fa-angle-up'"
+                                    @click="toggleCartActive()"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer py-4">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="card-body overflow-auto" :class="cartActive ? 'hv_50' : 'd-none'">
+                        <div v-if="cartActive">
+                            <div v-if="cart.length > 0">
+                                <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
+                                    <div class="plate-data">
+                                        <i class="fa-solid fa-xmark text-center rounded-circle mr-2 p-2" @click="removeFromCart(plate)"></i>
+                                        <span>{{ plate.name }}</span>
+                                    </div>
+                                    <div class="plate-prices">
+                                        <h6 class="mb-0">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else class="text-center">
+                                <h5>Il carrello è vuoto</h5>
+                                <p class="text-muted"><small>Clicca su un piatto per aggiungerlo</small></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer py-4" :class="cart.length === 0 ? 'd-none' : ''">
+                        <div class="d-flex justify-content-between align-items-center mb-w"                            >
                             <div>
                                 <h4>Totale:</h4>
                             </div>
@@ -79,7 +104,10 @@
                                 <h4>{{ floatPrice(total) }}€</h4>
                             </div>
                         </div>
-                        <a href="#" class="btn ms_btn_primary w-100">Vai alla cassa</a>
+                        <div class="checkout-box text-center">
+                            <a href="#" class="btn mb-1 text-muted">Svuota carrello</a>
+                            <a href="#" class="btn ms_btn_primary w-100">Vai alla cassa</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,6 +116,8 @@
                     <div class="col-12 mb-3">
                         <h3>Carrello</h3>
                     </div>
+
+
                     <!------------ Desktop Cart ------------>
                     <div class="col-12">
                         <div class="card h-100 rounded">
@@ -97,6 +127,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Nome</th>
+                                            <th scope="col">Quantità</th>
                                             <th scope="col">Prezzo</th>
                                             <th scope="col">Rimuovi</th>
                                         </tr>
@@ -104,6 +135,7 @@
                                     <tbody>
                                         <tr v-for="(plate, index) in cart" :key="index">
                                             <td>{{ plate.name }}</td>
+                                            <td>1</td>
                                             <td>€ {{floatPrice(plate.price - (plate.price * plate.discount / 100))}}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-danger" @click="removeFromCart(plate)">
@@ -119,11 +151,10 @@
                                     </tbody>
                                 </table>
 
-                                <div v-else>
+                                <div v-else class="text-center">
                                     <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5>
-                                    <p class="card-subtitle text-muted mb-3">Clicca sui piatti per aggiungerli</p>
+                                    <h6 class="card-subtitle mb-3">Clicca sui piatti per aggiungerli</h6>
                                 </div>
-                                
 
                             </div>
                         </div>
@@ -148,6 +179,7 @@ export default {
             plateIdsArray: [],
             total: 0,
             restaurantId: null,
+            cartActive: false,
         }
     },
     
@@ -258,6 +290,12 @@ export default {
             this.total -= parseFloat(plate.price - (plate.price * plate.discount / 100));
             this.save();
         },
+
+
+        //Cart behaviour methods
+        toggleCartActive() {
+            this.cartActive = !this.cartActive;
+        }
     },
     created(){
         this.getRestaurantDetail();
@@ -318,13 +356,20 @@ div.card.h-100{
 }
 
 
-/* Mobile Cart*/
+/*** Mobile Cart ***/
 
+.hv_50 {
+    height: 50vh;
+}
 
 .mobile-cart {
     box-shadow: 0 -4px 6px rgba(33,33,33,0.08);
-}
-.fa-solid.fa-xmark {
+    transition: 2s;
+};
+.fa-solid.fa-xmark,
+.fa-solid.fa-angle-up,
+.fa-angle-down,
+.fa-plus {
     background-color: rgba(33,33,33,.05);
     color: $rgba-dark-color;
     height: 30px;
@@ -334,6 +379,16 @@ div.card.h-100{
         cursor: pointer;
         background-color: rgba(33,33,33,.1);
         color: $dark-color;
+    }
+}
+
+.fa-plus {
+    background-color: $secondary-color;
+    color: $dark-color;
+
+    &:hover {
+        background-color: $secondary-accenture-color;
+        cursor: pointer;
     }
 }
 </style>
