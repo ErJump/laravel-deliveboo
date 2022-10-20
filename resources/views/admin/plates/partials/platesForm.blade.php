@@ -117,7 +117,7 @@
         <div class="col-xs-12 d-flex justify-content-end align-items-center w-100 p-3">
             {{-- Submit --}}
             <div class="ml-3">
-                <button type="submit" class="btn btn-primary">Completa modifiche</button>
+                <button type="submit" class="btn btn-primary">Invio</button>
             </div>
         </div>
     </div>
