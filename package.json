@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "font-awesome": "^4.7.0",
+        "sweetalert2": "^11.6.0",
         "vue-router": "^3.2.0"
     }
 }
