@@ -35,18 +35,15 @@
                     <a class="btn text-white ms_btn_secondary" v-if="nextPageUrl != ''" @click="getNewRestaurantPage()">Carica altri ristoranti</a>
                 </div>
             </div>
-            <div v-else 
-                class="row" 
-                v-for="typology in filteredRestaurants" :key="typology.id"
-            >
+            <div v-else class="row">
                 <div class="col-12">
-                    <h3 class="mb-3"><strong>{{capitalizeFirstLetter(typology.name)}}</strong></h3>
+                    <h3 class="mb-3"><strong v-for="typology in typologies" :key="typology.id">{{capitalizeFirstLetter(getTypologyName(typology))}} </strong></h3>
                 </div>
-                <div v-if="typology.users.length == 0"  class="col-12 mb-5">
+                <div v-if="filteredRestaurants.length == 0"  class="col-12 mb-5">
                     <h6 class="col-12">Non ci sono ristoranti per questa tipologia</h6>
                 </div>
-                <div v-else class="col-12 col-sm-6 col-lg-4 mb-5" v-for="restaurant in typology.users" :key="restaurant.id">
-                    <RestaurantCard :restaurant="restaurant" />
+                <div v-else class="col-12 col-sm-6 col-lg-4 mb-5" v-for="filteredRestaurant in filteredRestaurants" :key="filteredRestaurant.id">
+                    <RestaurantCard :restaurant="filteredRestaurant" />
                 </div>
             </div>
         </div>  
@@ -69,7 +66,7 @@ export default {
         return {
             restaurantsUrl: 'http://localhost:8000/api/users',
             typologiesUrl: 'http://localhost:8000/api/typologies',
-            filteredTypologiesUrl: 'http://localhost:8000/api/typologies/search',
+            filteredTypologiesUrl: 'http://localhost:8000/api/search',
             restaurants: [],
             typologiesArray: [],
             typologies: [],
@@ -96,7 +93,7 @@ export default {
             axios.get(this.typologiesUrl)
                 .then(response => {
                     this.typologiesArray = response.data.results.data;
-                    console.log(this.typologiesArray)
+                    //console.log(this.typologiesArray)
                 })
                 .catch(error => {
                     console.log(error)
@@ -126,8 +123,9 @@ export default {
                 }
             })
             .then(response => {
-                this.filteredRestaurants = response.data.results;
-                console.log(this.filteredRestaurants)
+                this.filteredRestaurants = response.data.results.data;
+                console.log('ristoranti filtrati: ' + this.filteredRestaurants)
+                console.log('typologies: ' + this.typologies)
             })
             .catch(error => {
                 console.log(error)
@@ -148,6 +146,16 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
+        },
+        //converte l'id di una tipologia nel suo nome
+        getTypologyName(typologyID) {
+            let typologyName = '';
+            this.typologiesArray.forEach(typology => {
+                if(typology.id == typologyID) {
+                    typologyName = typology.name;
+                }
+            });
+            return typologyName;
         }
     },
     created() {
