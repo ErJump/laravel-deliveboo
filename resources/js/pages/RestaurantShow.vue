@@ -135,7 +135,7 @@
                                     <tbody>
                                         <tr v-for="(plate, index) in cart" :key="index">
                                             <td>{{ plate.name }}</td>
-                                            <td>1</td>
+                                            <td>{{ plate.quantity }}</td>
                                             <td>€ {{floatPrice(plate.price - (plate.price * plate.discount / 100))}}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-danger" @click="removeFromCart(plate)">
