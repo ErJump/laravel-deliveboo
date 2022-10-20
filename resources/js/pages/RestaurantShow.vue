@@ -92,7 +92,8 @@
                     <div class="col-12">
                         <div class="card h-100 rounded">
                             <div class="card-body">
-                                <table class="table mb-4">
+
+                                <table class="table mb-4" v-if="cart.length > 0">
                                     <thead>
                                         <tr>
                                             <th scope="col">Nome</th>
@@ -118,6 +119,12 @@
                                     </tbody>
                                 </table>
 
+                                <div v-else>
+                                    <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5>
+                                    <p class="card-subtitle text-muted mb-3">Clicca sui piatti per aggiungerli</p>
+                                </div>
+                                
+
                             </div>
                         </div>
                     </div>
@@ -129,6 +136,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
     name: 'RestaurantShow',
 
@@ -162,10 +170,6 @@ export default {
                 })
         
         },
-        urlValidationFunction(image){
-            image.startsWith("https");
-            return true;
-        },
         cutImageString(image){
             // console.warn(image);
             if(image.startsWith("uploads/")){
@@ -188,15 +192,53 @@ export default {
                 this.total += parseFloat(plate.price - (plate.price * plate.discount / 100));
                 this.save();
             } else {
-                console.log("ID pagina attuale: " + this.restaurantId);
-                console.log("ID ristorante del local storage: " + localStorage.getItem("id"));
-                console.log("Local Storage svuotato");
-                localStorage.removeItem("cart");
-                localStorage.removeItem("total");
-                localStorage.removeItem("id");
-                this.cart = [];
-                this.total = 0;
-                this.save();
+                const Swal = require('sweetalert2');
+                const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success m-2',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+                })
+
+                swalWithBootstrapButtons.fire({
+                title: 'Sei sicuro?',
+                text: "Il tuo carrello contiene degli ordini da un altro ristorante, così svuoterai il carrello",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sì, svuota',
+                cancelButtonText: 'No, torna indietro',
+                reverseButtons: true
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire(
+                    'Svuotato!',
+                    'Il tuo carrello è stato svuotato, è stato creato un nuovo carrello con il nuovo prodotto',
+                    'success'
+                    );
+                    console.log("ID pagina attuale: " + this.restaurantId);
+                    console.log("ID ristorante del local storage: " + localStorage.getItem("id"));
+                    console.log("Local Storage svuotato");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("total");
+                    localStorage.removeItem("id");
+                    this.cart = [];
+                    this.total = 0;
+                    this.cart.push(plate);
+                    this.plateIdsArray.push(plate.id);
+                    this.total += parseFloat(plate.price - (plate.price * plate.discount / 100));
+                    this.save();
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                    'Annullato',
+                    'Il tuo carrello non è stato modificato',
+                    'error'
+                    )
+                }
+                })                
             }
         },
         save() {

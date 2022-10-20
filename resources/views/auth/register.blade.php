@@ -245,23 +245,39 @@
 @section('footer-scripts')
 <script>
 
+    function validatePassword() {
+        let password = document.getElementById('password');
+        let passwordConfirm = document.getElementById('password-confirm');
+        const passwordMatch = password.value == passwordConfirm.value;
+
+
+        if(!passwordMatch) {
+            passwordConfirm.setCustomValidity("Le due password non corrispondono");
+            passwordConfirm.reportValidity();
+        } else {    
+            passwordConfirm.setCustomValidity("");
+            passwordConfirm.submit();
+        } 
+    }
+
     function validateGrp() {
-    let things = document.querySelectorAll('.form-check-input')
-    let checked = 0;
-    for (let thing of things) {
-        thing.checked && checked++
-    }
-    if (checked) {
-        things[things.length - 1].setCustomValidity("");
-        document.getElementById('checkGroup').submit();
-    } else {
-        things[things.length - 1].setCustomValidity("Devi selezionare almeno una tipologia");
-        things[things.length - 1].reportValidity();
-    }
+        let things = document.querySelectorAll('.form-check-input')
+        let checked = 0;
+        for (let thing of things) {
+            thing.checked && checked++
+        }
+        if (checked) {
+            things[things.length - 1].setCustomValidity("");
+            document.getElementById('checkGroup').submit();
+        } else {
+            things[things.length - 1].setCustomValidity("Devi selezionare almeno una tipologia");
+            things[things.length - 1].reportValidity();
+        }
     }
 
     document.querySelector('[name=submit]').addEventListener('click', () => {
-    validateGrp()
+    validatePassword();
+    validateGrp();
     });
 
 </script>
