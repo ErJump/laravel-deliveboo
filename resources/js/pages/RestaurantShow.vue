@@ -82,7 +82,7 @@
                                 <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
                                     <div class="plate-data">
                                         <i class="fa-solid fa-xmark text-center rounded-circle mr-2 p-2" @click="removeFromCart(plate)"></i>
-                                        <span>{{ plate.name }}</span>
+                                        <span>{{ plate.name }} x{{ plate.quantity }}</span>
                                     </div>
                                     <div class="plate-prices">
                                         <h6 class="mb-0">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="checkout-box text-center">
-                            <a href="#" class="btn mb-1 text-muted">Svuota carrello</a>
+                            <!-- <a class="btn mb-1 text-muted">Svuota carrello</a> -->
                             <a href="#" class="btn ms_btn_primary w-100">Vai alla cassa</a>
                         </div>
                     </div>
@@ -301,7 +301,46 @@ export default {
                 this.save();
             }
         },
+        emptyCart() {
+            const Swal = require('sweetalert2');
+            const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success m-2',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+            })
 
+            swalWithBootstrapButtons.fire({
+            title: 'Sei sicuro?',
+            text: "Così svuoterai il carrello e perderai tutti i piatti aggiunti",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sì, svuota',
+            cancelButtonText: 'No, torna indietro',
+            reverseButtons: true
+            }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                'Svuotato!',
+                'Il tuo carrello è stato svuotato',
+                'success'
+                )
+                this.cart = [];
+                this.total = 0;
+                this.save();
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                'Annullato',
+                'Il tuo carrello non è stato modificato',
+                'error'
+                )
+            }
+            })
+        },
 
         //Cart behaviour methods
         toggleCartActive() {
