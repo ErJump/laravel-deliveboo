@@ -55,17 +55,43 @@
                     <h3>Questo ristorante non ha ancora inserito il suo menu</h3>
                 </div>
             </div>
-            <div class="col-12 col-lg-4">
+            <!------------ Mobile Cart ------------>
+            <div class="d-sm-none">
+                <div class="card mobile-cart fixed-bottom">
+                    <div class="card-body">
+                        <h4 class="car-title mb-3 font-weight-bold">Carrello</h4>
+                        <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
+                            <div class="plate-data">
+                                <i class="fa-solid fa-xmark text-center rounded-circle mr-2 p-2" @click="removeFromCart(plate)"></i>
+                                <span>{{ plate.name }}</span>
+                            </div>
+                            <div class="plate-prices">
+                                <h6 class="mb-0">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer py-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <h4>Totale:</h4>
+                            </div>
+                            <div>
+                                <h4>{{ floatPrice(total) }}€</h4>
+                            </div>
+                        </div>
+                        <a href="#" class="btn ms_btn_primary w-100">Vai alla cassa</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 d-none d-sm-block">
                 <div class="row">
                     <div class="col-12 mb-3">
                         <h3>Carrello</h3>
                     </div>
+                    <!------------ Desktop Cart ------------>
                     <div class="col-12">
                         <div class="card h-100 rounded">
                             <div class="card-body">
-                                <!-- <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5> -->
-                                <!-- <p class="card-subtitle text-muted mb-3">Io sono un carrello</p> -->
-
                                 <table class="table mb-4">
                                     <thead>
                                         <tr>
@@ -246,6 +272,26 @@ div.card.h-100{
 @media (min-width: 1920px) {
     .custom{
         max-width: 1800px;
+    }
+}
+
+
+/* Mobile Cart*/
+
+
+.mobile-cart {
+    box-shadow: 0 -4px 6px rgba(33,33,33,0.08);
+}
+.fa-solid.fa-xmark {
+    background-color: rgba(33,33,33,.05);
+    color: $rgba-dark-color;
+    height: 30px;
+    width: 30px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(33,33,33,.1);
+        color: $dark-color;
     }
 }
 </style>
