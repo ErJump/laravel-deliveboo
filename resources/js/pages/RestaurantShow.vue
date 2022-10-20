@@ -80,6 +80,7 @@
                             </div>
                         </div>
                         <a href="#" class="btn ms_btn_primary w-100">Vai alla cassa</a>
+                        <a @click="emptyCart()" href="#" class="btn ms_btn_secondary w-100 mt-2">Svuota il carrello</a>
                     </div>
                 </div>
             </div>
@@ -257,6 +258,46 @@ export default {
             this.cart.splice(this.cart.indexOf(plate), 1);
             this.total -= parseFloat(plate.price - (plate.price * plate.discount / 100));
             this.save();
+        },
+        emptyCart() {
+            const Swal = require('sweetalert2');
+            const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success m-2',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+            title: 'Sei sicuro?',
+            text: "Così svuoterai il carrello e perderai tutti i piatti aggiunti",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sì, svuota',
+            cancelButtonText: 'No, torna indietro',
+            reverseButtons: true
+            }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                'Svuotato!',
+                'Il tuo carrello è stato svuotato',
+                'success'
+                )
+                this.cart = [];
+                this.total = 0;
+                this.save();
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                'Annullato',
+                'Il tuo carrello non è stato modificato',
+                'error'
+                )
+            }
+            })
         },
     },
     created(){
