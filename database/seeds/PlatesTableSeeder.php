@@ -30,7 +30,7 @@ class PlatesTableSeeder extends Seeder
         $plate2->description = "Una pizza ottima per i prodotti del territorio";
         $plate2->price = 6.00;
         $plate2->discount = 0;
-        $plate2->availability = true;
+        $plate2->availability = false;
         $plate2->image = 'https://www.melarossa.it/wp-content/uploads/2021/02/pizza-capricciosa.jpg';
         $plate2->save();
 
