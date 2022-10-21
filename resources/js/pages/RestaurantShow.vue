@@ -261,6 +261,7 @@ export default {
                     localStorage.removeItem("id");
                     this.cart = [];
                     this.total = 0;
+                    plate.quantity = 1;
                     this.cart.push(plate);
                     this.plateIdsArray.push(plate.id);
                     this.total += parseFloat(plate.price - (plate.price * plate.discount / 100));
