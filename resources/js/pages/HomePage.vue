@@ -171,7 +171,7 @@ export default {
 .ms_typology_card{
     div>img{
         filter: grayscale(70%);
-        transition: all 0.3s ease-in-out;
+        transition: all 0.1s ease-in-out;
     }
     &:hover div>img{
         filter: grayscale(0%);
