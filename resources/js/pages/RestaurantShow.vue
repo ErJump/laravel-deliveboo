@@ -128,30 +128,50 @@
                                         <tr>
                                             <th scope="col">Nome</th>
                                             <th scope="col">Quantità</th>
-                                            <th scope="col">Prezzo</th>
-                                            <th scope="col">Rimuovi</th>
+                                            <th scope="col" :colspan="activeForm ? '1' : '2'">Prezzo</th>
+                                            <th scope="col" v-if="!activeForm">Rimuovi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="(plate, index) in cart" :key="index">
                                             <td>{{ plate.name }}</td>
                                             <td>{{ plate.quantity }}</td>
-                                            <td>€ {{floatPrice(plate.price - (plate.price * plate.discount / 100))}}</td>
+                                            <td :colspan="activeForm ? '1' : '2'">€ {{floatPrice(plate.price - (plate.price * plate.discount / 100))}}</td>
                                             <td>
-                                                <button class="btn btn-sm btn-danger" @click="removeFromCart(plate)">
+                                                <button v-if="!activeForm" class="btn btn-sm btn-danger" @click="removeFromCart(plate)">
                                                     Rimuovi
                                                 </button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong>Totale</strong></td>
-                                            <td colspan="3">€ {{ floatPrice(total) }}</td>
+                                            <td :colspan="activeform ? '2' : '3'">€ {{ floatPrice(total) }}</td>
                                         </tr>
-                                        <tr>
+                                        <tr v-if="activeForm">
+                                            <!-- Checkout -->
+                                            <td class="p-4" colspan="4">
+                                                <h4>Checkout</h4>
+                                                <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome"
+                                                    required />
+                                                <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome"
+                                                    required />
+                                                <input class="form-control mb-2" type="text" v-model="userAddress"
+                                                    placeholder="Indirizzo" required />
+                                                <input class="form-control mb-2" type="text" v-model="userPhone"
+                                                    placeholder="Numero di telefono" required />
+                                                <input class="form-control mb-2" type="text" v-model="userEmail" placeholder="Email*"
+                                                    required />
+                                            </td>
+                                            <!-- Fine checkout -->
+                                        </tr>
+                                        <tr>    
                                             <td colspan="4">
-                                                <div class="checkout-box text-center">
+                                                <div v-if="!activeForm" class="checkout-box text-center">
                                                     <a @click="emptyCart()" class="btn mb-1 text-muted">Svuota carrello</a>
-                                                    <a href="#" class="btn ms_btn_primary w-100">Vai alla cassa</a>
+                                                    <a @click="activeForm = true" class="btn ms_btn_primary w-100">Vai alla cassa</a>
+                                                </div>
+                                                <div v-else class="checkout-box text-center">
+                                                    <a @click="activeForm = false" class="btn ms_btn_primary w-100">Torna Indietro</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -164,7 +184,7 @@
                                 </div>
 
                             </div>
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -187,6 +207,12 @@ export default {
             total: 0,
             restaurantId: null,
             cartActive: false,
+            userName: null,
+            userSurname: null,
+            userAddress: null,
+            userPhone: null,
+            userEmail: null,
+            activeForm: false,
         }
     },
     
