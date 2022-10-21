@@ -169,6 +169,7 @@ export default {
 @import "../../sass/variables.scss";
 
 .ms_typology_card{
+    border: 4px solid #f8fafc;
     div>img{
         filter: grayscale(70%);
         transition: all 0.1s ease-in-out;
@@ -181,6 +182,9 @@ export default {
     }
     &:hover h6{
         color: $primary-color;
+    }
+    &:hover{
+        border: 4px solid $secondary-color;
     }
 }
 
@@ -218,6 +222,7 @@ export default {
  * w: http://animista.net, t: @cssanimista
  * ---------------------------------------------- */
 .active {
+    border: 4px solid $secondary-color;
     div>img {
         filter: grayscale(0);  
     };
