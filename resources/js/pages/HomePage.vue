@@ -33,6 +33,7 @@
                 </div>
                 <div class="col-12 text-center my-2">
                     <a class="btn text-white ms_btn_secondary" v-if="nextPageUrl != ''" @click="getNewRestaurantPage()">Carica altri ristoranti</a>
+                    <small v-else>Non ci sono altri ristoranti da caricare</small>
                 </div>
             </div>
             <div v-else class="row">
@@ -229,8 +230,8 @@ export default {
     h6 {
         color: $primary-color;
     };
-    -webkit-animation:flip-horizontal-bottom .4s cubic-bezier(.455,.03,.515,.955) both;
-    animation:flip-horizontal-bottom .4s cubic-bezier(.455,.03,.515,.955) both;
+    -webkit-animation: flip-horizontal-bottom .4s cubic-bezier(.455,.03,.515,.955) both;
+    animation: flip-horizontal-bottom .4s cubic-bezier(.455,.03,.515,.955) both;
 }
 
 /* ----------------------------------------------
