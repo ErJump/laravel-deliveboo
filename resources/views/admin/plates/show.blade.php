@@ -71,17 +71,26 @@
 @endsection
 
 @section('footer-scripts')
-    <script>
-        const deleteForms = document.querySelectorAll('.form-plate-delete');
-
-        deleteForms.forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const confirmDelete = confirm('Sei sicuro di voler eliminare questo piatto?');
-                if (confirmDelete) {
-                    form.submit();
-                }
-            });
+<script>
+    const deleteForms = document.querySelectorAll('.form-plate-delete');
+    deleteForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+            title: 'Attenzione',
+            text: "Non potrai più recuperare questo piatto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sì, elimina!',
+            cancelButtonText: 'Annulla'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+        })
         });
-    </script>
+    });
+</script>
 @endsection

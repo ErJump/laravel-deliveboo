@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Typology;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -15,11 +17,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10, ['name', 'email', 'address', 'phone_number', 'description', 'image']);
+
+
+        $users = User::with('typologies', 'plates')->paginate(6, ['id', 'name', 'email', 'address', 'phone_number', 'description', 'image']);
         return response()->json([
             'response' => true,
             'results' => $users
-        ]);
+        ]); 
     }
 
     /**
@@ -51,7 +55,16 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::with('typologies', 'plates')->find($id, ['id','name', 'email', 'address', 'phone_number', 'description', 'image']);
+
+        if ($user) {
+            return response()->json([
+                'response' => true,
+                'results' => $user,
+
+            ]);
+        }    
+        else return response('', 404);
     }
 
     /**
@@ -87,4 +100,36 @@ class UserController extends Controller
     {
         //
     }
+
+
+    public function search(Request $request)
+    {
+        $typologies = $request->query('typologies');
+
+        //prendo solo gli utenti appartengono a tutte le tipologie selezionate
+        $users = DB::table('typology_user')
+            ->select('user_id')
+            ->whereIn('typology_id', $typologies)
+            ->groupBy('user_id')
+            ->havingRaw('COUNT(*) = ?', [count($typologies)])
+            ->get();
+
+
+        //converto users in array
+        $users_array = [];
+        foreach ($users as $user) {
+            $users_array[] = $user->user_id;
+        }
+
+        //cerco gli utenti che hanno id uguale a quelli trovati
+        $result = User::with('typologies')->whereIn('id', $users_array)->paginate(6, ['id', 'name', 'email', 'address', 'phone_number', 'description', 'image']);
+
+
+        return response()->json([
+            'response' => true,
+            'results' => $result
+        ]);
+    }
 }
+
+

@@ -4,6 +4,7 @@
 
 @section('content')
     <main>
+        {{-- popup  --}}
         <div class="container">
             <div class="row mb-3">
                 <div class="col-12">
@@ -134,14 +135,23 @@
 @section('footer-scripts')
     <script>
         const deleteForms = document.querySelectorAll('.form-plate-delete');
-
         deleteForms.forEach(form => {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                const confirmDelete = confirm('Sei sicuro di voler eliminare questo piatto?');
-                if (confirmDelete) {
-                    form.submit();
+                Swal.fire({
+                title: 'Attenzione',
+                text: "Non potrai più recuperare questo piatto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sì, elimina!',
+                cancelButtonText: 'Annulla'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
                 }
+            })
             });
         });
     </script>
