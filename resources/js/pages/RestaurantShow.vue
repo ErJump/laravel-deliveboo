@@ -41,9 +41,9 @@
                                 <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold">{{plate.name}}</h5>
-                                <p class="card-subtitle text-muted mb-3">{{plate.description}}</p>
-                                <p class="card-subtitle text-muted mb-3"><strong>Ingredienti: </strong>{{plate.ingredients}}</p>
+                                <h6 class="card-title font-weight-bold">{{plate.name}}</h6>
+                                <p class="card-subtitle text-muted mb-3"><small>{{plate.description}}</small></p>
+                                <p class="card-subtitle text-muted mb-3"><small><strong>Ingredienti: </strong>{{plate.ingredients}}</small></p>
                                 <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block">{{plate.discount}}% di sconto</span>
                                 <div class="d-flex g-3">
                                     <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block text-muted mr-3"><s>{{plate.price}}€</s></span>
@@ -375,13 +375,16 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/variables.scss";
 
-/* *{
-    outline: 1px solid blue;
-} */
 
-div.card.h-100{
-    /* cursor: pointer; */
+.card-header {
+    height: 200px;
 }
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+}
+
 .ms_not_available{
     filter: grayscale(100%);
     opacity: 0.5;
