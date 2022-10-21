@@ -146,22 +146,25 @@
                                         </tr>
                                         <tr>
                                             <td><strong>Totale</strong></td>
-                                            <td :colspan="activeform ? '2' : '3'">€ {{ floatPrice(total) }}</td>
+                                            <td :colspan="activeForm ? '2' : '3'">€ {{ floatPrice(total) }}</td>
                                         </tr>
                                         <tr v-if="activeForm">
                                             <!-- Checkout -->
                                             <td class="p-4" colspan="4">
                                                 <h4>Checkout</h4>
-                                                <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome"
-                                                    required />
-                                                <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome"
-                                                    required />
-                                                <input class="form-control mb-2" type="text" v-model="userAddress"
-                                                    placeholder="Indirizzo" required />
-                                                <input class="form-control mb-2" type="text" v-model="userPhone"
-                                                    placeholder="Numero di telefono" required />
-                                                <input class="form-control mb-2" type="text" v-model="userEmail" placeholder="Email*"
-                                                    required />
+                                                <form action="">
+                                                    <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
+                                                        required />
+                                                    <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
+                                                        required />
+                                                    <input class="form-control mb-2" type="text" v-model="userAddress"
+                                                        placeholder="Indirizzo*" required />
+                                                    <input class="form-control mb-2" type="number" v-model="userPhone"
+                                                        placeholder="Numero di telefono*" required />
+                                                    <input class="form-control mb-2" type="email" v-model="userEmail" placeholder="Email*"
+                                                        required />
+                                                    <button type="submit">Paga</button>
+                                                </form>
                                             </td>
                                             <!-- Fine checkout -->
                                         </tr>
@@ -237,11 +240,12 @@ export default {
         
         },
         cutImageString(image){
-            // console.warn(image);
-            if(image.startsWith("uploads/")){
-                return image.split('uploads/').pop()
+            if(image){
+                if(image.startsWith("uploads/")){
+                    return image.split('uploads/').pop()
+                }
+                return false
             }
-            return false
         },
         capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
