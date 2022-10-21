@@ -144,9 +144,16 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Totale</th>
-                                            <td>€ {{ floatPrice(total) }}</td>
-                                            <td></td>
+                                            <td><strong>Totale</strong></td>
+                                            <td colspan="3">€ {{ floatPrice(total) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <div class="checkout-box text-center">
+                                                    <a @click="emptyCart()" class="btn mb-1 text-muted">Svuota carrello</a>
+                                                    <a href="#" class="btn ms_btn_primary w-100">Vai alla cassa</a>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
