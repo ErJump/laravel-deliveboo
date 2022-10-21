@@ -41,7 +41,8 @@
                                 <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold">{{plate.name}}</h5>
+                                <h5 class="card-title font-weight-bold mb-2">{{plate.name}}</h5>
+                                <h5 v-if="!plate.availability" class="text-dark mb-3"> Non disponibile</h5>
                                 <p class="card-subtitle text-muted mb-3">{{plate.description}}</p>
                                 <p class="card-subtitle text-muted mb-3"><strong>Ingredienti: </strong>{{plate.ingredients}}</p>
                                 <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block">{{plate.discount}}% di sconto</span>
@@ -49,7 +50,7 @@
                                     <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block text-muted mr-3"><s>{{plate.price}}€</s></span>
                                     <strong class="card-subtitle mb-3 d-block">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</strong>
                                 </div>
-                                <i class="fa-solid fa-plus text-right rounded-circle p-2"
+                                <i v-if="plate.availability" class="fa-solid fa-plus text-right rounded-circle p-2"
                                 @click="[plate.availability == 1 ? addToCart(plate) : '']"></i>
                             </div>
                         </div>
