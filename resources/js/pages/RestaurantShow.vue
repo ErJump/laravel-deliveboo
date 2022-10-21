@@ -379,7 +379,7 @@ export default {
 } */
 
 div.card.h-100{
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 .ms_not_available{
     filter: grayscale(100%);
