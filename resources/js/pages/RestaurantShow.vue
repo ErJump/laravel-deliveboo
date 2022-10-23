@@ -161,12 +161,16 @@
                                                         placeholder="Indirizzo*" required />
                                                     <input class="form-control mb-2" type="number" v-model="userPhone"
                                                         placeholder="Numero di telefono*" required />
-                                                    <input class="form-control mb-2" type="email" v-model="userEmail" placeholder="Email*"
+                                                    <input class="form-control mb-2" type="email" v-model="userEmail" placeholder="Email* "
                                                         required />
                                                     <button type="submit">Paga</button>
                                                 </form>
                                             </td>
                                             <!-- Fine checkout -->
+                                        </tr>
+                                        <tr>
+                                            <!-- braintree -->
+                                            <div id="dropin-container"></div>
                                         </tr>
                                         <tr>    
                                             <td colspan="4">
@@ -386,7 +390,19 @@ export default {
         //Cart behaviour methods
         toggleCartActive() {
             this.cartActive = !this.cartActive;
-        }
+        },
+
+        //braintree
+        // Step two: create a dropin instance using that container (or a string
+        // that functions as a query selector such as `#dropin-container`)
+        initBraintree() {
+            braintree.dropin.create({
+                authorization: this.clientToken,
+                container: '#dropin-container'
+            }, (createErr, instance) => {
+                this.dropinInstance = instance;
+            });
+        },
     },
     created(){
         this.getRestaurantDetail();
