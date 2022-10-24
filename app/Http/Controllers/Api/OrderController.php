@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -26,26 +27,48 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
         $braintree = config('braintree');
-        $nonce = $request->nonce;
-        $amount = $request->total;
+        $nonce = $request->payment_method_nonce;
+
+        $plates = json_decode(request('cart_items'));
+        $total = 0;
+        $restaurantId = '';
+        foreach ($plates as $plate) {
+            $total += ($plate->price - ($plate->price * $plate->discount / 100));
+            $restaurantId = $plate->user_id;
+        }
+        $amount = $total;
         $result = $braintree->transaction()->sale([
             'amount' => $amount,
             'paymentMethodNonce' => $nonce,
         ]);
         if ($result->success) {
-            return response()->json([
-                'response' => true,
-                'transaction' => $result->transaction
-            ]);
+            $newOrder = new Order();
+            $newOrder->first_name = $request->userName;
+            $newOrder->last_name = $request->userSurname;
+            $newOrder->address = $request->userAddress;
+            $newOrder->phone = $request->userPhone;
+            $newOrder->email = $request->userEmail;
+            $newOrder->total_price = $amount;
+            $newOrder->user_id = $restaurantId;
+            $newOrder->save();
+
+            // return response()->json([
+            //     'response' => true,
+            //     'transaction' => $result->transaction
+            // ]);
+
+            return redirect()->route('checkout');
             
         } else {
-            return response()->json([
-                'response' => false,
-                'errors' => $result->errors->deepAll(),
-                'debug' => [$nonce, $amount]
-            ]);
+            // return response()->json([
+            //     'response' => false,
+            //     'errors' => $result->errors->deepAll(),
+            //     'debug' => [$nonce, $amount]
+            // ]);
+            
+            return redirect()->route('checkoutf');
+
         }
     }
     /**
