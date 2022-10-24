@@ -112,15 +112,75 @@
                     </div>
                 </div>
             </div>
+
+            
             <div class="col-12 col-lg-4 d-none d-sm-block">
                 <div class="row">
                     <div class="col-12 mb-3">
                         <h3>Carrello</h3>
                     </div>
-
-
-                    <!------------ Desktop Cart ------------>
                     <div class="col-12">
+                        
+                        
+                        <div class="card">
+                            <div class="card-body">
+                                <div v-if="cart.length > 0">
+                                    <h4 class="card-title">Ordine</h4>
+                                    <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
+                                        <div class="plate-data">
+                                            <i class="fa-solid fa-xmark text-center rounded-circle mr-2 p-2" @click="removeFromCart(plate)"></i>
+                                            <span>{{ plate.name }} x{{ plate.quantity }}</span>
+                                        </div>
+                                        <div class="plate-prices">
+                                            <h6 class="mb-0">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-else class="text-center">
+                                    <h5>Il carrello è vuoto</h5>
+                                    <p class="text-muted"><small>Clicca su un piatto per aggiungerlo</small></p>
+                                </div>
+                                <div class="checkout-form">
+                                    <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
+                                        <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
+                                            required name="name"/>
+                                        <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
+                                            required name="surname"/>
+                                        <input class="form-control mb-2" type="text" v-model="userAddress"
+                                            placeholder="Indirizzo*" name="address" required />
+                                        <input class="form-control mb-2" name="phone" type="number" v-model="userPhone"
+                                            placeholder="Numero di telefono*" required />
+                                        <input class="form-control mb-2" name="email" type="email" v-model="userEmail" placeholder="Email* "
+                                            required />
+                                        <div id="dropin-container"></div>
+                                        <button type="submit">Paga</button>
+                                        <input type="hidden" id="nonce" name="payment_method_nonce"/>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-footer py-4" :class="cart.length === 0 ? 'd-none' : ''">
+                                <div class="d-flex justify-content-between align-items-center mb-w"                            >
+                                    <div>
+                                        <h4>Totale:</h4>
+                                    </div>
+                                    <div>
+                                        <h4>{{ floatPrice(total) }}€</h4>
+                                    </div>
+                                </div>
+                                <div class="checkout-box text-center">
+                                    <div v-if="!activeForm" class="checkout-box text-center">
+                                        <a @click="emptyCart()" class="btn mb-1 text-muted">Svuota carrello</a>
+                                        <a @click="activeForm = true" class="btn ms_btn_primary w-100">Vai alla cassa</a>
+                                    </div>
+                                    <div v-else class="checkout-box text-center">
+                                        <a @click="activeForm = false" class="btn ms_btn_primary w-100">Torna Indietro</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!------------ Desktop Cart ------------>
                         <div class="card h-100 rounded">
                             <div class="card-body">
                                 <!-- da rimettere v-if="cart.length > 0"-->
