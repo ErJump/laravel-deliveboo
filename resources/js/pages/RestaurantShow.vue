@@ -51,7 +51,7 @@
                                     <strong class="card-subtitle mb-3 d-block">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</strong>
                                 </div>
                                 <i v-if="plate.availability" class="fa-solid fa-plus text-right rounded-circle p-2"
-                                @click="[plate.availability == 1 ? addToCart(plate) : '']"></i>
+                                @click="[plate.availability == 1 ? addToCart(plate) : ''], cartActive = true"></i>
                             </div>
                         </div>
                     </div>
@@ -462,19 +462,6 @@ export default {
 
 /***  Cart  ***/
 
-@media screen and (max-width: 576px) {
-    #checkout-cart {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-    }
-}
-
-@media screen and (min-whidth: 577px) {
-    #checkout-cart {
-        position: relative;
-    }
-}
 
 .hv_50 {
     height: 50vh;
@@ -507,6 +494,24 @@ export default {
     &:hover {
         background-color: $secondary-accenture-color;
         cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    #checkout-cart {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+@media screen and (min-whidth: 577px) {
+    #checkout-cart {
+        position: relative;
+
+        .hv_50 {
+            height: auto;
+        }
     }
 }
 </style>
