@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Mail\OrderConfirmationMail;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -25,7 +27,8 @@ class OrderController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
+        
         $data = $request->all();
         $braintree = config('braintree');
         $nonce = $request->payment_method_nonce;
@@ -58,6 +61,14 @@ class OrderController extends Controller
             //     'transaction' => $result->transaction
             // ]);
 
+            $userData = [
+                'name' => $request->userName,
+                'surname' => $request->userSurname,
+                'address' => $request->userAddress,
+                'email' => $request->userEmail,
+                'amount' => $total,
+            ];
+            Mail::to($request->userEmail)->send(new OrderConfirmationMail($userData));    
             return redirect()->route('checkout');
             
         } else {
