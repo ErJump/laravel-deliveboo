@@ -93,7 +93,7 @@ class PlatesTableSeeder extends Seeder
         $plate8->name = 'Paella';
         $plate8->user_id = 4;
         $plate8->ingredients = "riso e frutti di mare";
-        $plate8->description = "La tempura è uno dei piatti più conosciuti e amati della cucina del Sol Levante";
+        $plate8->description = "La paella è un piatto tradizionale della cucina spagnola a base di riso, zafferano e frutti di mare.";
         $plate8->price = 12;
         $plate8->discount = 5;
         $plate8->availability = 1;
@@ -103,8 +103,8 @@ class PlatesTableSeeder extends Seeder
         $plate9 = new Plate();
         $plate9->name = 'Churros';
         $plate9->user_id = 4;
-        $plate9->ingredients = "salmone, tonno e branzino";
-        $plate9->description = "Il sashimi è una ricetta giapponese che rientra nel gruppo del sushi";
+        $plate9->ingredients = "farina, acqua e zucchero";
+        $plate9->description = "ll churro è un dolce dalla forma cilindrica ed allungata";
         $plate9->price = 4;
         $plate9->discount = 0;
         $plate9->availability = 1;
