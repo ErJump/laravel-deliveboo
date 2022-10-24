@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -16,7 +17,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Auth::user()->orders;
+        // $orders = Auth::user()->orders;
+        $orders = DB::table('orders')
+                ->orderBy('updated_at', 'desc')
+                ->get();
         return view('admin.orders.index', compact('orders'));
     }
 
