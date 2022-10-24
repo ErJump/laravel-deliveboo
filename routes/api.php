@@ -27,5 +27,6 @@ Route::namespace('Api')->group(function(){
     Route::get('/typologies/search', 'TypologyController@search');
 
     Route::get('/orders', 'OrderController@index');
+    Route::post('/orders', 'OrderController@store');
 
 });

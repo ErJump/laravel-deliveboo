@@ -23,23 +23,37 @@ class OrderController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $braintree = config('braintree');
+        dd($request);
+        $nonce = $request->payment_method_nonce;
+        $amount = $request->amount;
+        $result = $braintree->transaction()->sale([
+            'amount' => $amount,
+            'paymentMethodNonce' => $nonce,
+            'options' => [
+                'submitForSettlement' => True
+            ]
+        ]);
+        if ($result->success) {
+            return response()->json([
+                'response' => true,
+                'transaction' => $result->transaction
+            ]);
+        } else {
+            return response()->json([
+                'response' => false,
+                'errors' => $result->errors->deepAll()
+            ]);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
     {
         //
     }
