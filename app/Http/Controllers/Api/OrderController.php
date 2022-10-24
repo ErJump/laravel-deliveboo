@@ -25,16 +25,14 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        $data = $request->all();
+
         $braintree = config('braintree');
-        dd($request);
-        $nonce = $request->payment_method_nonce;
-        $amount = $request->amount;
+        $nonce = $request->nonce;
+        $amount = $request->total;
         $result = $braintree->transaction()->sale([
             'amount' => $amount,
             'paymentMethodNonce' => $nonce,
-            'options' => [
-                'submitForSettlement' => True
-            ]
         ]);
         if ($result->success) {
             return response()->json([
@@ -44,7 +42,8 @@ class OrderController extends Controller
         } else {
             return response()->json([
                 'response' => false,
-                'errors' => $result->errors->deepAll()
+                'errors' => $result->errors->deepAll(),
+                'debug' => $nonce
             ]);
         }
     }

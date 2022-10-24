@@ -153,7 +153,7 @@
                                             <!-- Checkout -->
                                             <td class="p-4" colspan="4">
                                                 <h4>Checkout</h4>
-                                                <form action="/api/orders" id="payment-form" method="post">
+                                                <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
                                                     <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
                                                         required name="name"/>
                                                     <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
@@ -440,18 +440,21 @@ export default {
             userPhone: null,
             userEmail: null, */
         sendPayment() {
-            axios.post(this.paymentApiUrl, {
-                nonce: document.getElementById('nonce').value,
-                total: this.total,
+            console.log('sendPayment');
+            //chiamata axios con i params
+            axios.post(this.tokenApiUrl, {
                 cart: this.cart,
+                total: this.total,
                 restaurant_id: this.restaurantId,
-                address: this.userAddress,
-                phone: this.userPhone,
-                name: this.userName,
-                surname: this.userSurname,
-                email: this.userEmail,
+                user_name: this.userName,
+                user_surname: this.userSurname,
+                user_address: this.userAddress,
+                user_phone: this.userPhone,
+                user_email: this.userEmail,
+                nonce: document.getElementById('nonce').value
             })
             .then(response => {
+                console.log('estamos')
                 console.log(response);
                 /* this.emptyCart();
                 this.toggleCartActive();
