@@ -18,7 +18,7 @@ class OrderController extends Controller
     public function index()
     {
         // $orders = Auth::user()->orders;
-        $orders = DB::table('orders')
+        $orders = Order::where('user_id', Auth::user()->id)
                 ->orderBy('updated_at', 'desc')
                 ->get();
         return view('admin.orders.index', compact('orders'));
