@@ -26,6 +26,14 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'userName' => 'required|string|max:50',
+            'userSurname' => 'required|string|max:50',
+            'userAddress' => 'required|string|max:50',
+            'userPhone' => 'required|string|max:20',
+            'userEmail' => 'required|email',
+        ]);    
+
         $data = $request->all();
         $braintree = config('braintree');
         $nonce = $request->payment_method_nonce;
