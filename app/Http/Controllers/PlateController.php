@@ -18,7 +18,7 @@ class PlateController extends Controller
         'discount' => 'required|integer|min:0|max:100',
         'price' => 'required|numeric|min:0',
         'image' => 'nullable|image|max:2000',
-        'visibility' => 'boolean',
+        'availability' => 'required|boolean',
     ];
 
     protected $validationMessages = [
@@ -52,8 +52,8 @@ class PlateController extends Controller
         'image.image' => 'L\'immagine deve essere un file immagine',
         'image.max' => 'L\'immagine deve essere più piccola di 2MB',
 
-        'visibility.required' => 'La visibilità è obbligatoria',
-        'visibility.boolean' => 'La visibilità deve essere un booleano',
+        'availability.required' => 'La disponibilità è obbligatoria',
+        'availability.boolean' => 'La disponibilità deve essere un booleano',
     ];
 
     /**

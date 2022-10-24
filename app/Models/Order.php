@@ -11,7 +11,6 @@ class Order extends Model
         'last_name',
         'email',
         'phone',
-        'comment',
         'address',
         'total_price',
       ];

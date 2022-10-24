@@ -9,10 +9,10 @@
                 <div class="col-12">
                     <div class="d-flex filter-categories">
                         <div 
-                            class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3" 
+                            class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3 "
                             v-for="typology in typologiesArray" :key="typology.id" 
                             @click="toggleTypologies(typology.id, typology.name), getFilteredTypologies()">
-                            <div class="card text-center filter-card" :class="typology.name">
+                            <div class="card text-center filter-card ms_typology_card" :class="typology.name">
                                 <div class="filter-img">
                                     <img class="card-img-top" :src="typology.image" :alt="typology.name">
                                 </div>
@@ -33,6 +33,7 @@
                 </div>
                 <div class="col-12 text-center my-2">
                     <a class="btn text-white ms_btn_secondary" v-if="nextPageUrl != ''" @click="getNewRestaurantPage()">Carica altri ristoranti</a>
+                    <small v-else>Non ci sono altri ristoranti da caricare</small>
                 </div>
             </div>
             <div v-else class="row">
@@ -44,6 +45,10 @@
                 </div>
                 <div v-else class="col-12 col-sm-6 col-lg-4 mb-5" v-for="filteredRestaurant in filteredRestaurants" :key="filteredRestaurant.id">
                     <RestaurantCard :restaurant="filteredRestaurant" />
+                </div>
+                <div v-if="filteredRestaurants.length != 0" class="col-12 text-center mb-5">
+                    <a class="btn text-white ms_btn_secondary" v-if="nextPageUrlFiltered != ''" @click="getNewFilteredRestaurantPage()">Carica altri ristoranti</a>
+                    <small v-else>Non ci sono altri ristoranti da caricare</small>
                 </div>
             </div>
         </div>  
@@ -71,8 +76,8 @@ export default {
             typologiesArray: [],
             typologies: [],
             filteredRestaurants: [],
-            activePage: 0,
             nextPageUrl: '',
+            nextPageUrlFiltered: '',
         }
     },
     methods: {
@@ -82,7 +87,6 @@ export default {
                 .then(response => {
                     this.restaurants = response.data.results.data;
                     this.nextPageUrl = response.data.results.next_page_url;
-                    //console.log(this.restaurants)
                 })
                 .catch(error => {
                     console.log(error)
@@ -93,7 +97,6 @@ export default {
             axios.get(this.typologiesUrl)
                 .then(response => {
                     this.typologiesArray = response.data.results.data;
-                    //console.log(this.typologiesArray)
                 })
                 .catch(error => {
                     console.log(error)
@@ -124,8 +127,11 @@ export default {
             })
             .then(response => {
                 this.filteredRestaurants = response.data.results.data;
-                console.log('ristoranti filtrati: ' + this.filteredRestaurants)
-                console.log('typologies: ' + this.typologies)
+                if(response.data.results.next_page_url != null) {
+                        this.nextPageUrlFiltered = response.data.results.next_page_url;
+                    } else {
+                        this.nextPageUrlFiltered = '';
+                    }
             })
             .catch(error => {
                 console.log(error)
@@ -141,12 +147,33 @@ export default {
                     } else {
                         this.nextPageUrl = '';
                     }
-                    console.log('Url nuova pagina: ' + this.nextPageUrl);
+                    //console.log('Url nuova pagina: ' + this.nextPageUrl);
                 })
                 .catch(error => {
                     console.log(error)
                 })
         },
+        //carica i ristoranti successivi filtrati
+        getNewFilteredRestaurantPage(){
+            axios.get(this.nextPageUrlFiltered, {
+                params: {
+                    typologies: this.typologies
+                }
+            })
+                .then(response => {
+                    this.filteredRestaurants = this.filteredRestaurants.concat(response.data.results.data);
+                    if(response.data.results.next_page_url != null) {
+                        this.nextPageUrlFiltered = response.data.results.next_page_url;
+                    } else {
+                        this.nextPageUrlFiltered = '';
+                    }
+                    console.log('Url nuova pagina: ' + this.nextPageUrlFiltered);
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
+
         //converte l'id di una tipologia nel suo nome
         getTypologyName(typologyID) {
             let typologyName = '';
@@ -168,6 +195,26 @@ export default {
 <style scoped lang="scss">
 @import "../../sass/variables.scss";
 
+.ms_typology_card{
+    border: 4px solid #f8fafc;
+    div>img{
+        filter: grayscale(70%);
+        transition: all 0.1s ease-in-out;
+    }
+    &:hover div>img{
+        filter: grayscale(0%);
+    }
+    h6{
+        transition: all ;
+    }
+    &:hover h6{
+        color: $primary-color;
+    }
+    &:hover{
+        border: 4px solid $secondary-color;
+    }
+}
+
 
 .filter-img {
     height: 100px;
@@ -186,16 +233,42 @@ export default {
     }
 }
 
-.active{
-    border: 5px solid $primary-color;
-}
-
 .card {
 
     &:hover {
         cursor: pointer;
     }
 }
+
+/* Animazioni */
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-10-20 15:28:18
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+.active {
+    border: 4px solid $secondary-color;
+    div>img {
+        filter: grayscale(0);  
+    };
+    h6 {
+        color: $primary-color;
+    };
+    -webkit-animation: flip-horizontal-bottom .4s cubic-bezier(.455,.03,.515,.955) both;
+    animation: flip-horizontal-bottom .4s cubic-bezier(.455,.03,.515,.955) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-10-20 15:46:34
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+ @-webkit-keyframes flip-horizontal-bottom{0%{-webkit-transform:rotateX(0);transform:rotateX(0)}100%{-webkit-transform:rotateX(-360deg);transform:rotateX(-360deg)}}
+ @keyframes flip-horizontal-bottom{0%{-webkit-transform:rotateX(0);transform:rotateX(0)}100%{-webkit-transform:rotateX(-360deg);transform:rotateX(-360deg)}}
 
 
 /* breakpoints classes */

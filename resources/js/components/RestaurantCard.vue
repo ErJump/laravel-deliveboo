@@ -61,13 +61,15 @@ img {
 .card {
     text-decoration: none;
     transition: .3s;
+    cursor: default !important;
 
-    &:hover {
+    //da gestire
+    /* &:hover {
         transform: translateY(-10px);
 
         h5 {
             color: $primary-color;
         }
-    }
+    } */
 }
 </style>
