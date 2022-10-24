@@ -25,11 +25,4 @@
         </div>
     </div>
 </main>
-
-<script type="text/javascript">
-    localStorage.removeItem("cart");
-    localStorage.removeItem("total");
-    localStorage.removeItem("id");
-    localStorage.removeItem("restaurant");
-</script>
 @endsection
