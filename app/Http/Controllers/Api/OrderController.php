@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Mail\OrderConfirmationMail;
+use App\User;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -26,6 +30,14 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'userName' => 'required|string|max:50',
+            'userSurname' => 'required|string|max:50',
+            'userAddress' => 'required|string|max:50',
+            'userPhone' => 'required|string|max:20',
+            'userEmail' => 'required|email',
+        ]);    
+
         $data = $request->all();
         $braintree = config('braintree');
         $nonce = $request->payment_method_nonce;
@@ -61,6 +73,19 @@ class OrderController extends Controller
             //     'transaction' => $result->transaction
             // ]);
 
+            $userData = [
+                'name' => $request->userName,
+                'surname' => $request->userSurname,
+                'address' => $request->userAddress,
+                'email' => $request->userEmail,
+                'order'=>$order_list,
+                'amount' => $total
+            ];
+            
+            Mail::to($request->userEmail)->send(new OrderConfirmationMail($userData));
+            
+            $user = DB::table('users')->find($restaurantId);
+            Mail::to($user->email)->send(new OrderConfirmationMail($userData));    
             return redirect()->route('checkout');
             
         } else {
