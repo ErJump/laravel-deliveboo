@@ -12,7 +12,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $braintree = config('braintree');
         $clientToken = $braintree->clientToken()->generate();
@@ -39,11 +39,12 @@ class OrderController extends Controller
                 'response' => true,
                 'transaction' => $result->transaction
             ]);
+            
         } else {
             return response()->json([
                 'response' => false,
                 'errors' => $result->errors->deepAll(),
-                'debug' => $nonce
+                'debug' => [$nonce, $amount]
             ]);
         }
     }
