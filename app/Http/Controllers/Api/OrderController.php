@@ -70,7 +70,7 @@ class OrderController extends Controller
                 'surname' => $request->userSurname,
                 'address' => $request->userAddress,
                 'email' => $request->userEmail,
-                'plates'=>$plates,
+                'order'=>$order_list,
                 'amount' => $total
             ];
             

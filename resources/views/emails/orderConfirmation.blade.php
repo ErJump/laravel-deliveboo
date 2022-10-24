@@ -49,9 +49,7 @@
     <div class="cutom-align">
         <h2>Grazie per il tuo ordine {{$name}}</h2>
         <p>L' ordine contiene: </p>
-        @foreach ($plates as $plate)
-            <p>{{ $plate->name }}</p>
-        @endforeach
+        <p>{{$order}}</p>
         <p>totale: {{ $amount }}</p>
     </div>
 </body>
