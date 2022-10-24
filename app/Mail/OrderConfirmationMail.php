@@ -31,12 +31,13 @@ class OrderConfirmationMail extends Mailable
     public function build()
     {
         // return $this->view('view.name');
-        return $this->view('mail.orderConfirmation')->with([
+        return $this->view('emails.orderConfirmation')->with([
             'name' => $this->userData['name'],
             'surname' => $this->userData['surname'],
             'address' => $this->userData['address'],
             'email' => $this->userData['email'],
             'amount' => $this->userData['amount'],
+            'plates' => $this->userData['plates']
         ]);
     }
 }

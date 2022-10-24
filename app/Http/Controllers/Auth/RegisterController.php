@@ -140,7 +140,6 @@ class RegisterController extends Controller
         $user->save();
         $user->typologies()->attach($data['typologies']); 
 
-        Mail::to($data['email'])->send(new WelcomeMail($user));
 
         return redirect()->route('login')->with('result-message', 'Ristorante creato con successo, effettua il login per accedere al pannello di controllo');
 

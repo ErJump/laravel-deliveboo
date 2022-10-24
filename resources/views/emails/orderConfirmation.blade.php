@@ -47,7 +47,12 @@
         <img class="image-sizing" src="https://raw.githubusercontent.com/ErJump/laravel-deliveboo/Dev/public/assets/images/logo-red.png" alt="Logo">
     </div>
     <div class="cutom-align">
-        <h2>Grazie per il tuo ordine {{'name'}}</h2>
+        <h2>Grazie per il tuo ordine {{$name}}</h2>
+        <p>L' ordine contiene: </p>
+        @foreach ($plates as $plate)
+            <p>{{ $plate->name }}</p>
+        @endforeach
+        <p>totale: {{ $amount }}</p>
     </div>
 </body>
 

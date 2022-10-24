@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Mail\OrderConfirmationMail;
+use App\User;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -28,7 +30,6 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {   
-        
         $data = $request->all();
         $braintree = config('braintree');
         $nonce = $request->payment_method_nonce;
@@ -66,9 +67,14 @@ class OrderController extends Controller
                 'surname' => $request->userSurname,
                 'address' => $request->userAddress,
                 'email' => $request->userEmail,
-                'amount' => $total,
+                'plates'=>$plates,
+                'amount' => $total
             ];
-            Mail::to($request->userEmail)->send(new OrderConfirmationMail($userData));    
+            
+            Mail::to($request->userEmail)->send(new OrderConfirmationMail($userData));
+            
+            $user = DB::table('users')->find($restaurantId);
+            Mail::to($user->email)->send(new OrderConfirmationMail($userData));    
             return redirect()->route('checkout');
             
         } else {
