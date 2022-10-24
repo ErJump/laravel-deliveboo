@@ -23,7 +23,6 @@ class CreateOrdersTable extends Migration
             $table->string('last_name', 50);
             $table->string('email', 50);
             $table->string('phone', 30);
-            $table->string('comment') -> nullable();
             $table->string('address');
             $table->float('total_price');
             
