@@ -60,11 +60,8 @@
                     <h3>Questo ristorante non ha ancora inserito il suo menu</h3>
                 </div>
             </div>
-
-
-            <!------------ Mobile Cart ------------>
-            <div class="d-sm-none">
-                <div class="card fixed-bottom mobile-cart" id="mobile-cart">
+            <div class="col-12 col-lg-4" id="checkout-cart">
+                <div class="card mobile-cart">
                     <div class="card-header">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
@@ -78,7 +75,7 @@
                         </div>
                     </div>
                     <div class="card-body overflow-auto" :class="cartActive ? 'hv_50' : 'd-none'">
-                        <div v-if="cartActive">
+                        <div class="mb-4" v-if="cartActive">
                             <div v-if="cart.length > 0">
                                 <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
                                     <div class="plate-data">
@@ -95,6 +92,24 @@
                                 <p class="text-muted"><small>Clicca su un piatto per aggiungerlo</small></p>
                             </div>
                         </div>
+                        <div class="checkout-form" :class="cart.length === 0 ? 'd-none' : ''">
+                            <h4>Pagamento</h4>
+                            <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
+                                <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
+                                    required name="name"/>
+                                <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
+                                    required name="surname"/>
+                                <input class="form-control mb-2" type="text" v-model="userAddress"
+                                    placeholder="Indirizzo*" name="address" required />
+                                <input class="form-control mb-2" name="phone" type="number" v-model="userPhone"
+                                    placeholder="Numero di telefono*" required />
+                                <input class="form-control mb-2" name="email" type="email" v-model="userEmail" placeholder="Email* "
+                                    required />
+                                <div id="dropin-container"></div>
+                                <button type="submit" class="btn ms_btn_primary w-100">Paga</button>
+                                <input type="hidden" id="nonce" name="payment_method_nonce"/>
+                            </form>
+                        </div>
                     </div>
                     <div class="card-footer py-4" :class="cart.length === 0 ? 'd-none' : ''">
                         <div class="d-flex justify-content-between align-items-center mb-w"                            >
@@ -106,154 +121,8 @@
                             </div>
                         </div>
                         <div class="checkout-box text-center">
-                            <a @click="emptyCart()" class="btn mb-1 text-muted">Svuota carrello</a>
-                            <a href="#" class="btn ms_btn_primary w-100">Vai alla cassa</a>
+                            <a @click="emptyCart()" class="btn mb-1 btn-dark w-100">Svuota carrello</a>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="col-12 col-lg-4 d-none d-sm-block">
-                <div class="row">
-                    <div class="col-12 mb-3">
-                        <h3>Carrello</h3>
-                    </div>
-                    <div class="col-12">
-                        
-                        
-                        <div class="card">
-                            <div class="card-body">
-                                <div v-if="cart.length > 0">
-                                    <h4 class="card-title">Ordine</h4>
-                                    <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
-                                        <div class="plate-data">
-                                            <i class="fa-solid fa-xmark text-center rounded-circle mr-2 p-2" @click="removeFromCart(plate)"></i>
-                                            <span>{{ plate.name }} x{{ plate.quantity }}</span>
-                                        </div>
-                                        <div class="plate-prices">
-                                            <h6 class="mb-0">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div v-else class="text-center">
-                                    <h5>Il carrello è vuoto</h5>
-                                    <p class="text-muted"><small>Clicca su un piatto per aggiungerlo</small></p>
-                                </div>
-                                <div class="checkout-form">
-                                    <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
-                                        <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
-                                            required name="name"/>
-                                        <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
-                                            required name="surname"/>
-                                        <input class="form-control mb-2" type="text" v-model="userAddress"
-                                            placeholder="Indirizzo*" name="address" required />
-                                        <input class="form-control mb-2" name="phone" type="number" v-model="userPhone"
-                                            placeholder="Numero di telefono*" required />
-                                        <input class="form-control mb-2" name="email" type="email" v-model="userEmail" placeholder="Email* "
-                                            required />
-                                        <div id="dropin-container"></div>
-                                        <button type="submit">Paga</button>
-                                        <input type="hidden" id="nonce" name="payment_method_nonce"/>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="card-footer py-4" :class="cart.length === 0 ? 'd-none' : ''">
-                                <div class="d-flex justify-content-between align-items-center mb-w"                            >
-                                    <div>
-                                        <h4>Totale:</h4>
-                                    </div>
-                                    <div>
-                                        <h4>{{ floatPrice(total) }}€</h4>
-                                    </div>
-                                </div>
-                                <div class="checkout-box text-center">
-                                    <div v-if="!activeForm" class="checkout-box text-center">
-                                        <a @click="emptyCart()" class="btn mb-1 text-muted">Svuota carrello</a>
-                                        <a @click="activeForm = true" class="btn ms_btn_primary w-100">Vai alla cassa</a>
-                                    </div>
-                                    <div v-else class="checkout-box text-center">
-                                        <a @click="activeForm = false" class="btn ms_btn_primary w-100">Torna Indietro</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!------------ Desktop Cart ------------>
-                        <div class="card h-100 rounded">
-                            <div class="card-body">
-                                <!-- da rimettere v-if="cart.length > 0"-->
-                                <table class="table mb-4">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Nome</th>
-                                            <th scope="col">Quantità</th>
-                                            <th scope="col" :colspan="activeForm ? '1' : '2'">Prezzo</th>
-                                            <th scope="col" v-if="!activeForm">Rimuovi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(plate, index) in cart" :key="index">
-                                            <td>{{ plate.name }}</td>
-                                            <td>{{ plate.quantity }}</td>
-                                            <td :colspan="activeForm ? '1' : '2'">€ {{floatPrice(plate.price - (plate.price * plate.discount / 100))}}</td>
-                                            <td>
-                                                <button v-if="!activeForm" class="btn btn-sm btn-danger" @click="removeFromCart(plate)">
-                                                    Rimuovi
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Totale</strong></td>
-                                            <td :colspan="activeForm ? '2' : '3'">€ {{ floatPrice(total) }}</td>
-                                        </tr>
-                                        <!-- da rimettere v-if="activeForm" -->
-                                        <tr>
-                                            <!-- Checkout -->
-                                            <td class="p-4" colspan="4">
-                                                <h4>Checkout</h4>
-                                                <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
-                                                    <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
-                                                        required name="name"/>
-                                                    <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
-                                                        required name="surname"/>
-                                                    <input class="form-control mb-2" type="text" v-model="userAddress"
-                                                        placeholder="Indirizzo*" name="address" required />
-                                                    <input class="form-control mb-2" name="phone" type="number" v-model="userPhone"
-                                                        placeholder="Numero di telefono*" required />
-                                                    <input class="form-control mb-2" name="email" type="email" v-model="userEmail" placeholder="Email* "
-                                                        required />
-                                                    <div id="dropin-container"></div>
-                                                    <button type="submit">Paga</button>
-                                                    <input type="hidden" id="nonce" name="payment_method_nonce"/>
-                                                </form>
-                                            </td>
-                                            <!-- Fine checkout -->
-                                        </tr>
-                                        
-                                        <tr>    
-                                            <td colspan="4">
-                                                <div v-if="!activeForm" class="checkout-box text-center">
-                                                    <a @click="emptyCart()" class="btn mb-1 text-muted">Svuota carrello</a>
-                                                    <a @click="activeForm = true" class="btn ms_btn_primary w-100">Vai alla cassa</a>
-                                                </div>
-                                                <div v-else class="checkout-box text-center">
-                                                    <a @click="activeForm = false" class="btn ms_btn_primary w-100">Torna Indietro</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                
-                                <!-- da riattivare -->
-                                <!-- <div v-else class="text-center">
-                                    <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5>
-                                    <h6 class="card-subtitle mb-3">Clicca sui piatti per aggiungerli</h6>
-                                </div> -->
-
-                            </div>
-                            </div>
                     </div>
                 </div>
             </div>
@@ -591,7 +460,21 @@ export default {
 }
 
 
-/*** Mobile Cart ***/
+/***  Cart  ***/
+
+@media screen and (max-width: 576px) {
+    #checkout-cart {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+@media screen and (min-whidth: 577px) {
+    #checkout-cart {
+        position: relative;
+    }
+}
 
 .hv_50 {
     height: 50vh;
