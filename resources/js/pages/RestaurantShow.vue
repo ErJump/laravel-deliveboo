@@ -96,11 +96,11 @@
                             <h4>Pagamento</h4>
                             <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
                                 <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
-                                    required name="userName"/>
+                                    required maxlength="50" name="userName"/>
                                 <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
-                                    required name="userSurname"/>
+                                    required maxlength="50" name="userSurname"/>
                                 <input class="form-control mb-2" type="text" v-model="userAddress"
-                                    placeholder="Indirizzo*" name="userAddress" required />
+                                    placeholder="Indirizzo*" name="userAddress" required maxlength="50"/>
                                 <input class="form-control mb-2" name="userPhone" type="number" v-model="userPhone"
                                     placeholder="Numero di telefono*" required />
                                 <input class="form-control mb-2" name="userEmail" type="email" v-model="userEmail" placeholder="Email*"
