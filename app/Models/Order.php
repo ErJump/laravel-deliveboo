@@ -12,6 +12,7 @@ class Order extends Model
         'email',
         'phone',
         'address',
+        'order_list',
         'total_price',
       ];
     

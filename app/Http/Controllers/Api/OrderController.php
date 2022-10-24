@@ -41,9 +41,11 @@ class OrderController extends Controller
         $plates = json_decode(request('cart_items'));
         $total = 0;
         $restaurantId = '';
+        $order_list = '';
         foreach ($plates as $plate) {
-            $total += ($plate->price - ($plate->price * $plate->discount / 100));
+            $total += (($plate->price * $plate->quantity) - (($plate->price * $plate->discount / 100) * $plate->quantity));
             $restaurantId = $plate->user_id;
+            $order_list = $order_list . $plate->name . ' x' . $plate->quantity . " | ";
         }
         $amount = $total;
         $result = $braintree->transaction()->sale([
@@ -59,6 +61,7 @@ class OrderController extends Controller
             $newOrder->email = $request->userEmail;
             $newOrder->total_price = $amount;
             $newOrder->user_id = $restaurantId;
+            $newOrder->order_list = $order_list;
             $newOrder->save();
 
             // return response()->json([
