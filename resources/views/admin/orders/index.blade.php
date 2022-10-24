@@ -29,7 +29,6 @@
                                        <li><strong>Email:</strong> {{ $order->email }}</li>
                                        <li><strong>Telefono:</strong> {{ $order->phone }}</li>
                                        <li><strong>Indirizzo:</strong> {{ $order->address }}</li>
-                                       <li><strong>Note:</strong> {{ $order->comment }}</li>
                                     </ul>
                                     <h6 class="font-weight-bold">Prezzo:</h6>
                                     <p class="fs-2">{{ $order->total_price }}€</p>
@@ -53,7 +52,6 @@
                            <th scope="col">Cognome</th>
                            <th scope="col">Email</th>
                            <th scope="col">Telefono</th>
-                           <th scope="col">Commento</th>
                            <th scope="col">Indirizzo</th>
                            <th scope="col">Totale</th>
                         </tr>
@@ -67,12 +65,11 @@
                                  <td>{{ $order->last_name}}</td>
                                  <td>{{ $order->email}}</td>
                                  <td>{{ $order->phone}}</td>
-                                 <td>{{ $order->comment}}</td>
                                  <td>{{ $order->address}}</td>
                                  <td>{{ $order->total_price}}€</td>
                               </tr> 
                            @empty
-                              <tr>Non ci sono ordini per il tuo risorante</tr>
+                              <tr>Non ci sono ordini per il tuo ristorante</tr>
                            @endforelse
                         @endif
                      </tbody>
