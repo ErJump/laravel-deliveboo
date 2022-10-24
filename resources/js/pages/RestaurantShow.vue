@@ -123,8 +123,8 @@
                     <div class="col-12">
                         <div class="card h-100 rounded">
                             <div class="card-body">
-
-                                <table class="table mb-4" v-if="cart.length > 0">
+                                <!-- da rimettere v-if="cart.length > 0"-->
+                                <table class="table mb-4">
                                     <thead>
                                         <tr>
                                             <th scope="col">Nome</th>
@@ -148,26 +148,30 @@
                                             <td><strong>Totale</strong></td>
                                             <td :colspan="activeForm ? '2' : '3'">€ {{ floatPrice(total) }}</td>
                                         </tr>
-                                        <tr v-if="activeForm">
+                                        <!-- da rimettere v-if="activeForm" -->
+                                        <tr>
                                             <!-- Checkout -->
                                             <td class="p-4" colspan="4">
                                                 <h4>Checkout</h4>
-                                                <form action="">
+                                                <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
                                                     <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
-                                                        required />
+                                                        required name="name"/>
                                                     <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
-                                                        required />
+                                                        required name="surname"/>
                                                     <input class="form-control mb-2" type="text" v-model="userAddress"
-                                                        placeholder="Indirizzo*" required />
-                                                    <input class="form-control mb-2" type="number" v-model="userPhone"
+                                                        placeholder="Indirizzo*" name="address" required />
+                                                    <input class="form-control mb-2" name="phone" type="number" v-model="userPhone"
                                                         placeholder="Numero di telefono*" required />
-                                                    <input class="form-control mb-2" type="email" v-model="userEmail" placeholder="Email*"
+                                                    <input class="form-control mb-2" name="email" type="email" v-model="userEmail" placeholder="Email* "
                                                         required />
+                                                    <div id="dropin-container"></div>
                                                     <button type="submit">Paga</button>
+                                                    <input type="hidden" id="nonce" name="payment_method_nonce"/>
                                                 </form>
                                             </td>
                                             <!-- Fine checkout -->
                                         </tr>
+                                        
                                         <tr>    
                                             <td colspan="4">
                                                 <div v-if="!activeForm" class="checkout-box text-center">
@@ -181,11 +185,12 @@
                                         </tr>
                                     </tbody>
                                 </table>
-
-                                <div v-else class="text-center">
+                                
+                                <!-- da riattivare -->
+                                <!-- <div v-else class="text-center">
                                     <h5 class="card-title font-weight-bold">Il carrello è vuoto</h5>
                                     <h6 class="card-subtitle mb-3">Clicca sui piatti per aggiungerli</h6>
-                                </div>
+                                </div> -->
 
                             </div>
                             </div>
@@ -211,12 +216,14 @@ export default {
             total: 0,
             restaurantId: null,
             cartActive: false,
-            userName: null,
-            userSurname: null,
-            userAddress: null,
-            userPhone: null,
-            userEmail: null,
+            userName: '',
+            userSurname: '',
+            userAddress: '',
+            userPhone: '',
+            userEmail: '',
             activeForm: false,
+            clientToken: '',
+            tokenApiUrl: 'http://127.0.0.1:8000/api/orders',
         }
     },
     
@@ -386,10 +393,84 @@ export default {
         //Cart behaviour methods
         toggleCartActive() {
             this.cartActive = !this.cartActive;
-        }
+        },
+
+        //inizializza braintree
+        // create a dropin instance using that container (or a string
+        // that functions as a query selector such as `#dropin-container`)
+        initBraintree() {
+            const form = document.getElementById('payment-form');
+            
+            braintree.dropin.create({
+                authorization: this.clientToken,
+                container: '#dropin-container'
+            }, (error, dropinInstance) => {
+                //this.dropinInstance = instance;
+                if(error)console.error(error);
+
+                form.addEventListener('submit', event => {
+                    event.preventDefault();
+                    dropinInstance.requestPaymentMethod((error, payload) => {
+                        if(error)console.error(error);
+
+                        // Pass payload.nonce to your server
+                        document.getElementById('nonce').value = payload.nonce;
+                        this.sendPayment();
+                    });
+                });
+            });
+        },
+
+        //prende il token dal server
+        getToken() {
+            axios.get(this.tokenApiUrl)
+                .then(response => {
+                    this.clientToken = response.data.clientToken;
+                    //inizializza braintree
+                    this.initBraintree();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+
+        /* userName: null,
+            userSurname: null,
+            userAddress: null,
+            userPhone: null,
+            userEmail: null, */
+        sendPayment() {
+            console.log('sendPayment');
+            //chiamata axios con i params
+            axios.post(this.tokenApiUrl, {
+                cart: this.cart,
+                total: this.total,
+                restaurant_id: this.restaurantId,
+                user_name: this.userName,
+                user_surname: this.userSurname,
+                user_address: this.userAddress,
+                user_phone: this.userPhone,
+                user_email: this.userEmail,
+                nonce: document.getElementById('nonce').value
+            })
+            .then(response => {
+                console.log('estamos')
+                console.log(response);
+                /* this.emptyCart();
+                this.toggleCartActive();
+                this.togglePaymentActive();
+                this.toggleSuccessActive(); */
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
     },
     created(){
+        
         this.getRestaurantDetail();
+        this.getToken();
+
 
         const url = window.location.href;
         let pageID = url.substring(url.lastIndexOf("/") + 1);
