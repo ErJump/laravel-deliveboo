@@ -49,7 +49,7 @@ class OrderController extends Controller
         foreach ($plates as $plate) {
             $total += (($plate->price * $plate->quantity) - (($plate->price * $plate->discount / 100) * $plate->quantity));
             $restaurantId = $plate->user_id;
-            $order_list = $order_list . $plate->name . ' x' . $plate->quantity . " | ";
+            $order_list = $order_list . $plate->name . ' x' . $plate->quantity . ", ";
         }
         $amount = $total;
         $result = $braintree->transaction()->sale([
