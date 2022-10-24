@@ -96,18 +96,19 @@
                             <h4>Pagamento</h4>
                             <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
                                 <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
-                                    required name="name"/>
+                                    required name="userName"/>
                                 <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
-                                    required name="surname"/>
+                                    required name="userSurname"/>
                                 <input class="form-control mb-2" type="text" v-model="userAddress"
-                                    placeholder="Indirizzo*" name="address" required />
-                                <input class="form-control mb-2" name="phone" type="number" v-model="userPhone"
+                                    placeholder="Indirizzo*" name="userAddress" required />
+                                <input class="form-control mb-2" name="userPhone" type="number" v-model="userPhone"
                                     placeholder="Numero di telefono*" required />
-                                <input class="form-control mb-2" name="email" type="email" v-model="userEmail" placeholder="Email* "
+                                <input class="form-control mb-2" name="userEmail" type="email" v-model="userEmail" placeholder="Email*"
                                     required />
                                 <div id="dropin-container"></div>
                                 <button type="submit" class="btn ms_btn_primary w-100">Paga</button>
                                 <input type="hidden" id="nonce" name="payment_method_nonce"/>
+                                <input type="hidden" id="cart" name="cart_items"/>
                             </form>
                         </div>
                     </div>
@@ -344,7 +345,8 @@ export default {
 
                         // Pass payload.nonce to your server
                         document.getElementById('nonce').value = payload.nonce;
-                        this.sendPayment();
+                        document.getElementById('cart').value = JSON.stringify(this.cart);
+                        form.submit();
                     });
                 });
             });
