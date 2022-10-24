@@ -124,7 +124,7 @@
                         <div class="card h-100 rounded">
                             <div class="card-body">
                                 <!-- da rimettere v-if="cart.length > 0"-->
-                                <table class="table mb-4" v-if="cart.length > 0">
+                                <table class="table mb-4">
                                     <thead>
                                         <tr>
                                             <th scope="col">Nome</th>
