@@ -37,8 +37,16 @@ Route::middleware('auth')
 
 Route::post('/register/create', 'Auth\RegisterController@create')->name('addNewUser');
 
+
+Route::get('/checkout', function () {
+	return view('guest.checkout_success');
+})->name('checkout');
+
+Route::get('/checkoutf', function () {
+	return view('guest.checkout_failed');
+})->name('checkoutf');
+
 //da scommentare quando si attiva il front-office
 Route::get("{any?}", function () {
     return view('guest.home');
 })->where("any", ".*");
-
