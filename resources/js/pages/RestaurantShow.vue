@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-12 col-md-6 col-xl-4 mb-4"  v-for="plate in platesArray" :key="plate.id" >
                         <div class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
-                            <div class="card-header p-0 position-relative">
+                            <div class="card-header p-0 position-relative plate-card-img">
                                 <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
                                 <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna">
                                 <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
@@ -495,7 +495,7 @@ export default {
 @import "../../sass/variables.scss";
 
 
-.card-header {
+.plate-card-img {
     height: 200px;
 }
 
