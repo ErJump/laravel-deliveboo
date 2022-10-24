@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('email', 50);
             $table->string('phone', 30);
             $table->string('address');
+            $table->text('order_list');
             $table->float('total_price');
             
             $table->timestamps();
