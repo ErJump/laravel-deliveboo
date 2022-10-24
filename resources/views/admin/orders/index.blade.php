@@ -29,6 +29,7 @@
                                        <li><strong>Email:</strong> {{ $order->email }}</li>
                                        <li><strong>Telefono:</strong> {{ $order->phone }}</li>
                                        <li><strong>Indirizzo:</strong> {{ $order->address }}</li>
+                                       <li><strong>Ordine:</strong> {{ $order->order_list }}</li>
                                     </ul>
                                     <h6 class="font-weight-bold">Prezzo:</h6>
                                     <p class="fs-2">{{ $order->total_price }}€</p>
@@ -53,6 +54,7 @@
                            <th scope="col">Email</th>
                            <th scope="col">Telefono</th>
                            <th scope="col">Indirizzo</th>
+                           <th scope="col">Ordine</th>
                            <th scope="col">Totale</th>
                         </tr>
                      </thead>
@@ -66,6 +68,7 @@
                                  <td>{{ $order->email}}</td>
                                  <td>{{ $order->phone}}</td>
                                  <td>{{ $order->address}}</td>
+                                 <td>{{ $order->order_list}}</td>
                                  <td>{{ $order->total_price}}€</td>
                               </tr> 
                            @empty
