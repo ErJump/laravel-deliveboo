@@ -41,17 +41,23 @@
                                 <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold mb-2">{{plate.name}}</h5>
-                                <h5 v-if="!plate.availability" class="text-dark mb-3"> Non disponibile</h5>
-                                <p class="card-subtitle text-muted mb-3">{{plate.description}}</p>
-                                <p class="card-subtitle text-muted mb-3"><strong>Ingredienti: </strong>{{plate.ingredients}}</p>
-                                <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block">{{plate.discount}}% di sconto</span>
-                                <div class="d-flex g-3">
-                                    <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block text-muted mr-3"><s>{{plate.price}}€</s></span>
-                                    <strong class="card-subtitle mb-3 d-block">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</strong>
+                                <h6 class="card-title font-weight-bold mb-2">{{plate.name}}</h6>
+                                <p class="card-subtitle text-muted mb-3"><small>{{plate.description}}</small></p>
+                                <p class="card-subtitle text-muted mb-3"><small><strong>Ingredienti: </strong>{{plate.ingredients}}</small></p>
+                            </div>
+                            <div class="card-footer">
+                                <p v-if="!plate.availability" class="text-dark mb-0"><small>Non disponibile</small></p>
+                                <div v-if="plate.availability" class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p v-if="plate.discount > 0" class="card-subtitle text-muted mr-1 d-inline"><s>{{plate.price}}€</s></p>
+                                        <h6 class="mb-0 d-inline font-weight-bold">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
+                                        <p v-if="plate.discount > 0" class="card-subtitle text-muted fs-small"><small>{{plate.discount}}% di sconto</small></p>
+                                    </div>
+                                    <div>
+                                        <i v-if="plate.availability" class="fa-solid fa-plus text-right rounded-circle p-2"
+                                    @click="[plate.availability == 1 ? addToCart(plate) : ''], cartActive = true"></i>
+                                    </div>
                                 </div>
-                                <i v-if="plate.availability" class="fa-solid fa-plus text-right rounded-circle p-2"
-                                @click="[plate.availability == 1 ? addToCart(plate) : ''], cartActive = true"></i>
                             </div>
                         </div>
                     </div>
@@ -65,7 +71,7 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <h4 class="car-title mb-0 font-weight-bold">Carrello</h4>    
+                                <h4 class="car-title mb-0">Carrello</h4>
                             </div>
                             <div class="collapse-cart d-sm-none">
                                 <i class="fa-solid text-center rounded-circle mr-2 p-2"
