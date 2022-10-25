@@ -7,6 +7,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Mail\OrderConfirmationMail;
 use App\User;
+use DateTime;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 
@@ -46,6 +47,8 @@ class OrderController extends Controller
         $total = 0;
         $restaurantId = '';
         $order_list = '';
+        date_default_timezone_set('Europe/Rome');
+        $myTime = new DateTime();
         foreach ($plates as $plate) {
             $total += (($plate->price * $plate->quantity) - (($plate->price * $plate->discount / 100) * $plate->quantity));
             $restaurantId = $plate->user_id;
@@ -66,6 +69,7 @@ class OrderController extends Controller
             $newOrder->total_price = $amount;
             $newOrder->user_id = $restaurantId;
             $newOrder->order_list = $order_list;
+            $newOrder->order_date = $myTime;
             $newOrder->save();
 
             // return response()->json([
