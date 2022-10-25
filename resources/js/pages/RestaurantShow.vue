@@ -1,29 +1,21 @@
 <template>
     <section class="container-lg pt-5 custom">
         <div class="row mb-5">
-            <div class="col-12 col-md-4 mb-5">
+            <div class="col-12 col-md-4 mb-3">
                 <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + restaurant.image" alt="immagine_interna">
                 <img v-else class="w-100 rounded-lg" :src="restaurant.image" alt="image">
             </div>
             <div class="col-12 col-md-8">
-                <h3 class="font-weight-bold">{{ restaurant.name }}</h3>
-                <h5 class="mb-3">
-                    <span v-for="typology in restaurant.typologies" :key="typology.id">{{ capitalizeFirstLetter(typology.name) }} </span>
-                </h5>
-                <p>
-                    {{ restaurant.description }}
-                </p>
+                <h4 class="font-weight-bold">{{ restaurant.name }}</h4>
+                <p v-for="typology in restaurant.typologies" :key="typology.id"><small>{{ capitalizeFirstLetter(typology.name) }}</small></p>
+                <p>{{ restaurant.description }}</p>
                 <div>
                     <i class="fa-solid fa-phone"></i>
-                    <span>
-                        {{ restaurant.phone_number}}
-                    </span>
+                    <span>{{ restaurant.phone_number}}</span>
                 </div>
                 <div>
                     <i class="fa-solid fa-location-dot"></i>
-                    <span>
-                        {{ restaurant.address}}
-                    </span>
+                    <span>{{ restaurant.address}}</span>
                 </div>
             </div>
         </div>
@@ -41,17 +33,23 @@
                                 <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold mb-2">{{plate.name}}</h5>
-                                <h5 v-if="!plate.availability" class="text-dark mb-3"> Non disponibile</h5>
-                                <p class="card-subtitle text-muted mb-3">{{plate.description}}</p>
-                                <p class="card-subtitle text-muted mb-3"><strong>Ingredienti: </strong>{{plate.ingredients}}</p>
-                                <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block">{{plate.discount}}% di sconto</span>
-                                <div class="d-flex g-3">
-                                    <span v-if="plate.discount > 0" class="card-subtitle mb-3 d-block text-muted mr-3"><s>{{plate.price}}€</s></span>
-                                    <strong class="card-subtitle mb-3 d-block">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</strong>
+                                <h6 class="card-title font-weight-bold mb-2">{{plate.name}}</h6>
+                                <p class="card-subtitle text-muted mb-3"><small>{{plate.description}}</small></p>
+                                <p class="card-subtitle text-muted mb-3"><small><strong>Ingredienti: </strong>{{plate.ingredients}}</small></p>
+                            </div>
+                            <div class="card-footer">
+                                <p v-if="!plate.availability" class="text-dark mb-0 font-weight-bold">Non disponibile</p>
+                                <div v-if="plate.availability" class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p v-if="plate.discount > 0" class="card-subtitle text-muted mr-1 d-inline"><s>{{plate.price}}€</s></p>
+                                        <h6 class="mb-0 d-inline font-weight-bold">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
+                                        <p v-if="plate.discount > 0" class="card-subtitle text-muted fs-small"><small>{{plate.discount}}% di sconto</small></p>
+                                    </div>
+                                    <div>
+                                        <i v-if="plate.availability" class="fa-solid fa-plus text-right rounded-circle p-2"
+                                    @click="[plate.availability == 1 ? addToCart(plate) : ''], cartActive = true"></i>
+                                    </div>
                                 </div>
-                                <i v-if="plate.availability" class="fa-solid fa-plus text-right rounded-circle p-2"
-                                @click="[plate.availability == 1 ? addToCart(plate) : ''], cartActive = true"></i>
                             </div>
                         </div>
                     </div>
@@ -65,11 +63,16 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <h4 class="car-title mb-0 font-weight-bold">Carrello</h4>    
+                                <h4 class="car-title mb-0">Carrello</h4>
                             </div>
-                            <div class="collapse-cart">
+                            <div class="collapse-cart d-sm-none">
                                 <i class="fa-solid text-center rounded-circle mr-2 p-2"
                                     :class="cartActive ? 'fa-angle-down' : 'fa-angle-up'"
+                                    @click="toggleCartActive()"></i>
+                            </div>
+                            <div class="collapse-cart d-none d-sm-block">
+                                <i class="fa-solid text-center rounded-circle mr-2 p-2"
+                                    :class="cartActive ? 'fa-angle-up' : 'fa-angle-down'"
                                     @click="toggleCartActive()"></i>
                             </div>
                         </div>
@@ -427,12 +430,12 @@ export default {
 
 
 .plate-card-img {
-    height: 200px;
+    height: 250px;
 }
 
 .card-img-top {
     object-fit: cover;
-    height: 200px;
+    height: 250px;
 }
 
 .ms_not_available{
@@ -464,6 +467,9 @@ export default {
 
 /***  Cart  ***/
 
+#checkout-cart {
+    z-index: 1;
+}
 
 .hv_50 {
     height: 50vh;
@@ -472,7 +478,7 @@ export default {
 .mobile-cart {
     box-shadow: 0 -4px 6px rgba(33,33,33,0.08);
     transition: 2s;
-};
+}
 .fa-solid.fa-xmark,
 .fa-solid.fa-angle-up,
 .fa-angle-down,
