@@ -59,7 +59,8 @@
                 </div>
             </div>
             <div class="col-12 col-lg-4" id="checkout-cart">
-                <div class="card mobile-cart">
+                <LoaderComponent v-if="isPaying" class="mt-5"/>
+                <div v-else class="card mobile-cart">
                     <div class="card-header">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
@@ -136,10 +137,13 @@
 
 <script>
 import axios from 'axios';
+import LoaderComponent from '../components/LoaderComponent';
 
 export default {
     name: 'RestaurantShow',
-
+    components: {
+        LoaderComponent
+    },
     data() {
         return {
             restaurant:[],
@@ -157,6 +161,7 @@ export default {
             activeForm: false,
             clientToken: '',
             tokenApiUrl: 'http://127.0.0.1:8000/api/orders',
+            isPaying: false,
         }
     },
     
@@ -350,6 +355,7 @@ export default {
                         document.getElementById('nonce').value = payload.nonce;
                         document.getElementById('cart').value = JSON.stringify(this.cart);
                         form.submit();
+                        this.isPaying = true;
                     });
                 });
             });
