@@ -63,8 +63,8 @@
         labels: labels,
         datasets: [{
             label: 'Ordini per mesi',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(255, 46, 64)',
+            borderColor: 'rgb(255, 46, 64)',
             data: ordersData,
         }]
     };
