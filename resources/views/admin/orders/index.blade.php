@@ -83,6 +83,13 @@
                </div>
             </div>
          </div>
+         <div class="row my-5">
+            <div class="col-12">
+               <div class="d-flex justify-content-center">
+                  {{ $orders->links() }}
+               </div>
+            </div>
+         </div>  
       </div>
    </main>
 @endsection

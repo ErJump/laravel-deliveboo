@@ -20,7 +20,7 @@ class OrderController extends Controller
         // $orders = Auth::user()->orders;
         $orders = Order::where('user_id', Auth::user()->id)
                 ->orderBy('updated_at', 'desc')
-                ->get();
+                ->paginate(10);
         return view('admin.orders.index', compact('orders'));
     }
 
