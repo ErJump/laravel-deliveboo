@@ -67,9 +67,14 @@
                             <div>
                                 <h4 class="car-title mb-0 font-weight-bold">Carrello</h4>    
                             </div>
-                            <div class="collapse-cart">
+                            <div class="collapse-cart d-sm-none">
                                 <i class="fa-solid text-center rounded-circle mr-2 p-2"
                                     :class="cartActive ? 'fa-angle-down' : 'fa-angle-up'"
+                                    @click="toggleCartActive()"></i>
+                            </div>
+                            <div class="collapse-cart d-none d-sm-block">
+                                <i class="fa-solid text-center rounded-circle mr-2 p-2"
+                                    :class="cartActive ? 'fa-angle-up' : 'fa-angle-down'"
                                     @click="toggleCartActive()"></i>
                             </div>
                         </div>
