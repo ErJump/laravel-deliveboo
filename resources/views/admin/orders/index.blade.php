@@ -5,13 +5,16 @@
 @section('content')
    <main>
       <div class="container">
-         <div class="row align-items-center mb-3">
+         <div class="row align-items-center justify-content-between mb-3">
             <div class="col-1">
                <a href="{{ route('admin.home') }}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
-           </div>
-           <div class="col-11">
+            </div>
+            <div class="col-7">
                <h3 class="font-weight-bold">Ordini</h3>
-           </div>
+            </div>
+            <div class="col-4 text-right">
+               <a href="{{ route('admin.orders.stats') }}" class="btn btn-primary">Statistiche</a>
+            </div>
          </div>
          <div class="row">
             <div class="col-12 d-lg-none">
