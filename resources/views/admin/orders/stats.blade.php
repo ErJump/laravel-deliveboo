@@ -32,7 +32,7 @@
     
     //salvo gli la data degli ordini in un array labels
     var labels = orders.map(function(order){
-        return order.created_at;
+        return order.order_date;
     });
 
     //contro quanti ordini ci sono per ogni data
