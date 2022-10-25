@@ -1,135 +1,140 @@
 <template>
     <section class="container-lg pt-5 custom">
-        <div class="row mb-5">
-            <div class="col-12 col-md-4 mb-3">
-                <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + restaurant.image" alt="immagine_interna">
-                <img v-else class="w-100 rounded-lg" :src="restaurant.image" alt="image">
-            </div>
-            <div class="col-12 col-md-8">
-                <h4 class="font-weight-bold">{{ restaurant.name }}</h4>
-                <p v-for="typology in restaurant.typologies" :key="typology.id"><small>{{ capitalizeFirstLetter(typology.name) }}</small></p>
-                <p>{{ restaurant.description }}</p>
-                <div>
-                    <i class="fa-solid fa-phone"></i>
-                    <span>{{ restaurant.phone_number}}</span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>{{ restaurant.address}}</span>
-                </div>
-            </div>
+        <div :class="!isReady ? '' : 'd-none'" class="ms_height">
+            <LoaderComponent />
         </div>
-        <div class="row mb-5">
-            <div class="col-12 col-lg-8">
-                <div v-if="platesArray.length > 0" class="row">
-                    <div class="col-12 mb-3">
-                        <h3>Menu</h3>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-4 mb-4"  v-for="plate in platesArray" :key="plate.id" >
-                        <div class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
-                            <div class="card-header p-0 position-relative plate-card-img">
-                                <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
-                                <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna">
-                                <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-title font-weight-bold mb-2">{{plate.name}}</h6>
-                                <p class="card-subtitle text-muted mb-3"><small>{{plate.description}}</small></p>
-                                <p class="card-subtitle text-muted mb-3"><small><strong>Ingredienti: </strong>{{plate.ingredients}}</small></p>
-                            </div>
-                            <div class="card-footer">
-                                <p v-if="!plate.availability" class="text-dark mb-0 font-weight-bold">Non disponibile</p>
-                                <div v-if="plate.availability" class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p v-if="plate.discount > 0" class="card-subtitle text-muted mr-1 d-inline"><s>{{plate.price}}€</s></p>
-                                        <h6 class="mb-0 d-inline font-weight-bold">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
-                                        <p v-if="plate.discount > 0" class="card-subtitle text-muted fs-small"><small>{{plate.discount}}% di sconto</small></p>
-                                    </div>
-                                    <div>
-                                        <i v-if="plate.availability" class="fa-solid fa-plus text-right rounded-circle p-2"
-                                    @click="[plate.availability == 1 ? addToCart(plate) : '']"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div :class="isReady ? '' : 'd-none'">
+            <div class="row mb-5">
+                <div class="col-12 col-md-4 mb-3">
+                    <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + restaurant.image" alt="immagine_interna">
+                    <img v-else class="w-100 rounded-lg" :src="restaurant.image" alt="image">
                 </div>
-                <div v-else-if="platesArray == 0">
-                    <h3>Questo ristorante non ha ancora inserito il suo menu</h3>
+                <div class="col-12 col-md-8">
+                    <h4 class="font-weight-bold">{{ restaurant.name }}</h4>
+                    <p v-for="typology in restaurant.typologies" :key="typology.id"><small>{{ capitalizeFirstLetter(typology.name) }}</small></p>
+                    <p>{{ restaurant.description }}</p>
+                    <div>
+                        <i class="fa-solid fa-phone"></i>
+                        <span>{{ restaurant.phone_number}}</span>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>{{ restaurant.address}}</span>
+                    </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4 " id="checkout-cart">
-                <div v-if="isPaying" class="mt-5 ms_loader d-flex flex-column align-items-center pt-4">
-                    <h4 class="mb-3 text-center">Stiamo processando il pagamento...</h4>
-                    <LoaderComponent  />
-                </div>
-                <div v-else class="card mobile-cart">
-                    <div class="card-header">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <h4 class="car-title mb-0">Carrello</h4>
-                            </div>
-                            <div class="collapse-cart d-sm-none">
-                                <i class="fa-solid text-center rounded-circle mr-2 p-2"
-                                    :class="cartActive ? 'fa-angle-down' : 'fa-angle-up'"
-                                    @click="toggleCartActive()"></i>
-                            </div>
-                            <div class="collapse-cart d-none d-sm-block">
-                                <i class="fa-solid text-center rounded-circle mr-2 p-2"
-                                    :class="cartActive ? 'fa-angle-up' : 'fa-angle-down'"
-                                    @click="toggleCartActive()"></i>
-                            </div>
+            <div class="row mb-5">
+                <div class="col-12 col-lg-8">
+                    <div v-if="platesArray.length > 0" class="row">
+                        <div class="col-12 mb-3">
+                            <h3>Menu</h3>
                         </div>
-                    </div>
-                    <div class="card-body overflow-auto" :class="cartActive ? 'hv_50' : 'd-none'">
-                        <div class="mb-4" v-if="cartActive">
-                            <div v-if="cart.length > 0">
-                                <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
-                                    <div class="plate-data">
-                                        <i class="fa-solid fa-xmark text-center rounded-circle mr-2 p-2" @click="removeFromCart(plate)"></i>
-                                        <span>{{ plate.name }} x{{ plate.quantity }}</span>
-                                    </div>
-                                    <div class="plate-prices">
-                                        <h6 class="mb-0">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
+                        <div class="col-12 col-md-6 col-xl-4 mb-4"  v-for="plate in platesArray" :key="plate.id" >
+                            <div class="card h-100 rounded" :class="plate.availability ? '' : 'ms_not_available'">
+                                <div class="card-header p-0 position-relative plate-card-img">
+                                    <img v-if="plate.image == null" class="card-img-top" src="/assets/images/food-placeholder.png" alt="placeholder">
+                                    <img v-else-if="cutImageString(plate.image)" class="card-img-top" :src="'/storage/' + plate.image" alt="immagine_interna">
+                                    <img v-else class="card-img-top" :src="plate.image" alt="immagine_url">
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title font-weight-bold mb-2">{{plate.name}}</h6>
+                                    <p class="card-subtitle text-muted mb-3"><small>{{plate.description}}</small></p>
+                                    <p class="card-subtitle text-muted mb-3"><small><strong>Ingredienti: </strong>{{plate.ingredients}}</small></p>
+                                </div>
+                                <div class="card-footer">
+                                    <p v-if="!plate.availability" class="text-dark mb-0 font-weight-bold">Non disponibile</p>
+                                    <div v-if="plate.availability" class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p v-if="plate.discount > 0" class="card-subtitle text-muted mr-1 d-inline"><s>{{plate.price}}€</s></p>
+                                            <h6 class="mb-0 d-inline font-weight-bold">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
+                                            <p v-if="plate.discount > 0" class="card-subtitle text-muted fs-small"><small>{{plate.discount}}% di sconto</small></p>
+                                        </div>
+                                        <div>
+                                            <i v-if="plate.availability" class="fa-solid fa-plus text-right rounded-circle p-2"
+                                        @click="[plate.availability == 1 ? addToCart(plate) : '']"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div v-else class="text-center">
-                                <h5>Il carrello è vuoto</h5>
-                                <p class="text-muted"><small>Clicca su un piatto per aggiungerlo</small></p>
-                            </div>
-                        </div>
-                        <div class="checkout-form" :class="cart.length === 0 ? 'd-none' : ''">
-                            <h4>Pagamento</h4>
-                            <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
-                                <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
-                                    required maxlength="50" name="userName"/>
-                                <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
-                                    required maxlength="50" name="userSurname"/>
-                                <input class="form-control mb-2" type="text" v-model="userAddress"
-                                    placeholder="Indirizzo*" name="userAddress" required maxlength="50"/>
-                                <input class="form-control mb-2" name="userPhone" type="number" v-model="userPhone"
-                                    placeholder="Numero di telefono*" required />
-                                <input class="form-control mb-2" name="userEmail" type="email" v-model="userEmail" placeholder="Email*"
-                                    required />
-                                <div id="dropin-container"></div>
-                                <button type="submit" class="btn ms_btn_primary w-100">Paga</button>
-                                <input type="hidden" id="nonce" name="payment_method_nonce"/>
-                                <input type="hidden" id="cart" name="cart_items"/>
-                            </form>
                         </div>
                     </div>
-                    <div class="card-footer py-4" :class="cart.length === 0 ? 'd-none' : ''">
-                        <div class="d-flex justify-content-between align-items-center mb-w"                            >
-                            <div>
-                                <h4>Totale:</h4>
-                            </div>
-                            <div>
-                                <h4>{{ floatPrice(total) }}€</h4>
+                    <div v-else-if="platesArray == 0">
+                        <h3>Questo ristorante non ha ancora inserito il suo menu</h3>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 " id="checkout-cart">
+                    <div v-if="isPaying" class="mt-5 ms_loader d-flex flex-column align-items-center pt-4">
+                        <h4 class="mb-3 text-center">Stiamo processando il pagamento...</h4>
+                        <LoaderComponent  />
+                    </div>
+                    <div v-else class="card mobile-cart">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h4 class="car-title mb-0">Carrello</h4>
+                                </div>
+                                <div class="collapse-cart d-sm-none">
+                                    <i class="fa-solid text-center rounded-circle mr-2 p-2"
+                                        :class="cartActive ? 'fa-angle-down' : 'fa-angle-up'"
+                                        @click="toggleCartActive()"></i>
+                                </div>
+                                <div class="collapse-cart d-none d-sm-block">
+                                    <i class="fa-solid text-center rounded-circle mr-2 p-2"
+                                        :class="cartActive ? 'fa-angle-up' : 'fa-angle-down'"
+                                        @click="toggleCartActive()"></i>
+                                </div>
                             </div>
                         </div>
-                        <div class="checkout-box text-center">
-                            <a @click="emptyCart()" class="btn mb-1 btn-dark w-100">Svuota carrello</a>
+                        <div class="card-body overflow-auto" :class="cartActive ? 'hv_50' : 'd-none'">
+                            <div class="mb-4" v-if="cartActive">
+                                <div v-if="cart.length > 0">
+                                    <div class="cart-plates d-flex justify-content-between align-items-center mb-3" v-for="(plate, index) in cart" :key="index">
+                                        <div class="plate-data">
+                                            <i class="fa-solid fa-xmark text-center rounded-circle mr-2 p-2" @click="removeFromCart(plate)"></i>
+                                            <span>{{ plate.name }} x{{ plate.quantity }}</span>
+                                        </div>
+                                        <div class="plate-prices">
+                                            <h6 class="mb-0">{{floatPrice(plate.price - (plate.price * plate.discount / 100))}}€</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-else class="text-center">
+                                    <h5>Il carrello è vuoto</h5>
+                                    <p class="text-muted"><small>Clicca su un piatto per aggiungerlo</small></p>
+                                </div>
+                            </div>
+                            <div class="checkout-form" :class="cart.length === 0 ? 'd-none' : ''">
+                                <h4>Pagamento</h4>
+                                <form action="http://127.0.0.1:8000/api/orders" id="payment-form" method="post">
+                                    <input class="form-control mb-2" type="text" v-model="userName" placeholder="Nome*"
+                                        required maxlength="50" name="userName"/>
+                                    <input class="form-control mb-2" type="text" v-model="userSurname" placeholder="Cognome*"
+                                        required maxlength="50" name="userSurname"/>
+                                    <input class="form-control mb-2" type="text" v-model="userAddress"
+                                        placeholder="Indirizzo*" name="userAddress" required maxlength="50"/>
+                                    <input class="form-control mb-2" name="userPhone" type="number" v-model="userPhone"
+                                        placeholder="Numero di telefono*" required />
+                                    <input class="form-control mb-2" name="userEmail" type="email" v-model="userEmail" placeholder="Email*"
+                                        required />
+                                    <div id="dropin-container"></div>
+                                    <button type="submit" class="btn ms_btn_primary w-100">Paga</button>
+                                    <input type="hidden" id="nonce" name="payment_method_nonce"/>
+                                    <input type="hidden" id="cart" name="cart_items"/>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-footer py-4" :class="cart.length === 0 ? 'd-none' : ''">
+                            <div class="d-flex justify-content-between align-items-center mb-w"                            >
+                                <div>
+                                    <h4>Totale:</h4>
+                                </div>
+                                <div>
+                                    <h4>{{ floatPrice(total) }}€</h4>
+                                </div>
+                            </div>
+                            <div class="checkout-box text-center">
+                                <a @click="emptyCart()" class="btn mb-1 btn-dark w-100">Svuota carrello</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -165,6 +170,7 @@ export default {
             clientToken: '',
             tokenApiUrl: 'http://127.0.0.1:8000/api/orders',
             isPaying: false,
+            isReady: false,
         }
     },
     
@@ -180,6 +186,7 @@ export default {
                         this.platesArray = response.data.results.plates;
                     }
                     //this.platesArray = response.data.results.plates;
+                    this.isReady = true;
                     console.log(this.restaurant, this.platesArray);
                 })
                 .catch(error => {
@@ -449,6 +456,9 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/variables.scss";
 
+.ms_height{
+    height: 70vh;
+}
 .ms_loader{
         width: 100%;
         background-color: #f8fafc;
