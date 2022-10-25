@@ -58,8 +58,11 @@
                     <h3>Questo ristorante non ha ancora inserito il suo menu</h3>
                 </div>
             </div>
-            <div class="col-12 col-lg-4" id="checkout-cart">
-                <LoaderComponent v-if="isPaying" class="mt-5"/>
+            <div class="col-12 col-lg-4 " id="checkout-cart">
+                <div v-if="isPaying" class="mt-5 ms_loader d-flex flex-column align-items-center pt-4">
+                    <h4 class="mb-3 text-center">Stiamo processando il pagamento...</h4>
+                    <LoaderComponent  />
+                </div>
                 <div v-else class="card mobile-cart">
                     <div class="card-header">
                         <div class="d-flex align-items-center justify-content-between">
@@ -446,7 +449,10 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/variables.scss";
 
-
+.ms_loader{
+        width: 100%;
+        background-color: #f8fafc;
+    } 
 .plate-card-img {
     height: 250px;
 }
