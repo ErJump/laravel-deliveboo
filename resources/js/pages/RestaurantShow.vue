@@ -38,7 +38,7 @@
                                 <p class="card-subtitle text-muted mb-3"><small><strong>Ingredienti: </strong>{{plate.ingredients}}</small></p>
                             </div>
                             <div class="card-footer">
-                                <p v-if="!plate.availability" class="text-dark mb-0"><small>Non disponibile</small></p>
+                                <p v-if="!plate.availability" class="text-dark mb-0 font-weight-bold">Non disponibile</p>
                                 <div v-if="plate.availability" class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <p v-if="plate.discount > 0" class="card-subtitle text-muted mr-1 d-inline"><s>{{plate.price}}€</s></p>
@@ -468,7 +468,7 @@ export default {
 /***  Cart  ***/
 
 #checkout-cart {
-    z-index: 100;
+    z-index: 1;
 }
 
 .hv_50 {
