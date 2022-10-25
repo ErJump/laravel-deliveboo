@@ -11,13 +11,15 @@ class Order extends Model
         'last_name',
         'email',
         'phone',
-        'comment',
         'address',
+        'order_list',
+        'order_date',
         'total_price',
       ];
     
       public function plates(){
-        return $this -> belongsToMany('App\Models\Plate');
+        return $this -> belongsToMany('App\Models\Plate')
+        ->withPivot('quantity');
       }
 
       public function user(){

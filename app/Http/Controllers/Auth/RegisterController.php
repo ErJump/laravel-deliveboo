@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPSTORM_META\type;
 
@@ -138,7 +140,10 @@ class RegisterController extends Controller
         $user->save();
         $user->typologies()->attach($data['typologies']); 
 
+
         return redirect()->route('login')->with('result-message', 'Ristorante creato con successo, effettua il login per accedere al pannello di controllo');
+
+        
         // return User::create([
         //     'restaurant_name' => $data['restaurant_name'],
         //     'email' => $data['email'],

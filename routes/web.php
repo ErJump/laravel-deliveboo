@@ -32,13 +32,23 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('plates', 'PlateController');
-        Route::resource('orders', 'OrderController');
+        //Route::resource('orders', 'OrderController');
+        Route::get('/orders', 'OrderController@index')->name('orders.index');
+        Route::get('/orders/stats', 'OrderController@stats')->name('orders.stats');
     });
 
 Route::post('/register/create', 'Auth\RegisterController@create')->name('addNewUser');
+
+
+Route::get('/checkout', function () {
+	return view('guest.checkout_success');
+})->name('checkout');
+
+Route::get('/checkoutf', function () {
+	return view('guest.checkout_failed');
+})->name('checkoutf');
 
 //da scommentare quando si attiva il front-office
 Route::get("{any?}", function () {
     return view('guest.home');
 })->where("any", ".*");
-

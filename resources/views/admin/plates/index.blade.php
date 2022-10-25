@@ -128,6 +128,13 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        {{ $plates->links() }}
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 @endsection

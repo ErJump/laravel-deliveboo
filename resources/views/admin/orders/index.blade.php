@@ -5,13 +5,16 @@
 @section('content')
    <main>
       <div class="container">
-         <div class="row align-items-center mb-3">
+         <div class="row align-items-center justify-content-between mb-3">
             <div class="col-1">
                <a href="{{ route('admin.home') }}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
-           </div>
-           <div class="col-11">
+            </div>
+            <div class="col-7">
                <h3 class="font-weight-bold">Ordini</h3>
-           </div>
+            </div>
+            <div class="col-4 text-right">
+               <a href="{{ route('admin.orders.stats') }}" class="btn btn-primary">Statistiche</a>
+            </div>
          </div>
          <div class="row">
             <div class="col-12 d-lg-none">
@@ -24,12 +27,13 @@
                                     <h6 class="font-weight-bold">Dati cliente:</h6>
                                     <ul class="mb-4">
                                        <li><strong>ID:</strong> {{ $order->id }}</li>
+                                       <li><strong>Data ordine:</strong> {{ $order->order_date }}</li>
                                        <li><strong>Nome:</strong> {{ $order->first_name }}</li>
                                        <li><strong>Cognome:</strong> {{ $order->last_name }}</li>
                                        <li><strong>Email:</strong> {{ $order->email }}</li>
                                        <li><strong>Telefono:</strong> {{ $order->phone }}</li>
                                        <li><strong>Indirizzo:</strong> {{ $order->address }}</li>
-                                       <li><strong>Note:</strong> {{ $order->comment }}</li>
+                                       <li><strong>Ordine:</strong> {{ $order->order_list }}</li>
                                     </ul>
                                     <h6 class="font-weight-bold">Prezzo:</h6>
                                     <p class="fs-2">{{ $order->total_price }}€</p>
@@ -49,12 +53,13 @@
                      <thead>
                         <tr>
                            <th scope="col">ID</th>
+                           <th scope="col" colspan="2">Data</th>
                            <th scope="col">Nome</th>
                            <th scope="col">Cognome</th>
                            <th scope="col">Email</th>
                            <th scope="col">Telefono</th>
-                           <th scope="col">Commento</th>
                            <th scope="col">Indirizzo</th>
+                           <th scope="col">Ordine</th>
                            <th scope="col">Totale</th>
                         </tr>
                      </thead>
@@ -63,16 +68,17 @@
                            @forelse ($orders as $order)
                               <tr>
                                  <td>{{ $order->id}}</td>
+                                 <td colspan="2">{{ $order->order_date}}</td>
                                  <td>{{ $order->first_name}}</td>
                                  <td>{{ $order->last_name}}</td>
                                  <td>{{ $order->email}}</td>
                                  <td>{{ $order->phone}}</td>
-                                 <td>{{ $order->comment}}</td>
                                  <td>{{ $order->address}}</td>
+                                 <td>{{ $order->order_list}}</td>
                                  <td>{{ $order->total_price}}€</td>
                               </tr> 
                            @empty
-                              <tr>Non ci sono ordini per il tuo risorante</tr>
+                              <tr>Non ci sono ordini per il tuo ristorante</tr>
                            @endforelse
                         @endif
                      </tbody>
@@ -80,6 +86,13 @@
                </div>
             </div>
          </div>
+         <div class="row my-5">
+            <div class="col-12">
+               <div class="d-flex justify-content-center">
+                  {{ $orders->links() }}
+               </div>
+            </div>
+         </div>  
       </div>
    </main>
 @endsection

@@ -93,7 +93,7 @@ class PlatesTableSeeder extends Seeder
         $plate8->name = 'Paella';
         $plate8->user_id = 4;
         $plate8->ingredients = "riso e frutti di mare";
-        $plate8->description = "La tempura è uno dei piatti più conosciuti e amati della cucina del Sol Levante";
+        $plate8->description = "La paella è un piatto tradizionale della cucina spagnola a base di riso, zafferano e frutti di mare.";
         $plate8->price = 12;
         $plate8->discount = 5;
         $plate8->availability = 1;
@@ -103,8 +103,8 @@ class PlatesTableSeeder extends Seeder
         $plate9 = new Plate();
         $plate9->name = 'Churros';
         $plate9->user_id = 4;
-        $plate9->ingredients = "salmone, tonno e branzino";
-        $plate9->description = "Il sashimi è una ricetta giapponese che rientra nel gruppo del sushi";
+        $plate9->ingredients = "farina, acqua e zucchero";
+        $plate9->description = "ll churro è un dolce dalla forma cilindrica ed allungata";
         $plate9->price = 4;
         $plate9->discount = 0;
         $plate9->availability = 1;
@@ -411,5 +411,82 @@ class PlatesTableSeeder extends Seeder
         $plate36->availability = 1;
         $plate36->image = 'https://storage.ecodibergamo.it/media/photologue/2020/6/16/photos/burger-vegetariani-tre-idee-semplici-e-buone-da-replicare-a-casa_d47644c2-afc6-11ea-a50c-b6d80997dbb2_1400_933.33.jpg';
         $plate36->save();
+
+        $plate37 = new Plate();
+        $plate37->name = 'Diavola';
+        $plate37->user_id = 1;
+        $plate37->ingredients = "Pomodoro, mozzarella, salame, basilico, peperoncino";
+        $plate37->description = "Avete voglia di provare una pizza di tutto un altro livello? Provate la nostra diavola";
+        $plate37->price = 6.50;
+        $plate37->discount = 0;
+        $plate37->availability = 1;
+        $plate37->image = 'https://www.silviocicchi.com/pizzachef/wp-content/uploads/2015/03/d2.jpg';
+        $plate37->save();
+
+        $plate38 = new Plate();
+        $plate38->name = 'Ortolana';
+        $plate38->user_id = 1;
+        $plate38->ingredients = "Provola e verdure di stagione";
+        $plate38->description = "Una pizza ottima per i prodotti del territorio";
+        $plate38->price = 8;
+        $plate38->discount = 0;
+        $plate38->availability = 1;
+        $plate38->image = 'https://www.agrodolce.it/app/uploads/2018/01/pizza-ortolana-a1742-16.jpg';
+        $plate38->save();
+
+        $plate39 = new Plate();
+        $plate39->name = 'Bufalina';
+        $plate39->user_id = 1;
+        $plate39->ingredients = "Pomodoro, bufala, extravergine, basilico";
+        $plate39->description = "Una ricetta per una pizza di tutt'altro livello provate ora la Bufalina";
+        $plate39->price = 7.50;
+        $plate39->discount = 0;
+        $plate39->availability = 1;
+        $plate39->image = 'https://www.tacoloco.it/wp-content/uploads/2018/01/pizza-bufalina.jpg';
+        $plate39->save();
+
+        $plate40 = new Plate();
+        $plate40->name = 'Pub';
+        $plate40->user_id = 1;
+        $plate40->ingredients = "Mozzarella, wurstel, patatine";
+        $plate40->description = "Pizza classica che non stufa mai, ordina adesso!";
+        $plate40->price = 7.50;
+        $plate40->discount = 0;
+        $plate40->availability = 1;
+        $plate40->image = 'https://tattadelivery.it/803-large_default/pizza-wurstel-e-patatine-donna-sofia-a-chiaia.jpg';
+        $plate40->save();
+
+        $plate41 = new Plate();
+        $plate41->name = 'Tropea';
+        $plate41->user_id = 1;
+        $plate41->ingredients = "Pomodoro San Marzano, mozzarella fior di latte, tonno, nduja di spilinga; cipolla rossa di Tropea, basilico, olio evo";
+        $plate41->description = "Avete voglia di provare una pizza di tutt'altro livello? Provate la tropeana";
+        $plate41->price = 8;
+        $plate41->discount = 0;
+        $plate41->availability = 1;
+        $plate41->image = 'https://blog.giallozafferano.it/dolcesalatomiky/wp-content/uploads/2017/05/DSC_0049.jpg';
+        $plate41->save();
+
+        $plate42 = new Plate();
+        $plate42->name = 'Calabrese';
+        $plate42->user_id = 1;
+        $plate42->ingredients = "Nduja artigianale di Spilinga, pomodorino giallo, mozzarella di bufala campana affumicata DOP (caseificio Pagliuca), olio EVO Elaios (varieta’ Ortice, presidio slow food) e basilico.";
+        $plate42->description = "Pizza classica che non stufa mai, ordina adesso!";
+        $plate42->price = 8;
+        $plate42->discount = 0;
+        $plate42->availability = 1;
+        $plate42->image = 'https://www.piatti-tipici-calabresi.it/wp-content/uploads/2016/12/pizza-calabrese-con-tonno-cipolla.jpg';
+        $plate42->save();
+
+        $plate43 = new Plate();
+        $plate43->name = 'Montanara Fritta al Forno';
+        $plate43->user_id = 1;
+        $plate43->ingredients = "Pomodoro Biologioco (selezione Bellillo), Mozzarella di bufala DOP e basilico";
+        $plate43->description = "tradizionale pizza fritta napoletana";
+        $plate43->price = 12;
+        $plate43->discount = 0;
+        $plate43->availability = 1;
+        $plate43->image = 'https://www.cortedelsalento.net/wp-content/uploads/2016/05/images_calzone-salento.jpg';
+        $plate43->save();
     }
 }
