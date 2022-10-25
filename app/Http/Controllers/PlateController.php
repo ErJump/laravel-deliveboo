@@ -64,7 +64,7 @@ class PlateController extends Controller
     public function index()
     {
         //mi segna errore in questo punto perchè non trova la funzione plates, tuttavia i piatti sono visualizzati correttamente
-        $plates = Auth::user()->plates()->orderBy('name')->get();
+        $plates = Auth::user()->plates()->orderBy('name')->paginate(10);
         return view('admin.plates.index', compact('plates'));
     }
 
