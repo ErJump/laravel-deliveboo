@@ -32,7 +32,9 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('plates', 'PlateController');
-        Route::resource('orders', 'OrderController');
+        //Route::resource('orders', 'OrderController');
+        Route::get('/orders', 'OrderController@index')->name('orders.index');
+        Route::get('/orders/stats', 'OrderController@stats')->name('orders.stats');
     });
 
 Route::post('/register/create', 'Auth\RegisterController@create')->name('addNewUser');
