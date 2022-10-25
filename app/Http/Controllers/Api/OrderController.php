@@ -50,10 +50,14 @@ class OrderController extends Controller
         $order_list = '';
         date_default_timezone_set('Europe/Rome');
         $myTime = new DateTime();
+        $plates_array = [];
+        $plates_quantity = [];
         foreach ($plates as $plate) {
             $total += (($plate->price * $plate->quantity) - (($plate->price * $plate->discount / 100) * $plate->quantity));
             $restaurantId = $plate->user_id;
             $order_list = $order_list . $plate->name . ' x' . $plate->quantity . ", ";
+            array_push($plates_array, $plate->id);
+            array_push($plates_quantity, $plate->quantity);
         }
         $amount = $total;
         $result = $braintree->transaction()->sale([
@@ -72,6 +76,9 @@ class OrderController extends Controller
             $newOrder->order_list = $order_list;
             $newOrder->order_date = $myTime;
             $newOrder->save();
+            for ($i=0; $i < count($plates_array); $i++) { 
+                $newOrder->plates()->attach($plates_array[$i], ['quantity' => $plates_quantity[$i]]);
+            }
 
             // return response()->json([
             //     'response' => true,
