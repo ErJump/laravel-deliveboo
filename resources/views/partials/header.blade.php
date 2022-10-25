@@ -26,6 +26,11 @@
                     @endif
                     @else
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.orders.stats') }}">
+                            Statistiche
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.orders.index') }}">
                             Ordini
                         </a>
