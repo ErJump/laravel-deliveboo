@@ -40,11 +40,21 @@
             .order-total {
                 background-color: #f2f2f2;
                 border-radius: 5px;
-                padding: 12px 25px;
+                padding: 12px;
                 margin-top: 1.75rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-end;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .email-card {
+                    width: 100%;
+                }
+
+                .image-sizing{
+                    height: 24px;
+                }
             }
         </style>
     </head>
