@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Mail\OrderConfirmationMail;
+use App\Mail\OrderConfirmationRestaurant;
 use App\User;
 use DateTime;
 use Illuminate\Support\Facades\Mail;
@@ -89,7 +90,7 @@ class OrderController extends Controller
             Mail::to($request->userEmail)->send(new OrderConfirmationMail($userData));
             
             $user = DB::table('users')->find($restaurantId);
-            Mail::to($user->email)->send(new OrderConfirmationMail($userData));    
+            Mail::to($user->email)->send(new OrderConfirmationRestaurant($userData));    
             return redirect()->route('checkout');
             
         } else {
