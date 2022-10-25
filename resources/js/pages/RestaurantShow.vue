@@ -47,7 +47,7 @@
                                     </div>
                                     <div>
                                         <i v-if="plate.availability" class="fa-solid fa-plus text-right rounded-circle p-2"
-                                    @click="[plate.availability == 1 ? addToCart(plate) : ''], cartActive = true"></i>
+                                    @click="[plate.availability == 1 ? addToCart(plate) : '']"></i>
                                     </div>
                                 </div>
                             </div>
@@ -210,6 +210,7 @@ export default {
                     this.plateIdsArray.push(plate.id);
                 }
                 this.total += parseFloat(plate.price - (plate.price * plate.discount / 100));
+                this.addedToCart();
                 this.save();
             } else {
                 const Swal = require('sweetalert2');
@@ -248,6 +249,7 @@ export default {
                     this.cart.push(plate);
                     this.plateIdsArray.push(plate.id);
                     this.total += parseFloat(plate.price - (plate.price * plate.discount / 100));
+                    this.addedToCart();
                     this.save();
                 } else if (
                     /* Read more about handling dismissals below */
@@ -261,6 +263,16 @@ export default {
                 }
                 })                
             }
+        },
+        addedToCart(){
+            const Swal = require('sweetalert2');
+            Swal.fire({
+                position: 'top',
+                icon: 'success',
+                text: "Prodotto aggiunto al carrello",
+                showConfirmButton: false,
+                timer: 1500
+            })
         },
         save() {
             localStorage.setItem("cart", JSON.stringify(this.cart));
@@ -298,7 +310,7 @@ export default {
 
             swalWithBootstrapButtons.fire({
             title: 'Sei sicuro?',
-            text: "Così svuoterai il carrello e perderai tutti i piatti aggiunti",
+            text: "Così svuoterai il carrello e perderai tutti i piatti aggiunti. Il carrello resterà comunque attivo per il ristorante scelto.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Sì, svuota',
