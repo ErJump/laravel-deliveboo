@@ -31,5 +31,25 @@ main{
     outline: 1px solid blue;
 } */
 
+//scrollbar 
 
+/* Scroll bar */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+  
+::-webkit-scrollbar-track {
+    /* border-radius: 10px; */
+}
+   
+  
+::-webkit-scrollbar-thumb {
+    background: $secondary-color; 
+    border-radius: 7px;
+    &:hover {
+        background: $primary-color;
+    }
+}
 
