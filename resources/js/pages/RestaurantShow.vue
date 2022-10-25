@@ -1,29 +1,21 @@
 <template>
     <section class="container-lg pt-5 custom">
         <div class="row mb-5">
-            <div class="col-12 col-md-4 mb-5">
+            <div class="col-12 col-md-4 mb-3">
                 <img v-if="cutImageString(restaurant.image)" class="card-img-top" :src="'/storage/' + restaurant.image" alt="immagine_interna">
                 <img v-else class="w-100 rounded-lg" :src="restaurant.image" alt="image">
             </div>
             <div class="col-12 col-md-8">
-                <h3 class="font-weight-bold">{{ restaurant.name }}</h3>
-                <h5 class="mb-3">
-                    <span v-for="typology in restaurant.typologies" :key="typology.id">{{ capitalizeFirstLetter(typology.name) }} </span>
-                </h5>
-                <p>
-                    {{ restaurant.description }}
-                </p>
+                <h4 class="font-weight-bold">{{ restaurant.name }}</h4>
+                <p v-for="typology in restaurant.typologies" :key="typology.id"><small>{{ capitalizeFirstLetter(typology.name) }}</small></p>
+                <p>{{ restaurant.description }}</p>
                 <div>
                     <i class="fa-solid fa-phone"></i>
-                    <span>
-                        {{ restaurant.phone_number}}
-                    </span>
+                    <span>{{ restaurant.phone_number}}</span>
                 </div>
                 <div>
                     <i class="fa-solid fa-location-dot"></i>
-                    <span>
-                        {{ restaurant.address}}
-                    </span>
+                    <span>{{ restaurant.address}}</span>
                 </div>
             </div>
         </div>
@@ -438,12 +430,12 @@ export default {
 
 
 .plate-card-img {
-    height: 200px;
+    height: 250px;
 }
 
 .card-img-top {
     object-fit: cover;
-    height: 200px;
+    height: 250px;
 }
 
 .ms_not_available{
@@ -475,6 +467,9 @@ export default {
 
 /***  Cart  ***/
 
+#checkout-cart {
+    z-index: 100;
+}
 
 .hv_50 {
     height: 50vh;
@@ -483,7 +478,7 @@ export default {
 .mobile-cart {
     box-shadow: 0 -4px 6px rgba(33,33,33,0.08);
     transition: 2s;
-};
+}
 .fa-solid.fa-xmark,
 .fa-solid.fa-angle-up,
 .fa-angle-down,
