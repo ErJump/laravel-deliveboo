@@ -13,6 +13,7 @@ class Order extends Model
         'phone',
         'address',
         'order_list',
+        'order_date',
         'total_price',
       ];
     

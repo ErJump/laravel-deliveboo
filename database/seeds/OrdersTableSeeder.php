@@ -21,6 +21,7 @@ class OrdersTableSeeder extends Seeder
         $order1->phone = '3463399876';
         $order1->address = 'Via Trinità delle Monache 22';
         $order1->order_list = 'Margherita x1, Capricciosa x2';
+        $order1->order_date = '2022-10-21';
         $order1->total_price = 18.50;
         $order1->save();
 
@@ -32,6 +33,7 @@ class OrdersTableSeeder extends Seeder
         $order2->phone = '3463488876';
         $order2->address = 'Piazzale Tecchio 11';
         $order2->order_list = 'Bacon Big Mac x1';
+        $order2->order_date = '2022-09-11';
         $order2->total_price = 28.50;
         $order2->save();
 
@@ -43,6 +45,7 @@ class OrdersTableSeeder extends Seeder
         $order3->phone = '3593588876';
         $order3->address = 'Via Luca Giordano 25';
         $order3->order_list = 'Capricciosa x1';
+        $order3->order_date = '2022-10-10';
         $order3->total_price = 28.50;
         $order3->save();
 
@@ -54,6 +57,7 @@ class OrdersTableSeeder extends Seeder
         $order4->phone = '3333588811';
         $order4->address = 'Via Maselli 11';
         $order4->order_list = 'Nigiri x8';
+        $order4->order_date = '2022-08-25';
         $order4->total_price = 20.60;
         $order4->save();
 

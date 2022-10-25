@@ -24,6 +24,7 @@
                                     <h6 class="font-weight-bold">Dati cliente:</h6>
                                     <ul class="mb-4">
                                        <li><strong>ID:</strong> {{ $order->id }}</li>
+                                       <li><strong>Data ordine:</strong> {{ $order->order_date }}</li>
                                        <li><strong>Nome:</strong> {{ $order->first_name }}</li>
                                        <li><strong>Cognome:</strong> {{ $order->last_name }}</li>
                                        <li><strong>Email:</strong> {{ $order->email }}</li>
@@ -49,6 +50,7 @@
                      <thead>
                         <tr>
                            <th scope="col">ID</th>
+                           <th scope="col" colspan="2">Data</th>
                            <th scope="col">Nome</th>
                            <th scope="col">Cognome</th>
                            <th scope="col">Email</th>
@@ -63,6 +65,7 @@
                            @forelse ($orders as $order)
                               <tr>
                                  <td>{{ $order->id}}</td>
+                                 <td colspan="2">{{ $order->order_date}}</td>
                                  <td>{{ $order->first_name}}</td>
                                  <td>{{ $order->last_name}}</td>
                                  <td>{{ $order->email}}</td>
