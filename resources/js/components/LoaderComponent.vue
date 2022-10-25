@@ -20,7 +20,6 @@
  <style scoped lang="scss">
  @import "../../sass/variables.scss";
     .ms_loader{
-        height: 300px;
         width: 100%;
         background-color: #f8fafc;
     } 
