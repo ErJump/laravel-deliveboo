@@ -1,9 +1,12 @@
 <template>
-    <div class="showbox">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-            </svg>
+    <div class="ms_loader d-flex flex-column align-items-center pt-4">
+        <h4 class="mb-3 text-center">Stiamo processando il pagamento...</h4>
+        <div class="showbox position-relative">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
         </div>
     </div>
  </template>
@@ -15,6 +18,14 @@
  </script>
  
  <style scoped lang="scss">
+ @import "../../sass/variables.scss";
+    .ms_loader{
+        height: 300px;
+        width: 100%;
+        background-color: #f8fafc;
+    } 
+
+
     $green: #008744;
     $blue: #0057e7;
     $red: #d62d20;
