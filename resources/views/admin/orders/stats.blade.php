@@ -30,18 +30,32 @@
     //creo un array vuoto per salvare i dati da passare al grafico
     var ordersData = [];
     
-    //salvo gli la data degli ordini in un array labels
-    var labels = orders.map(function(order){
-        return order.order_date;
-    });
+    //salvo i mesi degli ordini in un array labels da order date prendendo dalla stringa solo anno e mese senza usare slice
 
-    //contro quanti ordini ci sono per ogni data
-    var counts = {};
-    labels.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
+    //creo un array di mesi con tutti i mesi dal 2021-01 al 2022-12
+    var labels = [];
+    for (let i = 1; i <= 12; i++) {
+        labels.push('2021-' + i.toString().padStart(2, '0'));
+    }
+    for (let i = 1; i <= 12; i++) {
+        labels.push('2022-' + i.toString().padStart(2, '0'));
+    }
+
+    //conto quanti ordini ci sono per ogni mese e li salvo in un array
+    var ordersPerMonth = [];
+    for (let i = 0; i < labels.length; i++) {
+        var count = 0;
+        for (let j = 0; j < orders.length; j++) {
+            if (orders[j].order_date.includes(labels[i])) {
+                count++;
+            }
+        }
+        ordersPerMonth.push(count);
+    }
 
     //salvo i dati in un array
-    for (var key in counts) {
-        ordersData.push(counts[key]);
+    for (var key in ordersPerMonth) {
+        ordersData.push(ordersPerMonth[key]);
     }
 
     let data = {
@@ -64,6 +78,6 @@
       document.getElementById('myChart'),
       config
   );
-
+  console.log(labels)
 </script>
 @endsection
