@@ -67,11 +67,24 @@ Login in the Dashboard with the following credentials:
 
 ## Screens
 
+<br>
+<p align="center">
+    <span align="left">
+        <img src="public/assets/images/gif/restaurant-desktop.gif" height="300px"/>
+    </span>
+    <span align="right">
+        <img src="public/assets/images/gif/payment-desktop.gif" height="300px">
+    </span>
+</p>
+<p align="center">Restaurant page nad payment</p>
+
 <br><br>
-<img src="public/assets/images/gif/restaurant-desktop.gif">
-<br><br>
-<img src="public/assets/images/gif/payment-desktop.gif">
-<br><br>
-<img src="public/assets/images/gif/editdelete-desktop.gif">
-<br><br>
-<img src="public/assets/images/gif/orders-desktop.gif">
+<p align="center">
+    <span align="left">
+        <img src="public/assets/images/gif/editdelete-desktop.gif" height="300px"/>
+    </span>
+    <span align="right">
+        <img src="public/assets/images/gif/orders-desktop.gif" height="300px">
+    </span>
+</p>
+<p align="center">Back-office managment</p>
