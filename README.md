@@ -1,6 +1,8 @@
-# <img src="public/assets/images/favicon.png" height="30"/> Deliveboo
+# <img src="public/assets/images/favicon.png" height="40"/> Deliveboo
 
-### Deliveboo is a food delivery web app that allows customers to order food from their favorite restaurant without registration, but entering only the data necessary for delivery (Credit card number, name, address). Restaurateurs can register in the platform and create, modify and delete dishes and see statistics based on their customers orders.
+Deliveboo is a food delivery web app that allows customers to order food from their favorite restaurant without registration, but entering only the data necessary for delivery (Credit card number, name, address). Restaurateurs can register in the platform and create, modify and delete dishes and see statistics based on their customers orders.
+
+<img src="public/assets/images/gif/homepage-desktop.gif" style="text-align:center"/>
 
 <hr>
 
@@ -56,8 +58,6 @@ Login in the Dashboard with the following credentials:
 
 ## Screens
 
-<img src="public/assets/images/gif/homepage-desktop.gif">
-<br><br>
 <img src="public/assets/images/gif/homepage-mobile.gif">
 <br><br>
 <img src="public/assets/images/gif/restaurant-desktop.gif">
