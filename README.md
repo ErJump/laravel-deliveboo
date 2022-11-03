@@ -1,4 +1,4 @@
-# Deliveboo
+# Deliveboo <img src="public/assets/images/favicon.png">
 
 ### Deliveboo is a food delivery web app that allows customers to order food from their favorite restaurant without registration, but entering only the data necessary for delivery (Credit card number, name, address). Restaurateurs can register in the platform and create, modify and delete dishes and see statistics based on their customers orders.
 
